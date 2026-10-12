@@ -4,7 +4,7 @@ import re
 import collections
 from rules import (SPANISH_CALLS, NOT_CALLSIGNS, US_STATES, basic_clean, extract_quality, strip_tail_tags, smart_case, is_non_english, JUNK_RE,
                    country_group, sports_group, PPV_GROUP, G247, ADULT_GROUP, COUNTRY_ORDER)
-from classify import (CHANNEL_SRC, SRC_CATEGORY, LOCAL_SRC, LEAGUE_SRC, SERVICE_SRC, DROP_SRC, LEAGUE_GROUP,
+from classify import (strip_slot_quality, CHANNEL_SRC, SRC_CATEGORY, LOCAL_SRC, LEAGUE_SRC, SERVICE_SRC, DROP_SRC, LEAGUE_GROUP,
                       EVENTS_TO_PPV, resolve_label, parse_slot, slot_name, parse_country_name, display_label,
                       classify_category, parse_local, local_display, fix_mojibake, clean_event)
 
@@ -62,7 +62,12 @@ def event_record(rec, label, t):
     else:
         rec['group'] = sports_group(grp_label)
     rec['kind'] = 'event'
-    p = parse_slot(t)[0]
+    if LEAGUE_CHANNEL_KEEP.match(t) and parse_slot(strip_slot_quality(t)[0])[1] is None:
+        nm, q = extract_quality(strip_tail_tags(t))
+        rec['kind'] = 'league-channel'
+        rec['label'] = label
+        return finish(rec, norm_feed_words(smart_case(nm)), q)
+    p = parse_slot(strip_slot_quality(t)[0])[0]
     disp = display_label(label, p, t)
     name, q = slot_name(label, t, disp)
     rec['label'] = label
@@ -86,10 +91,10 @@ def process_entry(c):
     src = c['attrs'].get('group-title', '')
     url = c.get('url', '')
     raw = c['title']
-    rec = {'src': src, 'orig': raw, 'drop': None, 'group': None, 'name': None, 'cc': None,
+    rec = {'src': c.get('orig_group', src), 'orig': c.get('orig_title', raw), 'drop': None, 'group': None, 'name': None, 'cc': None,
            'kind': None, 'quality': None, 'local': None}
-    if '/series/' in url:
-        rec['drop'] = 'VOD episode'
+    if '/series/' in url or '/movie/' in url:
+        rec['drop'] = 'VOD episode' if '/series/' in url else 'VOD movie'
         return rec
     t = basic_clean(fix_mojibake(raw))
     if src in DROP_SRC:
@@ -116,6 +121,7 @@ def process_entry(c):
         n = re.sub(r'\bSeason (\d+)\b', lambda m: f'S{int(m.group(1)):02d}', n)
         n = re.sub(r'\bS(\d)\b', r'S0\1', n)
         n, q = extract_quality(n)
+        n = re.sub(r"\b([A-Za-z]{3,}) S (?=[A-Za-z])", r"\1's ", n)      # 'RUPAUL S DRAG RACE'
         return finish(rec, '24/7 ' + smart_case(tidy(n)), q)
 
     is_event_src = src in LEAGUE_SRC or src in SERVICE_SRC or src == 'PPV Live Events'
@@ -247,7 +253,7 @@ def process_entry(c):
         return finish(rec, f'CA: {nm}', q)
 
     cat = classify_category(name, src)
-    if cc == 'INT' and cat not in ('Sports', 'News'):
+    if cc == 'INT' and cat not in ('Sports', 'News', 'Music'):
         cat = 'General'
     rec['group'] = country_group(cc, cat)
     return finish(rec, f'{cc}: {norm_feed_words(smart_case(name)).replace(" | ", " - ")}', q)

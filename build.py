@@ -20,6 +20,7 @@ from parse import parse                      # noqa: E402
 from process import process_all              # noqa: E402
 from epgmap import EpgIndex, EPG_URLS        # noqa: E402
 from logos import LogoIndex                  # noqa: E402
+from adapt_p2 import adapt, is_pipe_style    # noqa: E402
 from rules import COUNTRY_ORDER, CATEGORY_ORDER, PPV_GROUP, G247, ADULT_GROUP  # noqa: E402
 
 DATA = os.environ.get('CLEANER_DATA', os.path.join(HERE, 'data'))
@@ -75,7 +76,10 @@ def main(src, out, report=None):
         with urllib.request.urlopen(req, timeout=180) as r, open(tmp, 'wb') as f:
             f.write(r.read())
         src = tmp
-    entries = parse(src)
+    entries, vod_skipped = parse(src, skip_vod=True)
+    pre_drops = []
+    if is_pipe_style(entries):
+        entries, pre_drops = adapt(entries)
     recs = process_all(entries)
     epg = EpgIndex()
     logos = LogoIndex(os.path.join(DATA, 'tvlogos_files.txt'), os.path.join(DATA, 'iptvorg'))
@@ -97,6 +101,10 @@ def main(src, out, report=None):
 
     kept = []
     stats = Counter()
+    if vod_skipped:
+        stats['dropped: VOD movie/episode'] += vod_skipped
+    for d in pre_drops:
+        stats['dropped: ' + d.split(' (')[0]] += 1
     for e, r in zip(entries, recs):
         if r['drop']:
             stats['dropped: ' + r['drop'].split(' (')[0]] += 1
@@ -166,7 +174,7 @@ def main(src, out, report=None):
             for r in kept:
                 w.writerow([r['group'], r['name'], r['tvg_id'], r['logo'], r['old_group'], r['orig'], r['old_id'], r['old_logo']])
     groups = Counter(r['group'] for r in kept)
-    summary = {'input_entries': len(entries), 'kept': len(kept), 'groups': len(groups),
+    summary = {'input_entries': len(entries) + vod_skipped + len(pre_drops), 'kept': len(kept), 'groups': len(groups),
                'stats': dict(stats), 'group_counts': dict(sorted(groups.items(), key=lambda x: group_rank(x[0])))}
     json.dump(summary, open(out + '.summary.json', 'w'), indent=1)
     return summary

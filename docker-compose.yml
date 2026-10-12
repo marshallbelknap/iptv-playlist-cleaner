@@ -1,0 +1,13 @@
+# Synology Container Manager > Project > Create > paste this, then fill in the three values below.
+services:
+  iptv-cleaner:
+    image: ghcr.io/marshallbelknap/iptv-playlist-cleaner:latest
+    container_name: iptv-cleaner
+    restart: unless-stopped
+    ports:
+      - "8765:8765"
+    environment:
+      PROVIDER_URL_1: "PASTE_PROVIDER_1_M3U_LINK_HERE"
+      PROVIDER_URL_2: "PASTE_PROVIDER_2_M3U_LINK_HERE"
+      ACCESS_TOKEN: "PICK_ANY_LONG_RANDOM_WORD"
+      CACHE_MINUTES: "30"

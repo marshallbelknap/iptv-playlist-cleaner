@@ -9,8 +9,8 @@ def parse_extinf(line):
     rest=line[pos:]
     title=rest.split(',',1)[1] if ',' in rest else rest
     return m.group(1), attrs, title.strip()
-def parse(path):
-    out=[]; cur=None
+def parse(path, skip_vod=False):
+    out=[]; cur=None; skipped=0
     for line in open(path, encoding='utf-8', errors='replace'):
         line=line.rstrip('\r\n')
         if line.startswith('#EXTINF'):
@@ -19,7 +19,15 @@ def parse(path):
             if cur: cur['extgrp']=line[8:]
         elif line.startswith('#') or not line.strip(): pass
         else:
-            if cur: cur['url']=line.strip(); out.append(cur); cur=None
+            if cur:
+                cur['url']=line.strip()
+                if skip_vod and ('/movie/' in cur['url'] or '/series/' in cur['url']):
+                    skipped+=1
+                else:
+                    out.append(cur)
+                cur=None
+    if skip_vod:
+        return out, skipped
     return out
 if __name__=='__main__':
     ch=parse(sys.argv[1]); json.dump(ch, open(sys.argv[2],'w'))

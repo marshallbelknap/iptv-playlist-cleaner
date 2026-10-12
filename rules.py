@@ -31,7 +31,7 @@ ADULT_GROUP = 'Adult'
 # ---------------------------------------------------------------------------
 ENGLISH_CC = {
     'US': 'US', 'USA': 'US', 'UK': 'UK', 'GB': 'UK', 'CA': 'CA', 'CAN': 'CA',
-    'AU': 'AU', 'AUS': 'AU', 'NZ': 'NZ', 'IRE': 'IE', 'IE': 'IE', 'ZA': 'ZA',
+    'AU': 'AU', 'AUS': 'AU', 'NZ': 'NZ', 'IRE': 'IE', 'IE': 'IE', 'ZA': 'ZA', 'INT': 'INT',
 }
 # Spanish-language US stations (Univision, UniMas, Telemundo, Estrella, Azteca and affiliates)
 SPANISH_CALLS = set('''
@@ -166,12 +166,20 @@ RT TRT ION INSP TCM LMN OAN NESN MSG SNY MASN NBCSN BYU EWTN TBN CBN NRB TYT LFC
 TG4 UTV FYI HD FHD SD UHD 4K II III IV DC NY KC TV2 TV3 OHL WHL QMJHL CHL PWHL SPHL ECHL KHL AHL
 MLBN NBATV NHLN BIG10 PDC GAA MOTOGP WRC NASCAR IMSA INDYCAR AFL NRL ICC IPL CFL USL NWSL ACCN SECN
 PBA ABC7 AMC+ BBC1 BBC2 BBC3 BBC4 E4 TJC QVC2 QVC3 CBBC DMAX AT&T WGN CTVN HSN2 CBSSN
-NBCLX TVG TVG2 VSIN VSiN DTV CGTN ESPN+ DAZN PBC XFL UFL WBC IBF WBO WTT LIV TGL BKFC PFL ARY
+NBCLX TVG TVG2 VSIN VSiN DTV CGTN ESPN+ DAZN PBC XFL UFL WBC IBF WBO WTT LIV TGL BKFC PFL ARY LMP CMA BC XD YTV TG LOI EU PL MC
 MLBTV EPIX HDNET AXN NCIS CSI JAG FBI SWAT TMNT ER NDTV TVSN UCLA LSU USC SMU TCU UCF UNLV UTEP UTSA
 UAB FIU FAU VMI UNC FCS FBS ACCNX SNL WE TV EN SEC CTV MSGSN BNN TSN1 TSN2 TSN3 TSN4 TSN5 NBA2K NWSL USWNT
 USMNT CONCACAF FIBA FIFA FIA WEC IFAF ESPNU PBS MTV NHRA AMA UFC WTA PDC ECHL OJHL BCHL CEBL OUA ARCA SRX
 CBSN NBCLX HBO2 TVA RDS NHLN NFLN MLBN WWE2 WPT HSN BBCA BBCW TBN CTN AFN NBA GB AM PM ET PT EDT EST CT MMA GPB NTV AFC FC SC CF RB PBR KPBS WTTW TNA ERC TAB NDRC GAC RFD TVC TVB HPI NBCSN UHD
 '''.split())
+COMMON_SHORT = set('''LOS LAS SAN NEW OLD RED BIG TOP ONE TWO SIX DAY WAY AND THE FOR OUT HOT CAR DOG CAT
+FUN JOY SKY SUN MAN MEN GUY BOX WAR ALL GOD ART AGE EYE OFF OUR YOU HER HIS MIX POP SON
+KID NOW LAW CUP KEY END BAR ST FT MT EL DE DEL LE DU DA DI ON OF IN AT TO BY OR IS
+IT MY GO SO UP WE BE AN AS'''.split())
+COMMON_KW = set('''WOLF KENT KING KIDS KICK KILL KISS KITE KNOW WALL WALK WANT WARM WASH WAVE WEEK WELL
+WENT WERE WHAT WHEN WHY WIDE WIFE WIND WINE WING WIRE WISE WISH WITH WORD WORK WRAP
+KNOT KEEP KELP KEYS KNEE WAKE WARS WEST WILD WILL WOKE WOMAN WORM WRY KARL KANE KATE KYLE WADE WARD
+WAYS WEAR WHIP WRIT WALT WAYNE WOLFS WOLVES WORLD WEIRD WATCH WHOLE WOMEN WRATH KICKS'''.split())
 SMALL_WORDS = {'a', 'an', 'and', 'at', 'by', 'for', 'in', 'of', 'on', 'or', 'the', 'to', 'vs', 'with', 'v'}
 SPECIAL_CASE = {
     'MSNOW': 'MS NOW', 'SYFY': 'Syfy', 'REELZ': 'Reelz', 'TRUTV': 'truTV', 'TVLAND': 'TV Land',
@@ -190,7 +198,7 @@ SPECIAL_CASE = {
     'SHOXBET': 'SHOxBET', 'JR': 'Jr', 'JR.': 'Jr.', 'TVONTARIO': 'TVOntario', 'IHEARTRADIO': 'iHeartRadio',
     'IHEART': 'iHeart', 'HGTV': 'HGTV', 'ESPNEWS': 'ESPNews', 'MSNBC': 'MSNBC', 'NICK': 'Nick',
     'CNNI': 'CNNi', 'XTRA': 'Xtra', 'TV': 'TV', 'MCNEESE': 'McNeese', 'MCDONALD': 'McDonald',
-    'DIRTVISION': 'DIRTVision', 'FLOSPORTS': 'FloSports', 'NEWSNOW': 'NewsNow',
+    'CITYTV': 'Citytv', 'DIRTVISION': 'DIRTVision', 'FLOSPORTS': 'FloSports', 'NEWSNOW': 'NewsNow',
 }
 PHRASE_FIX = [
     (r'(?i)\bla ?liga\b', 'LaLiga'), (r'\bTNT Sport (\d)', r'TNT Sports \1'),
@@ -203,6 +211,8 @@ PHRASE_FIX = [
     (r'\bTSN ?([1-5])\b', r'TSN\1'), (r'\bSportsnet ONE\b', 'Sportsnet One'), (r'\bSportsnet WORLD\b', 'Sportsnet World'),
     (r'\bSPORTSNET\b', 'Sportsnet'), (r'\bNick\.JR\b', 'Nick Jr.'),
     (r'(?<![&\w])AT(?![&\w])', 'at'), (r'(?<![&\w])VS\.?(?![&\w])', 'vs'), (r'(?i)\bms now\b', 'MS NOW'), (r'(?i)\bmsgsn\b', 'MSGSN'), (r'(?i)\bnbc lx\b', 'NBC LX'),
+    (r'(?i)\bc-span\b', 'C-SPAN'), (r'(?i)\bbig ten\b', 'Big Ten'), (r'\bthe CW\b', 'The CW'),
+    (r'\bKing(?= Seattle| 5\b| \()', 'KING'), (r'(?i)\bhbcu\b', 'HBCU'),
     (r'(?i)\bc span ?(\d)?', lambda m: 'C-SPAN' + (' ' + m.group(1) if m.group(1) else '')),
     (r'(?i)\bcspan ?(\d)?', lambda m: 'C-SPAN' + (' ' + m.group(1) if m.group(1) else '')),
 ]
@@ -211,6 +221,9 @@ PHRASE_FIX = [
 def _word_case(w, first):
     if '/' in w and len(w) > 3:
         return '/'.join(_word_case(p, first and i == 0) for i, p in enumerate(w.split('/')))
+    if re.fullmatch(r'[A-Za-z]{3,}-[A-Za-z]{3,}', w.strip('()[]:,.')) and w.upper() != w.lower() \
+            and 'SPAN' not in w.upper():
+        return '-'.join(_word_case(p, first and i == 0) for i, p in enumerate(w.split('-')))
     if w.endswith('+1') and len(w) > 2:
         return _word_case(w[:-2], first) + '+1'
     core = w.strip('()[]:,.-"\'')
@@ -225,7 +238,8 @@ def _word_case(w, first):
         return w                            # (NSW) (QLD) (MA)
     if re.fullmatch(r'MC[A-Z]{3,}', up):
         return w.replace(core, 'Mc' + core[2:3].upper() + core[3:].lower())
-    if re.fullmatch(r'[KW][A-Z]{2,3}(-?(TV|DT|LD|CD|CA|D\d?))?', up) and len(core) >= 4:
+    if re.fullmatch(r'[KW][A-Z]{2,3}(-?(TV|DT|LD|CD|CA|D\d?))?', up) and len(core) >= 4 \
+            and up not in COMMON_KW:
         return w.replace(core, up)          # US call sign
     if re.fullmatch(r'C[BFHIJK][A-Z]{2}(-?(TV|DT))?', up) and up not in ('CHEF', 'CHIC', 'CHAT', 'CHOP', 'CITY', 'CINE', 'CIAO', 'CHAN', 'CHIP'):
         return w.replace(core, up)          # Canadian call sign
@@ -253,7 +267,8 @@ def smart_case(s, aggressive=True):
     upper_ratio = sum(c.isupper() for c in letters) / len(letters)
     words = s.split(' ')
     if upper_ratio >= 0.8:
-        out = ' '.join(w if (not aggressive and len(w.strip('()[]:,.-@')) <= 3) else _word_case(w, i == 0)
+        out = ' '.join(w if (not aggressive and len(w.strip('()[]:,.-@')) <= 3
+                             and w.strip('()[]:,.-@').upper() not in COMMON_SHORT) else _word_case(w, i == 0)
                        for i, w in enumerate(words))
     elif not aggressive:
         out = s
@@ -362,7 +377,7 @@ NEWS_RE = re.compile(r"\b(news|cnn|hln|headline news|msnbc|ms ?now|cnbc|fox busi
                      r"localish|local now|now ?this|reuters|yahoo finance|fox weather|bbc world|"
                      r"rte news|sky news extra|abc australia news|real america|first ?coast news|"
                      r"telemundo|cna|wfn|business)\b", re.I)
-SPORTS_RE = re.compile(r"\b(espn\w*|sports?|fox sports|fs[12]|nfl|nba|mlb|nhl|wnba|golf|tennis|t2|btn|big ten|"
+SPORTS_RE = re.compile(r"\b(espn\w*|sports?|supersports?|loi \d|fox sports|fs[12]|nfl|nba|mlb|nhl|wnba|golf|tennis|t2|btn|big ten|"
                        r"sec network|acc network|accn|secn|pac[- ]?12|tsn\d?|sportsnet|sky sports?|"
                        r"tnt sports?|bt sport|premier sports?|eurosport|bein|dazn|racing|tvg\d?|fight|"
                        r"ufc|wwe|boxing|mma|pokergo|yes network|msg\d?|nesn|sny|masn|marquee|bally|"

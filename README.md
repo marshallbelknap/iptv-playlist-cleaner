@@ -9,11 +9,18 @@ sets epgshare01 guide ids and fixes logos. Stream URLs are never modified.
     pip install rapidfuzz          # optional, improves guide matching
     python3 build.py "https://pia.cx/m3u/USER/PASS" playlist_clean.m3u changes.csv
 
-## Always-current playlist (event names update when the provider renames slots)
-    PROVIDER_URL="https://pia.cx/m3u/USER/PASS" python3 serve.py 8765
-Point TiviMate/UHF at `http://<machine-ip>:8765/playlist.m3u` and set the app's playlist
-auto-update interval. The cleaner re-runs on the provider's latest file at most every 30 min.
-Run it on any always-on machine (home PC, NAS, Raspberry Pi) or a small cloud host.
+## Always-current playlists (event names update when the provider renames slots)
+    PROVIDER_URL_1="https://provider-one/..." PROVIDER_URL_2="http://provider-two/get.php?..." \
+    ACCESS_TOKEN=some-long-word python3 serve.py 8765
+Point TiviMate/UHF at `http://<machine-ip>:8765/<ACCESS_TOKEN>/playlist1.m3u` (and `playlist2.m3u`)
+and set the app's playlist auto-update interval. Each playlist is rebuilt from the provider at most
+every `CACHE_MINUTES` (default 30). `/playlist.m3u` is an alias for playlist 1.
+
+## Synology (Container Manager)
+Every push to `main` builds `ghcr.io/marshallbelknap/iptv-playlist-cleaner:latest` (amd64 + arm64).
+In Container Manager: Project > Create > "Create docker-compose.yml", paste `docker-compose.yml`,
+fill in the provider links and token, Build. To update later: Project > iptv-cleaner > Action > Build
+(or Image > Update), which pulls the latest image.
 
 ## Guide (EPG) URLs to add in TiviMate / UHF
 The playlist header already lists them; add manually if your app ignores it:
@@ -32,7 +39,3 @@ The playlist header already lists them; add manually if your app ignores it:
 - epgmap.py – guide-id matching (aliases at the top)
 - logos.py – logo fallbacks (tv-logo/tv-logos repo, iptv-org database)
 - data/ – guide channel lists, logo indexes, list of known-broken logo URLs
-
-## Railway deployment
-Set service variables `PROVIDER_URL` (your provider M3U link) and `ACCESS_TOKEN` (any long random string).
-The playlist is served at `https://<service-domain>/<ACCESS_TOKEN>/playlist.m3u`; every other path returns 404.

@@ -18,14 +18,14 @@ CHANNEL_SRC = {
     'United Kingdom': 'UK', 'UK Entertainment': 'UK', 'UK Sports': 'UK', 'UK Movies': 'UK',
     'UK Kids': 'UK', 'UK News': 'UK', 'UK Music': 'UK', 'Discovery Plus': 'UK',
     'Irish TV': 'IE', 'Australia': 'AU', 'Australia Sports': 'AU', 'Sky New Zealand': 'NZ',
-    'DSTV': 'ZA', 'beIN Sports': 'BEIN', 'Betting TV': 'RACING',
+    'DSTV': 'ZA', 'beIN Sports': 'BEIN', 'Betting TV': 'RACING', 'P2 Intl Sports': 'INT',
 }
 # Category forced by the source group when the name gives no better signal
 SRC_CATEGORY = {
     'US Movies': 'Movies', 'UK Movies': 'Movies', 'US Music': 'Music', 'UK Music': 'Music',
     'US News': 'News', 'UK News': 'News', 'Canada News': 'News', 'US Sports': 'Sports',
     'UK Sports': 'Sports', 'Canada Sports': 'Sports', 'Australia Sports': 'Sports', 'DSTV': 'Sports',
-    'Sky New Zealand': None,
+    'Sky New Zealand': None, 'P2 Intl Sports': 'Sports',
 }
 LOCAL_SRC = {'US Locals & Regional', 'US NBC', 'US FOX', 'US CBS', 'US ABC', 'US PBS'}
 
@@ -36,11 +36,14 @@ LEAGUE_SRC = {
     'WHL': 'WHL', 'QMJHL': 'QMJHL', 'SPHL Hockey': 'SPHL', 'PDC DARTS': 'PDC', 'Golf': 'Golf',
     'NCAAF': 'NCAAF', 'NCAA Basketball': 'NCAAB', 'NCAA': 'NCAA', 'MLB Baseball league': 'MLB',
     'Optus': 'EPL', 'Football': 'Soccer', 'Others': 'GAA',
+    'P2 MiLB': 'MiLB', 'P2 AHL': 'AHL', 'P2 SPFL': 'SPFL', 'P2 La Liga': 'La Liga', 'P2 Serie A': 'Serie A',
+    'P2 Ligue 1': 'Ligue 1', 'P2 Tennis': 'Tennis', 'P2 Other': 'Other',
 }
 SERVICE_SRC = {
     'ESPN Plus': 'ESPN+', 'DAZN': 'DAZN', 'TSN Plus': 'TSN+', 'Paramount Plus': 'Paramount+',
     '(US) HBO MAX': 'MAX', 'Peacock TV': 'Peacock', 'Flo Sports': 'FloSports', 'FloCollege': 'FloSports',
     'Fite TV': 'Triller TV', 'Clubber': 'Clubber TV', 'DIRTVision': 'DIRTVision',
+    'P2 Sportsnet+': 'Sportsnet+',
 }
 DROP_SRC = {
     'Setanta Sports': 'non-English (Setanta Eurasia, Russian commentary)',
@@ -59,7 +62,8 @@ LEAGUE_GROUP = {
     'CONMEBOL': 'Soccer (Other)', 'F1': 'F1', 'MotoGP': 'MotoGP', 'OHL': 'CHL', 'WHL': 'CHL',
     'QMJHL': 'CHL', 'PWHL': 'Hockey (Other)', 'KHL': 'Hockey (Other)', 'SPHL': 'Hockey (Other)',
     'ECHL': 'Hockey (Other)', 'OJHL': 'Hockey (Other)', 'PDC': 'Darts', 'Golf': 'Golf', 'GAA': 'GAA',
-    'Tennis': 'Tennis', 'OUA': 'Other', 'CEBL': 'Other', 'Super League': 'Other',
+    'Tennis': 'Tennis', 'OUA': 'Other', 'CEBL': 'Other', 'Super League': 'Other', 'AHL': 'Hockey (Other)',
+    'Other': 'Other', 'Rugby': 'Other', 'NRL': 'Other', 'AFL': 'Other',
     'ESPN+': 'ESPN+', 'DAZN': 'DAZN', 'TSN+': 'TSN+', 'Sportsnet+': 'Sportsnet+',
     'Paramount+': 'Paramount+', 'MAX': 'MAX', 'Peacock': 'Peacock', 'FloSports': 'FloSports',
     'Prime Video': 'Prime Video',
@@ -123,7 +127,8 @@ LABEL_RULES = [
     (r'^:?Golf|^PGA', 'Golf'),
     (r'^(?:ULSTER |Tyrone )?Gaa|^ARMAGH TV', 'GAA'),
     (r'^WTA|^ATP|^Tennis', 'Tennis'),
-    (r'^OUA', 'OUA'), (r'^CEBL', 'CEBL'),
+    (r'^OUA', 'OUA'), (r'^CEBL', 'CEBL'), (r'^AHL', 'AHL'), (r'^TC\+', 'Tennis'),
+    (r'^NRL', 'NRL'), (r'^AFL', 'AFL'), (r'^Rugby', 'Rugby'), (r'^(?:US \()?(?:B1G|BTN)\+', 'BIG10+'),
     (r'^PPV|^LIVE EVENT|^PPV EVENT', 'PPV'),
     (r'^(?:Live )?Football|^Match(?:\s*\d|$)', 'Soccer'),
 ]
@@ -184,7 +189,15 @@ def norm_dates(e):
         if y in ('2098', '2099') or not 1 <= int(mo) <= 12:
             return ' '
         return f' ({MONTHS[int(mo)-1]} {int(d)} {_ampm(h, mi, None)}) '
-    e = re.sub(r'\((20\d\d) (\d\d) (\d\d) (\d\d):(\d\d)(?::\d\d)?\)', d2, e)
+    e = re.sub(r'\((20\d\d)[ -](\d\d)[ -](\d\d)[ T](\d\d):(\d\d)(?::\d\d)?\)', d2, e)
+    e = re.sub(r'(?<![\d:])(20\d\d)-(\d\d)-(\d\d)[ T](\d\d):(\d\d)(?::\d\d)?(?![\d]|\s*[AaPp][Mm])', d2, e)
+    # 2026-10-03 - 23:00 (GMT)
+    def d4(m):
+        y, mo, d, h, mi, z = m.groups()
+        if y in ('2098', '2099') or not 1 <= int(mo) <= 12:
+            return ' '
+        return f' ({MONTHS[int(mo)-1]} {int(d)} {_ampm(h, mi, None)}{" " + z if z else ""}) '
+    e = re.sub(r'(?<![\d:])(20\d\d)-(\d\d)-(\d\d)\s*[-|]\s*(\d\d):(\d\d)(?:\s*\((GMT|UTC|ET|BST)\))?', d4, e)
     # @ Oct 10 7:20 AM   /   Oct 10 2:30 PM
     def d3(m):
         mon, d, h, mi, ap = m.groups()
@@ -210,6 +223,7 @@ def dedupe_parens(e):
 
 def clean_event(e, label=None):
     e = basic_clean(fix_mojibake(e))
+    e = re.sub(r'^\s*•\s*|\s*•\s*$', '', e).replace('_', ' ')
     e = re.sub(r'\((?:2098|2099)[^)]*\)', ' ', e)
     e = e.replace(' // ', ' | ')
     e = dedupe_parens(e)
@@ -251,7 +265,7 @@ SLOT_PATTERNS = [
     # (FLSP 366) | text    (F1TV 18) | text   (NBA 06)
     re.compile(r'^\((?P<p>[^)]*?)\s*(?P<n>\d{1,3})\)\s*\|?\s*(?P<e>.*)$'),
     # text @ Oct 10 ... :TSN+  40      :MAX US 38
-    re.compile(r'^(?P<e>.*?)\s*:\s*(?P<p>TSN\+|Paramount\+|MAX US|Flo College|Flo Racing|MLS|Golf|NCAAB|Sportsnet\+|Milb)'
+    re.compile(r'^(?P<e>.*?)\s*:\s*(?P<p>TSN\+|Paramount\+|MAX US|Flo College|Flo Racing|MLS|Golf|NCAAB|Sportsnet\+|Milb|Tennis)'
                r'\s+(?P<n>\d{1,3})\s*$', re.I),
     # UEFA | 06   Crystal Palace vs ...      NFL  | 05   1pm Bengals at Dolphins
     re.compile(r'^(?P<p>[A-Za-z][A-Za-z+ .]*?)\s*\|\s*(?P<n>\d{1,3})\b\s*(?P<e>.*)$'),
@@ -291,13 +305,29 @@ DISPLAY_ALIAS = {
     'tyronegaa': 'Tyrone GAA', 'armaghtv': 'Armagh GAA TV', 'premierleague+': 'Premier League+', 'superleagueplus': 'Super League+',
     'superleague': 'Super League+', 'scottishcup': 'Scottish Cup', 'scottishpremiership': 'SPFL',
     'libertadores': 'Libertadores', 'nbag': 'NBA G League', 'pdcboard': 'PDC', 'f1tv': 'F1 TV',
-    'uefael': 'UEFA Europa League', 'europaleague': 'UEFA Europa League', 'liveevent': 'Event',
+    'uefael': 'UEFA Europa League', 'europaleague': 'UEFA Europa League', 'liveevent': 'Event', 'live': 'Event',
     'ppvevent': 'PPV', 'footballevent': 'Soccer', 'livefootball': 'Soccer', 'match': 'Soccer',
     'ttraces': 'TT Races', 'bbcstream': 'BBC Sport', 'bbcredbutton': 'BBC Red Button',
     'amazonuk': 'Prime Video', 'sn+': 'Sportsnet+', 'rallytv': 'Rally TV', 'tennistv': 'Tennis TV',
     'big10+': 'B1G+', 'fs': 'Fox Sports', 'p+': 'Paramount+', 'hbo': 'MAX', 'maxus': 'MAX', 'milb': 'MiLB',
     'ncaam': 'NCAAB', 'clubbertv': 'Clubber TV', 'clubber': 'Clubber TV', 'trillertv': 'Triller TV',
     'triller': 'Triller TV', 'ufcint': 'UFC Intl', 'motogp': 'MotoGP', 'nhlgame': 'NHL',
+    'soccer': 'Soccer PPV', 'nfhs': 'NFHS', 'fifa+': 'FIFA+', 'nbapass': 'NBA', 'viaplay': 'Viaplay',
+    'appletvf1': 'F1 Apple TV', 'rally': 'Rally TV', 'mxgp': 'MXGP', 'volley': 'Volleyball World',
+    'ultimatepool': 'Ultimate Pool', 'netflix': 'Netflix', 'max': 'MAX', 'sportsnet': 'Sportsnet+',
+    'rogerssupersportspack': 'Sportsnet+', 'viaplayxtra': 'Viaplay Xtra', 'skysportsredbutton': 'Sky Sports Red Button',
+    'skysport+': 'Sky Sports+', 'eurosportxtra': 'Eurosport Xtra', 'espnplayevents': 'ESPN Play',
+    'espnplay': 'ESPN Play', 'b/rmaxsportsevents': 'B/R Sports', 'payperview': 'PPV', 'matchroomevent': 'Matchroom',
+    'matchroomevents': 'Matchroom', 'rugby': 'Rugby', 'nrltv': 'NRL', 'afltv': 'AFL', 'nationalleague': 'National League',
+    'faplayer': 'FA Player', 'cymrufootball': 'Cymru Football', 'psf': 'Pre-Season Friendlies', 'loitv': 'LOI',
+    'nifl': 'NIFL', 'supercross': 'Supercross', 'tc+': 'Tennis Channel+', 'victory+': 'Victory+', 'stan': 'Stan',
+    'stanevent': 'Stan', 'btn+': 'B1G+', 'b1g+': 'B1G+', 'fitetv': 'Triller TV', 'hubpremier': 'Hub Premier',
+    'bbcevents': 'BBC Sport', 'tnts': 'TNT Sports', 'tntsports': 'TNT Sports', 'ahl': 'AHL', 'florugby': 'FloRugby',
+    'ufc': 'UFC', 'boxing': 'Boxing', 'premiereleague': 'EPL', 'epl|premiereleague': 'EPL', 'wnba': 'WNBA',
+    'nbareplay': 'NBA Replay', 'nhlreplay': 'NHL Replay', 'eplreplay': 'EPL Replay', 'eflreplay': 'EFL Replay',
+    'spflreplay': 'SPFL Replay', 'nationalleaguereplay': 'National League Replay',
+    'uefaeuropaleaguereplay': 'UEFA Europa League Replay', 'uefachampionsleaguereplay': 'UEFA Champions League Replay',
+    'worldcup2026replay': 'World Cup 2026 Replay', 'motogp': 'MotoGP', 'f1tv': 'F1 TV', 'formula1event': 'F1',
     'wnbaleaguepass': 'WNBA', 'ligue1': 'Ligue 1', 'ligueone': 'Ligue 1', 'formulaone': 'F1', 'laliga': 'LaLiga', 'goldenleague': 'Golf',
 }
 
@@ -307,13 +337,29 @@ def display_label(label, p, t):
         m = re.search(r'\b(UK|CA|US)\b', t)
         return f'DAZN {m.group(1)}' if m else 'DAZN'
     key = re.sub(r'\s+', '', (p or '').lower())
+    key = re.sub(r'(hd|fhd|sd)$', '', key)
     if key in DISPLAY_ALIAS:
         return DISPLAY_ALIAS[key]
+    if key.endswith('replay'):
+        return {'La Liga': 'LaLiga'}.get(label, label) + ' Replay'
+    if label in ('Live Events', 'Other') and p and len(p) <= 30 and not re.search(r'\d', p):
+        pretty = smart_case(re.sub(r'\s*\|\s*$', '', p.strip()))
+        if pretty and pretty.lower() not in ('event', 'live event', 'ppv event', 'match', 'live football'):
+            return pretty
     return {'La Liga': 'LaLiga', 'CONMEBOL': 'Libertadores', 'Live Events': 'Event'}.get(label, label)
+
+
+def strip_slot_quality(t):
+    """'ESPN Play Events 7 HD' -> ('ESPN Play Events 7', 'HD')."""
+    m = re.search(r'(?<=\d)\s+(4K|UHD|FHD|HD|SD)\s*$', t)
+    if not m:
+        return t, None
+    return t[:m.start()], {'UHD': '4K'}.get(m.group(1), m.group(1))
 
 
 def slot_name(label, t, disp=None):
     disp = disp or label
+    t, q0 = strip_slot_quality(t)
     p, n, e = parse_slot(t)
     if n is None:
         # team channels / feeds without a slot number -> "LABEL: text"
@@ -331,13 +377,15 @@ def slot_name(label, t, disp=None):
         e, q = extract_quality(strip_tail_tags(e))
         e = clean_event(e, label)
         name = f'{disp}: {e}' if e else disp
-        return name, q
+        return name, q or q0
     pq, q1 = extract_quality(p)
     e, q = extract_quality(e)
     ev = clean_event(e, label)
+    if ev[:1].islower():
+        ev = ev[:1].upper() + ev[1:]
     num = f'{n:02d}' if n < 100 else str(n)
     name = f'{disp} {num}'
-    return (f'{name}: {ev}' if ev else name), (q or q1)
+    return (f'{name}: {ev}' if ev else name), (q or q1 or q0)
 
 
 # ---------------------------------------------------------------------------
@@ -345,7 +393,7 @@ def slot_name(label, t, disp=None):
 # ---------------------------------------------------------------------------
 WORD_PREFIX_RE = re.compile(
     r'^(?:NEW\s+)?(?:HEVC\s*(?:FHD|HD)?\s*:?\s*)?'
-    r'(?P<cc>USA REG|USA|US|UK|CA|AUS|AU|NZ|IRE|ZA|SS|REG)?'
+    r'(?P<cc>USA REG|USA|US|UK|CA|AUS|AU|NZ|IRE|ZA|SS|REG|INT)?'
     r'(?P<q>SD|HD|FHD|UHD)?'
     r'(?:\s*\+1)?'
     r'(?:\s+(?P<q2>SD|HD|FHD|UHD|FR|MOVIE|REG))?'
@@ -508,7 +556,8 @@ def parse_local(name, loose=False):
         city = city.replace(after.group(0), call, 1)
     for rm in [cm.group(0)] + ([nm2.group(0)] if nm2 else []) + [netm.group(0)]:
         city = city.replace(rm, ' ', 1)
-    city = re.sub(r'\b(?:D\d|DT\d?|LD|TV|HD|FHD|SD|Telemundo|Local|LOCAL|News)\b', ' ', city)
+    city = re.sub(r'\b(?:D\d|DT\d?|LD|TV|HD|FHD|SD)\b', ' ', city)
+    city = re.sub(r'\b(?:Telemundo|Local|News)\b', ' ', city, flags=re.I)
     city = re.sub(r'[()|:,]', ' ', city)
     city = re.sub(r'\b(US|USA|REG)\b', ' ', city)
     words = [w for w in city.split() if w]
