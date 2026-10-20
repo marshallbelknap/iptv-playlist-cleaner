@@ -18,12 +18,6 @@ and set the app's playlist auto-update interval. If a provider gives you backup 
 `PROVIDER_MIRRORS_<NAME>="host1 host2"`; the same login is tried on each until one answers. Each playlist is rebuilt from the provider at most
 every `CACHE_MINUTES` (default 30). `/playlist.m3u` is an alias for the first one.
 
-## When your internet provider blocks an IPTV server
-Set `PROVIDER_PROXY_<NAME>` (or `PROVIDER_PROXY` for all) to an HTTP proxy; only that provider's playlist
-downloads use it. `docker-compose.nordvpn.yml` runs a NordVPN connection (Gluetun) next to the cleaner
-and points Kingdom's downloads at it. The channels themselves still play directly from the app, so the
-device you watch on needs its own way past the block (e.g. the NordVPN app).
-
 ## Synology (Container Manager)
 Every push to `main` builds `ghcr.io/marshallbelknap/iptv-playlist-cleaner:latest` (amd64 + arm64).
 In Container Manager: Project > Create > "Create docker-compose.yml", paste `docker-compose.yml`,
