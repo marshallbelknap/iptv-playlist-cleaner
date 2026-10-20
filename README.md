@@ -14,7 +14,8 @@ sets epgshare01 guide ids and fixes logos. Stream URLs are never modified.
     ACCESS_TOKEN=some-long-word python3 serve.py 8765
 Point TiviMate/UHF at `http://<machine-ip>:8765/<ACCESS_TOKEN>/private-iptv.m3u` (and `kingdom-iptv.m3u`) — the part after
 `PROVIDER_URL_` names the playlist
-and set the app's playlist auto-update interval. Each playlist is rebuilt from the provider at most
+and set the app's playlist auto-update interval. If a provider gives you backup server addresses, add
+`PROVIDER_MIRRORS_<NAME>="host1 host2"`; the same login is tried on each until one answers. Each playlist is rebuilt from the provider at most
 every `CACHE_MINUTES` (default 30). `/playlist.m3u` is an alias for the first one.
 
 ## Synology (Container Manager)

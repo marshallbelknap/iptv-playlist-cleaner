@@ -118,17 +118,25 @@ def gen_id(prefix, r, used):
     return gid
 
 
+def download(url, dest):
+    """Stream a provider playlist to disk (some are 80+ MB). Raises on network/HTTP errors."""
+    req = urllib.request.Request(url, headers={'User-Agent': 'TiviMate/5.0'})
+    with urllib.request.urlopen(req, timeout=30) as r, open(dest, 'wb') as f:
+        while True:
+            b = r.read(1 << 20)
+            if not b:
+                break
+            f.write(b)
+    with open(dest, 'rb') as f:
+        head = f.read(4096)
+    if b'#EXTINF' not in head and b'#EXTM3U' not in head:
+        raise ValueError('the server answered, but not with a playlist (wrong login or server busy?)')
+    return dest
+
+
 def main(src, out, report=None, gen_prefix='gen'):
     if re.match(r'https?://', src):
-        req = urllib.request.Request(src, headers={'User-Agent': 'TiviMate/5.0'})
-        tmp = out + '.source.m3u'
-        with urllib.request.urlopen(req, timeout=180) as r, open(tmp, 'wb') as f:
-            while True:                     # stream to disk: some providers' files are 80+ MB
-                b = r.read(1 << 20)
-                if not b:
-                    break
-                f.write(b)
-        src = tmp
+        src = download(src, out + '.source.m3u')
     entries, vod_skipped = parse(src, skip_vod=True)
     if src == out + '.source.m3u':
         os.remove(src)                      # the raw download is no longer needed

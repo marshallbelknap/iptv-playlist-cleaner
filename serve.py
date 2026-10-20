@@ -5,6 +5,8 @@ Environment:
   PROVIDER_URL_<NAME>                  one per provider; the name becomes the playlist file name,
                                        e.g. PROVIDER_URL_PRIVATE_IPTV -> /private-iptv.m3u
                                        (PROVIDER_URL alone works as playlist 1)
+  PROVIDER_MIRRORS_<NAME>              optional backup servers for that provider, separated by spaces or commas
+                                       (e.g. "vpn.4xott.us tv.trexiptv.com"); tried in order when one is down
   ACCESS_TOKEN                         optional; when set, playlists live under /<token>/
   CACHE_MINUTES                        rebuild playlists at most this often (default 30)
   GUIDE_MINUTES                        rebuild the guide this often (default 60)
@@ -23,7 +25,8 @@ import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from build import main as build  # noqa: E402
+from build import main as build, download  # noqa: E402
+from urllib.parse import urlsplit, urlunsplit  # noqa: E402
 import guide  # noqa: E402
 
 TOKEN = os.environ.get('ACCESS_TOKEN', '').strip().strip('/')
@@ -50,12 +53,33 @@ def providers():
     return out
 
 
+def mirrors():
+    out = {}
+    for k, v in os.environ.items():
+        m = re.fullmatch(r'PROVIDER_MIRRORS_([A-Za-z0-9_]+)', k)
+        if m:
+            out[slug(m.group(1))] = [h for h in re.split(r'[\s,]+', v) if h]
+    return out
+
+
+def with_host(url, host):
+    """Same login/path on another server: 'http://a/get.php?u=1' + 'b.com' -> 'http://b.com/get.php?u=1'."""
+    u = urlsplit(url)
+    if '://' in host:
+        h = urlsplit(host)
+        return urlunsplit((h.scheme, h.netloc, u.path, u.query, ''))
+    return urlunsplit((u.scheme, host, u.path, u.query, ''))
+
+
 PROVIDERS = providers()
+MIRRORS = mirrors()
 
 
 class Playlist:
     def __init__(self, n, src):
         self.n, self.src = n, src
+        self.urls = [src] + [with_host(src, h) for h in MIRRORS.get(n, [])] if re.match(r'https?://', src) else [src]
+        self.good = 0                             # index of the server that worked last time
         self.path = os.path.join(CACHE_DIR, f'{n}_clean.m3u')
         self.lock = threading.Lock()
         self.built = 0.0
@@ -67,7 +91,8 @@ class Playlist:
                 t0 = time.time()
                 print(f'playlist {self.n}: downloading and cleaning...', flush=True)
                 try:
-                    s = build(self.src, self.path + '.new', gen_prefix=self.n)
+                    src = self.fetch()
+                    s = build(src, self.path + '.new', gen_prefix=self.n)
                     os.replace(self.path + '.new', self.path)      # swap in one step: apps never see half a file
                     self.built = time.time()
                     print(f'playlist {self.n} rebuilt: {s["kept"]} channels in {s["groups"]} groups '
@@ -75,6 +100,28 @@ class Playlist:
                 except Exception as e:        # keep serving the last good copy
                     print(f'playlist {self.n} rebuild failed: {type(e).__name__}: {e}', file=sys.stderr, flush=True)
         return self.path
+
+    def fetch(self):
+        """Download from the server that worked last time, falling back through the backups."""
+        if not re.match(r'https?://', self.src):
+            return self.src
+        order = list(range(self.good, len(self.urls))) + list(range(0, self.good))
+        dest = self.path + '.new.source.m3u'
+        last = None
+        for i in order:
+            host = urlsplit(self.urls[i]).netloc
+            try:
+                download(self.urls[i], dest)
+                if i != self.good:
+                    print(f'playlist {self.n}: using server {host}', flush=True)
+                self.good = i
+                return dest
+            except Exception as e:
+                last = e
+                if len(self.urls) > 1:
+                    print(f'playlist {self.n}: server {host} failed ({type(e).__name__}: {e}), trying next',
+                          file=sys.stderr, flush=True)
+        raise last
 
     def ready(self):
         return os.path.exists(self.path)
