@@ -61,15 +61,23 @@ class Playlist:
         self.built = 0.0
 
     def fresh(self):
+        """Rebuild if due. Only the background thread calls this, so apps never wait on a rebuild."""
         with self.lock:
             if time.time() - self.built > TTL or not os.path.exists(self.path):
+                t0 = time.time()
+                print(f'playlist {self.n}: downloading and cleaning...', flush=True)
                 try:
-                    build(self.src, self.path, gen_prefix=self.n)
+                    s = build(self.src, self.path + '.new', gen_prefix=self.n)
+                    os.replace(self.path + '.new', self.path)      # swap in one step: apps never see half a file
                     self.built = time.time()
-                    print(f'playlist {self.n} rebuilt', flush=True)
+                    print(f'playlist {self.n} rebuilt: {s["kept"]} channels in {s["groups"]} groups '
+                          f'({time.time() - t0:.0f}s)', flush=True)
                 except Exception as e:        # keep serving the last good copy
-                    print(f'playlist {self.n} rebuild failed: {e}', file=sys.stderr, flush=True)
+                    print(f'playlist {self.n} rebuild failed: {type(e).__name__}: {e}', file=sys.stderr, flush=True)
         return self.path
+
+    def ready(self):
+        return os.path.exists(self.path)
 
 
 LISTS = {n: Playlist(n, s) for n, s in PROVIDERS.items()}
@@ -114,10 +122,11 @@ class H(BaseHTTPRequestHandler):
         if n not in LISTS:
             self.send_error(404)
             return
-        path = LISTS[n].fresh()
-        if not os.path.exists(path):
-            self.send_error(503, 'playlist not available yet')
+        pl = LISTS[n]
+        if not pl.ready():                    # first build still running: answer at once instead of hanging
+            self.send_error(503, 'Playlist is still being prepared - try again in a few minutes')
             return
+        path = pl.path
         with open(path, 'rb') as f:
             data = f.read()
         # point the app at this server's guide (one small file instead of many large public ones)

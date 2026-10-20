@@ -123,9 +123,15 @@ def main(src, out, report=None, gen_prefix='gen'):
         req = urllib.request.Request(src, headers={'User-Agent': 'TiviMate/5.0'})
         tmp = out + '.source.m3u'
         with urllib.request.urlopen(req, timeout=180) as r, open(tmp, 'wb') as f:
-            f.write(r.read())
+            while True:                     # stream to disk: some providers' files are 80+ MB
+                b = r.read(1 << 20)
+                if not b:
+                    break
+                f.write(b)
         src = tmp
     entries, vod_skipped = parse(src, skip_vod=True)
+    if src == out + '.source.m3u':
+        os.remove(src)                      # the raw download is no longer needed
     pre_drops = []
     if is_pipe_style(entries):
         entries, pre_drops = adapt(entries)
