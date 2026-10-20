@@ -118,20 +118,39 @@ def gen_id(prefix, r, used):
     return gid
 
 
+USER_AGENTS = [
+    os.environ.get('PROVIDER_USER_AGENT') or 'TiviMate/5.0',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36',
+    'VLC/3.0.21 LibVLC/3.0.21',
+]
+
+
 def download(url, dest):
-    """Stream a provider playlist to disk (some are 80+ MB). Raises on network/HTTP errors."""
-    req = urllib.request.Request(url, headers={'User-Agent': 'TiviMate/5.0'})
-    with urllib.request.urlopen(req, timeout=30) as r, open(dest, 'wb') as f:
-        while True:
-            b = r.read(1 << 20)
-            if not b:
-                break
-            f.write(b)
-    with open(dest, 'rb') as f:
-        head = f.read(4096)
-    if b'#EXTINF' not in head and b'#EXTM3U' not in head:
-        raise ValueError('the server answered, but not with a playlist (wrong login or server busy?)')
-    return dest
+    """Stream a provider playlist to disk (some are 80+ MB). Tries a few app identities, since some
+    providers refuse certain ones. Raises on network/HTTP errors."""
+    import urllib.error
+    last = None
+    for ua in dict.fromkeys(USER_AGENTS):
+        req = urllib.request.Request(url, headers={'User-Agent': ua, 'Accept': '*/*'})
+        try:
+            with urllib.request.urlopen(req, timeout=30) as r, open(dest, 'wb') as f:
+                while True:
+                    b = r.read(1 << 20)
+                    if not b:
+                        break
+                    f.write(b)
+        except urllib.error.HTTPError as e:
+            last = e
+            if e.code in (401, 403, 406, 451):     # refused: try the next identity
+                continue
+            raise
+        with open(dest, 'rb') as f:
+            head = f.read(4096)
+        if b'#EXTINF' in head or b'#EXTM3U' in head:
+            return dest
+        snippet = re.sub(r'\s+', ' ', head[:120].decode('utf-8', 'replace')).strip()
+        last = ValueError(f'the server answered, but not with a playlist: "{snippet or "(empty)"}"')
+    raise last
 
 
 def main(src, out, report=None, gen_prefix='gen'):
