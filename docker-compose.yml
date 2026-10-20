@@ -3,6 +3,7 @@ services:
   iptv-cleaner:
     image: ghcr.io/marshallbelknap/iptv-playlist-cleaner:latest
     container_name: iptv-cleaner
+    pull_policy: always   # fetch the newest version every time the project is built
     restart: unless-stopped
     ports:
       - "8765:8765"
