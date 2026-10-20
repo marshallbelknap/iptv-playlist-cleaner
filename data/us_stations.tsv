@@ -1,0 +1,1243 @@
+# call sign	city	network	channel  (pooled from both providers + PBS guide; used to complete local names)
+KAAL	Rochester	ABC	6
+KABB	San Antonio	FOX	29
+KABC	Los Angeles	ABC	7
+KACV	Amarillo	PBS	2
+KADN	Lafayette	FOX	15
+KAEF	Eureka	ABC	28
+KAET	Phoenix	PBS	8
+KAFT		PBS	
+KAGS	Bryan	NBC	23
+KAID	Boise	PBS	12
+KAIT	Jonesboro	NBC	8
+KAKE	Wichita	ABC	10
+KAKM	Anchorage	PBS	7
+KALB	Alexandria	NBC	5
+KAMC	Lubbock	ABC	28
+KAMR	Amarillo	NBC	4
+KAMU	College Station	PBS	15
+KAPP	Yakima	ABC	
+KAQI	Ada OK		
+KARD	West Monroe	FOX	14
+KARE	Minneapolis	NBC	11
+KARK	Little Rock	NBC	4
+KARZ	Little Rock	MyNetworkTV	42
+KASA	Tmo		
+KASN	Little Rock	CW	34
+KASW	Arizona 61 Arizona	Independent	
+KASY	Albuquerque Santa Fe	MyNetworkTV	50
+KATC	Lafayette	ABC	3
+KATH	Juneau	NBC	5
+KATN	Fairbanks	FOX	
+KATU	Portland	ABC	2
+KATV	Little Rock	ABC	7
+KAUT	Oklahoma City	CW	42
+KAUZ	Lawton	CBS	6
+KAVU	Victoria	ABC	25
+KAWB	Minneapolis	PBS	22
+KAWE	Lakeland	PBS	9
+KAYU	Spokane	FOX	28
+KAZD	Toons	MeTV	
+KAZF	Arizona's Family Sports Phoenix		
+KAZT	Arizona	CW	7
+KBAK	Bakersfield	CBS	29
+KBCW	San Francisco	CW	44
+KBDI	Denver	PBS	12
+KBEH	Retro TV		
+KBFX	Bakersfield	FOX	58
+KBGS		PBS	
+KBHE		PBS	
+KBIN		PBS	
+KBJR	Duluth/Superior	NBC	6
+KBME		PBS	
+KBMT	Beaumont	NBC	12
+KBMY	Bismarck	ABC	17
+KBNZ	Bend	CBS	7
+KBOI	Boise	CBS	2
+KBSI	Cape Girardeau	FOX	23
+KBTC	Seattle	PBS	28
+KBTF	Bakersfield		
+KBTX	Bryan	CBS	3
+KBVO	Austin	MyNetworkTV	14
+KBVU	Eureka	FOX	28
+KBZK	Bozeman	CW	
+KBZO	Lubbock		
+KCAL	Los Angeles	CBS	9
+KCAU	Sioux City	ABC	9
+KCBA	Salinas	FOX	35
+KCBD	Lubbock	NBC	11
+KCBS	Los Angeles	CBS	2
+KCCI	Des Moines	CBS	8
+KCDT	Spokane	PBS	26
+KCEN	Temple	NBC	6
+KCHY	Cheyenne	NBC	13
+KCIT	Amarillo	FOX	14
+KCJO	St. Joseph	CBS	30
+KCLO	Rapid City	CBS	11
+KCNC	Denver	CBS	4
+KCOP	Los Angeles	MyNetworkTV	13
+KCOS	El Paso	PBS	13
+KCOY	Santa Maria	CBS	12
+KCPN	Amarillo	MyNetworkTV	33
+KCPQ	Seattle	FOX	13
+KCPT	Kansas City	PBS	19
+KCRA	Sacramento	NBC	3
+KCRG	Cedar Rapids	ABC	9
+KCTS	Seattle	PBS	9
+KCTV	Kansas City	CBS	5
+KCVU	Chico	FOX	20
+KCWC	Riverton	PBS	4
+KCWE	Kansas City	CW	29
+KCWH	Nebraska	CW	16
+KCWI	Ames	CW	12
+KCWO	Odessa	CW	
+KCWQ	Palm Springs	CW	2
+KCWT	Harlingen/Weslaco/Brownsville/Mcallen	CW	23
+KCWX	San Antonio Texas	MyNetworkTV	2
+KCWY	Casper	NBC	13
+KCYU	Yakima	FOX	41
+KDAF	Dallas	CW	33
+KDBC	El Paso	CBS	4
+KDCU	Wichita		
+KDFI	Dallas	MyNetworkTV	27
+KDFW	Dallas	FOX	4
+KDFX	Palm Springs	FOX	33
+KDIN	Des Moines	PBS	11
+KDJT	Monterey		
+KDKA	Pittsburgh	CBS	2
+KDLH	Duluth	CW	3
+KDLT	Sioux Falls	NBC	46
+KDNL	St. Louis	ABC	30
+KDRV	Medford	ABC	12
+KDSM	Des Moines	FOX	17
+KDVR	Denver	FOX	31
+KECA		CW	
+KECI	Missoula	NBC	13
+KECY	El Centro	FOX	9
+KEDT	Corpus Christi	PBS	16
+KEET	Eureka	PBS	13
+KEGW	Fort Smith		
+KELO	Sioux Falls	CBS	11
+KENS	San Antonio	CBS	5
+KENW	Portales	PBS	3
+KENWDT2		PBS	3
+KEPB	Eugene	PBS	28
+KERA	Dallas	PBS	13
+KERO	Bakersfield	ABC	23
+KESQ	Palm Springs	ABC	3
+KET	Encore 2 WKAS	PBS	
+KETA	Oklahoma City	PBS	13
+KETC	St Louis	PBS	9
+KETK	Jacksonville	NBC	56
+KETS	Little Rock	PBS	2
+KETV	Omaha	ABC	7
+KETZ	Monroe	PBS	12
+KEVA	Boise		
+KEVN	Rapid City	FOX	7
+KEY	TV		
+KEYC	Mankato	FOX	12
+KEYE	Austin	CBS	42
+KEYT	Santa Barbara	ABC	3
+KEZI	Eugene	ABC	9
+KFAA	Dallas	Independent	29
+KFBB	Great Falls	FOX	5
+KFDA	Amarillo	CBS	10
+KFDM	Beaumont	CBS	6
+KFDX	Wichita Falls	NBC	3
+KFFX	Pendleton	FOX	
+KFJX	Pittsburg	FOX	14
+KFMB	San Diego	CBS	8
+KFME	Fargo	PBS	13
+KFNB	Casper/Riverton	FOX	20
+KFOR	Oklahoma City	NBC	4
+KFOX	El Paso	FOX	14
+KFPH	Chandler AZ		
+KFQX	Grand Junction	FOX	4
+KFRE	Fresno/Visalia	CW	59
+KFSM	Fort Smith	CBS	5
+KFSN	Fresno	ABC	30
+KFTA	Fort Smith	FOX	24
+KFTU	Marana		
+KFVS	Cape Girardeau	CBS	12
+KFXA	Cedar Rapids	FOX	28
+KFXK	Longview	FOX	51
+KFXL	Lincoln	FOX	51
+KFXO	Bend	FOX	39
+KFXV	Harlingen	FOX	67
+KFYR	Bismarck	NBC	5
+KGAN	Cedar Rapids	CBS	2
+KGBT	Harlingen	CBS	23
+KGCW	Burlington	CW	26
+KGET	Bakersfield	NBC	17
+KGHB	Colorado Springs CO		
+KGMB	Honolulu	CBS	5
+KGNS	Laredo	NBC	8
+KGO	San Francisco	ABC	7
+KGPE	Fresno	CBS	47
+KGTF	Hagåtña Guam	PBS	12
+KGTV	San Diego	ABC	10
+KGUN	Tucson	ABC	9
+KGW	Portland	NBC	8
+KGWC	Casper	CBS	14
+KGWN	Cheyenne	CBS	5
+KHBB	Helena	FOX	21
+KHBS	29 Fort Smith	ABC	40
+KHET	Hawaii	PBS	11
+KHGI	Grand Island	ABC	13
+KHII	Hanolulu	MyNetworkTV	
+KHMT	Billings	FOX	4
+KHNE	Lincoln	PBS	29
+KHNL	Honolulu	NBC	13
+KHOG	Fort Smith	ABC	
+KHON	Honolulu	FOX	2
+KHOU	Houston	CBS	11
+KHQ	Spokane	NBC	6
+KHQA	Hannibal	ABC	7
+KHSL	Chico	CBS	12
+KIAH	Houston	CW	39
+KICU	San Jose	CW	36
+KIDY	San Angelo	FOX	10
+KIEM	Eureka	NBC	3
+KIFI	Idaho Falls	ABC	8
+KIII	Corpus Christi	ABC	3
+KIIN		PBS	
+KIIT		FOX	11
+KIMA	Ya KIMA	CBS	29
+KIMT	Mason City	CBS	3
+KING	Seattle	NBC	5
+KION	Monterey	CBS	46
+KIRO	Seattle	CBS	7
+KISU		PBS	
+KITV	Honolulu	ABC	4
+KIVI	Boise	ABC	6
+KIXE	Redding	PBS	9
+KJBO	Lawton	MyNetworkTV	
+KJCT	Grand Junction	ABC	8
+KJNB	Jonesboro	FOX	39
+KJRH	Tulsa	NBC	2
+KJTV	Lubbock	FOX	34
+KJUD	Juneau	ABC	
+KJYY	Portland	CW	29
+KJZZ	14 Salt Lake City	Independent	14
+KKCO	Grand Junction	NBC	11
+KKFX	Santa Barbara	FOX	11
+KKTF	Chico		
+KKTQ	Cheyenne	ABC	
+KKTV	Colorado Springs	CBS	11
+KLAF	Lafayette	NBC	62
+KLAS	Las Vegas	CBS	8
+KLAX	Alexandria	ABC	31
+KLBK	Lubbock	CBS	13
+KLCS	Los Angeles	PBS	58
+KLCW	Lubbock	CW	
+KLFY	Lafayette	CBS	10
+KLJB	Davenport	FOX	18
+KLKN	Lincoln	ABC	8
+KLPA		PBS	
+KLPB	Lafayette	PBS	24
+KLRN	San Antonio	PBS	9
+KLRT	Little Rock	FOX	16
+KLRU	Austin	PBS	18
+KLSR	Eugene	FOX	34
+KLST	San Angelo	CBS	8
+KLTL	Lake Charles	PBS	18
+KLTM	Monroe	PBS	13
+KLTS		PBS	
+KLTV	Tyler	ABC	7
+KLVX	Las Vegas	PBS	10
+KLWY	Cheyenne	FOX	27
+KMAX	Sacramento	CW	31
+KMBC	Kansas City	ABC	9
+KMCC	Vegas34 Las Vegas	CW	
+KMGH	Denver	ABC	7
+KMID	Midland	ABC	2
+KMIR	Palm Desert	NBC	6
+KMIZ	Columbia	ABC	17
+KMNF	Mankato	NBC	7
+KMOL	Victoria	NBC	17
+KMOS	Sedalia	PBS	6
+KMOV	St. Louis	CBS	4
+KMPH	Fresno	FOX	26
+KMSB	Tucson	FOX	11
+KMSP	Minneapolis	FOX	9
+KMSS	Shreveport	FOX	33
+KMTR	Eugene	NBC	16
+KMTV	Omaha	CBS	3
+KMVT	Twin Falls	CBS	11
+KMVU	Medford	FOX	26
+KMYS	San Antonio Texas	CW	
+KMYU	Salt Lake City	MyNetworkTV	12
+KNBC	Los Angeles	NBC	4
+KNBN	Rapid City	NBC	21
+KNCT	Bryan	CW	
+KNDO	Yakima	NBC	23
+KNHL		CW	
+KNIN	Boise	FOX	9
+KNME	Albuquerque	PBS	5
+KNOE	Monroe	CBS	8
+KNOP	North Platte	NBC	2
+KNPB	Reno	PBS	5
+KNPG	St. Joseph	NBC	21
+KNPN	St Joseph	FOX	26
+KNSD	San Diego	NBC	39
+KNSN	Reno	Independent	21
+KNTV	San Francisco	NBC	11
+KNVA	Austin	CW	54
+KNVN	Chico	NBC	24
+KNWA	Fort Smith	NBC	51
+KNXV	Phoenix	ABC	15
+KOAA	Pueblo	NBC	5
+KOAB	Bend	PBS	3
+KOAM	Joplin Pittsburg	CBS	7
+KOAT	Albuquerque	ABC	7
+KOB	Albuquerque	NBC	4
+KOBI	Medford	NBC	5
+KOCB	Oklahoma City	CW	34
+KOCE	Los Angeles	PBS	50
+KOCO	Oklahoma City	ABC	5
+KODE	Joplin	ABC	12
+KOED	Tulsa	PBS	11
+KOHD	Bend	ABC	51
+KOIN	Portland	CBS	6
+KOKH	Oklahoma City	FOX	25
+KOKI	Tulsa	FOX	23
+KOLD	Tucson	CBS	13
+KOLN	Lincoln	CBS	10
+KOLO	Reno	ABC	8
+KOLR	Springfield	CBS	10
+KOMO	Seattle	ABC	4
+KOMU	Columbia	NBC	8
+KONG	Seattle	Independent	16
+KOOD	Bunker Hill	PBS	9
+KOPB	Portland	PBS	10
+KOSA	Odessa	CBS	7
+KOTA	Rapid City	ABC	3
+KOTV	Tulsa	CBS	6
+KOVR	Sacramento	CBS	13
+KOZK	Springfield	PBS	21
+KOZL	Springfield	MyNetworkTV	27
+KPAX	Missoula	CBS	8
+KPBS	San Diego	PBS	15
+KPBT	Odessa	PBS	36
+KPDX	Vancouver	MyNetworkTV	
+KPEJ	Midland	FOX	24
+KPHO	Phoenix	CBS	5
+KPIX	San Francisco	CBS	5
+KPLC	Lake Charles	NBC	7
+KPLR	St Louis	CW	11
+KPMR	Lompoc		
+KPNX	Phoenix	NBC	12
+KPRC	Houston	NBC	2
+KPSP	Palm Springs	CBS	2
+KPTH	Sioux City	FOX	44
+KPTM	Omaha	FOX	42
+KPTS	Kansas	PBS	8
+KPTV	Portland	FOX	12
+KPVI	Pocatello	NBC	6
+KPXJ	Shreveport	CW	21
+KQCA	Sacramento	MyNetworkTV	58
+KQCW	Tulsa	CW	19
+KQDS	Duluth	FOX	21
+KQED	San Francisco	PBS	9
+KQET	Monterey	PBS	25
+KQFX	Jefferson City	FOX	22
+KQIN	Davenport	PBS	36
+KQTV	St Joseph	ABC	2
+KRBC	Abilene	NBC	9
+KRBK	Osage Beach	FOX	49
+KRCB	San Francisco	PBS	22
+KRCG	Jefferson City	CBS	13
+KRCR	Chico/Redding	ABC	7
+KRCW	32 Salem	CW	29
+KRDO	Colorado Springs	ABC	13
+KREM	Spokane	CBS	2
+KREX	Grand Junction	CBS	5
+KRGV	Weslaco	ABC	5
+KRHD	Bryan 40 KXXV	ABC	
+KRIS	Corpus Christi	NBC	6
+KRIV	Houston	FOX	26
+KRMA	Denver	PBS	6
+KRNV	Reno	NBC	7
+KRON	San Francisco	CW	4
+KRQE	Albuquerque	CBS	13
+KRTV	Great Falls	CBS	3
+KRVU	Redding	MyNetworkTV	
+KRWG	Las Cruces	PBS	22
+KRXI	Reno	FOX	11
+KSAN	San Angelo	NBC	16
+KSAS	Wichita	FOX	24
+KSAT	San Antonio	ABC	12
+KSAW	Twin Falls	ABC	6
+KSAX	Alexandria KSTP	ABC	
+KSAZ	Phoenix	FOX	10
+KSBW	Salinas	NBC	8
+KSBY	San Luis Obispo	NBC	6
+KSCC	Corpus Christi	FOX	38
+KSCW	Wichita	CW	33
+KSDK	St. Louis	NBC	5
+KSEE	Fresno	NBC	24
+KSFY	Sioux Falls	ABC	13
+KSHB	Kansas City	NBC	41
+KSHV	Shreveport	MyNetworkTV	45
+KSIX	Honolulu	NBC	22
+KSKN	Spokane	CW	22
+KSL	Salt Lake City	NBC	5
+KSLA	Shreveport	CBS	12
+KSMO	Kansas City	MyNetworkTV	62
+KSMQ	Austin	PBS	15
+KSMS	Monterey		
+KSNB	Lincoln	NBC	4
+KSNF	Joplin	NBC	17
+KSNT	Topeka	NBC	27
+KSNV	Las Vegas	NBC	3
+KSNW	Wichita	NBC	3
+KSPR	Missouri	ABC	33
+KSPS	Spokane	PBS	7
+KSTC		Independent	
+KSTP	Minneapolis	ABC	5
+KSTU	Salt Lake City	FOX	13
+KSTW	Tacoma	CW	11
+KSVI	Billings	ABC	6
+KSVT	Twin Falls	FOX	14
+KSWB	San Diego	FOX	5
+KSWL	Lake Charles	CBS	17
+KSWO	Lawton	ABC	7
+KSYS	Medford	PBS	8
+KTAB	Abilene	CBS	32
+KTAL	Shreveport	NBC	6
+KTBC	Austin	FOX	7
+KTBS	Shreveport	ABC	3
+KTBY	Anchorage	FOX	4
+KTCA	Minneapolis	PBS	2
+KTEN	Ada	NBC	10
+KTFT	Twin Falls	NBC	7
+KTGF	Great Falls	NBC	12
+KTHV	Little Rock	CBS	11
+KTIV	Sioux City	NBC	4
+KTKA	Topeka	ABC	49
+KTLA	Los Angeles	CW	5
+KTLE	Odessa		
+KTMF	Missoula	ABC	23
+KTMJ	Topeka	FOX	43
+KTNV	Las Vegas	ABC	13
+KTNW	Richland	PBS	31
+KTOO		PBS	
+KTPN	Jacksonville TX		
+KTRK	Houston	ABC	13
+KTSB	Lompoc		
+KTSC	Colorado Springs	PBS	8
+KTSH	Texarcana	CBS	12
+KTSM	El Paso	NBC	9
+KTTC	Rochester	NBC	10
+KTTU	Tucson Arizona	CW	18
+KTTV	Los Angeles	FOX	11
+KTTW	Sioux Falls	FOX	17
+KTTZ	Lubbock	PBS	5
+KTUL	Tulsa	ABC	8
+KTUU	Anchorage	NBC	2
+KTVA	Anchorage	CBS	22
+KTVB	Boise	NBC	7
+KTVD	Denver	MyNetworkTV	20
+KTVE	West Monroe	NBC	10
+KTVF	Fairbanks	NBC	11
+KTVH	Helena	NBC	12
+KTVI	St. Louis	FOX	2
+KTVK	Phoenix	CW	
+KTVL	Medford	CBS	10
+KTVM	Butte	NBC	13
+KTVN	Reno	CBS	2
+KTVQ	Billings	CBS	2
+KTVT	Dallas	CBS	11
+KTVU	San Francisco	FOX	2
+KTVX	Salt Lake City	ABC	4
+KTVZ	Bend	NBC	21
+KTWO	Casper	ABC	2
+KTWU	Topeka	PBS	11
+KTXA	Fort Worth	CBS	
+KTXE	San Angelo	ABC	12
+KTXH	Houston	MyNetworkTV	20
+KTXL	Sacramento	FOX	40
+KTXS	Abilene	ABC	12
+KUAC	Fairbanks	PBS	9
+KUAT	Tucson	PBS	6
+KUCO	Chico		
+KUCW	Utah	CW	30
+KUED	Salt Lake City	PBS	7
+KUFM	Missoula	PBS	11
+KUGF		PBS	
+KUHT	Houston	PBS	8
+KUKC	Kansas City		
+KULR	Billings	NBC	8
+KUNU	Victoria		
+KUNW	Kennewick		
+KUOK	Oklahoma City		
+KUON	Lincoln	PBS	12
+KUPB	Odessa		
+KUPX	Salt Lake City	CW	16
+KUSA	Denver	NBC	9
+KUSD	Vermillion	PBS	2
+KUSI	9 San Diego	CW	
+KUSM	Butte Bozeman	PBS	9
+KUTP	Phoenix	MyNetworkTV	45
+KUTV	Salt Lake City	CBS	2
+KVAL	Eugene	CBS	13
+KVCR	Los Angeles	PBS	24
+KVCT	Victoria	FOX	19
+KVCW	Las Vegas	CW	33
+KVEO	Brownsville	NBC	23
+KVEW	Kennewick	ABC	42
+KVHP	Lake Charles	FOX	29
+KVIA	El Paso	ABC	7
+KVIE	Sacramento	PBS	6
+KVII	Amarillo	ABC	7
+KVIQ	Eureka	CBS	
+KVLY	Fargo	NBC	11
+KVOA	Tucson	NBC	4
+KVOS	Seattle		
+KVPT	Fresno	PBS	18
+KVRR	Fargo	FOX	15
+KVUE	Austin	ABC	24
+KVVU	Las Vegas	FOX	5
+KWBA		Independent	
+KWCH	Wichita	CBS	12
+KWCM	Appleton	PBS	10
+KWES	Odessa	NBC	9
+KWGN	Denver	CW	2
+KWKT	Waco	FOX	44
+KWNL	Fort Smith		
+KWQC	Davenport	NBC	6
+KWTV	Oklahoma City	CBS	9
+KWTX	Waco	CBS	10
+KWWE	Lake Charles	MyNetworkTV	19
+KWWL	Waterloo	NBC	7
+KWYB	Butte	ABC	18
+KXAN	Austin	NBC	36
+KXAS	Fort Worth	NBC	5
+KXDF	Fairbanks	CBS	
+KXFX	Brownsville	FOX	67
+KXII	Sherman	CBS	12
+KXJB	Fargo	CBS	30
+KXLF	Butte	CBS	4
+KXLT	Rochester	FOX	47
+KXLY	Spokane	ABC	4
+KXMA		CW	
+KXMB	Bismarck	CBS	
+KXNW	Eureka Springs	MyNetworkTV	34
+KXOF	Laredo	FOX	39
+KXPI	Idaho Falls	FOX	5
+KXRM	Colorado Springs	FOX	21
+KXTU	Colorado Springs CO	CW	
+KXTV	Sacramento	ABC	10
+KXVA	Abilene	FOX	15
+KXXV	Waco	ABC	25
+KYCW	Springfield	CW	24
+KYES	Anchorage	CBS	5
+KYEX	Juneau	CBS	
+KYLE	Bryan	MyNetworkTV	
+KYLX	Laredo	CW	13
+KYMA	Yuma	NBC	13
+KYNE		PBS	
+KYOU	Ottumwa	FOX	
+KYTV	Springfield	NBC	3
+KYTX	Nacogdoches	CBS	19
+KYUR	Anchorage	ABC	13
+KYUU	Boise	CW	35
+KYVE		PBS	
+KYW	Philadelphia	CBS	3
+KZJO	Seattle	MyNetworkTV	20
+KZTV	Corpus Christi	CBS	10
+KZUP	Baton Rouge	CW	20
+WAAY	Huntsville	ABC	31
+WABC	New York	ABC	7
+WABE	Atlanta	PBS	30
+WABG	Greenwood	ABC	6
+WABI	Bangor	CBS	5
+WABM	Birmingham	MyNetworkTV	33
+WABW		PBS	
+WACH	Columbia	FOX	57
+WACO	KWKT	ABC	10
+WAFB	Baton Rouge	CBS	9
+WAFF	Huntsville	NBC	48
+WAGA	Atlanta	FOX	5
+WAGM	Presque Isle	FOX	8
+WAGT	Augusta	NBC	16
+WAHU	Charlottesville	FOX	
+WAIQ	Montgomery	PBS	26
+WAKA	Montgomery/Selma	CBS	8
+WALA	Mobile	FOX	10
+WALB	Albany	NBC	10
+WAND	Decatur	NBC	17
+WANE	Fort Wayne	CBS	15
+WANF	Atlanta	CBS	46
+WAOW	Wausau	ABC	9
+WAPT	Jackson	ABC	16
+WASH		NBC	
+WATE	Knoxville	ABC	6
+WATM	Johnstown	ABC	23
+WATN	Memphis	ABC	24
+WAVE	Louisville	NBC	3
+WAVY	Portsmouth	NBC	10
+WAWV	Terre Haute	ABC	
+WAXN			
+WBAL	Baltimore	NBC	11
+WBAY	Green Bay	ABC	2
+WBBH	Fort Myers	NBC	20
+WBBJ	Jackson	ABC	7
+WBBM	Chicago	CBS	2
+WBCB	Youngstown		
+WBDT	Dayton	CW	2
+WBFF	Baltimore	FOX	45
+WBFS	Miami	CW	33
+WBGH	Binghamton	NBC	20
+WBGU		PBS	27
+WBIQ	Birmingham	PBS	10
+WBIR	Knoxville	NBC	10
+WBKB	FX		
+WBKI	Louisville	CW	58
+WBKO	Bowling Green	ABC	13
+WBMA	40 Birmingham	ABC	33
+WBMM	Montgomery	CW	22
+WBND	South Bend	ABC	57
+WBNG	Binghamton	CBS	12
+WBNS	Columbus	CBS	10
+WBNX	Cleveland	CW	
+WBOC	Salisbury	CBS	21
+WBOY	Clarksburg	NBC	12
+WBRA	Blue Ridge	PBS	15
+WBRC	Birmingham	FOX	6
+WBRE	Wilkes Barre	NBC	28
+WBRL	Baton Rouge	CBS	3
+WBRZ	Baton Rouge	ABC	2
+WBSF	Bay City	CW	46
+WBTS	Boston	NBC	10
+WBTV	Charlotte	CBS	3
+WBTW	Florence	CBS	13
+WBUI	Champaign	CW	23
+WBUP	Ishpeming	ABC	
+WBXX	Crossville	CW	20
+WBZ	Boston	CBS	4
+WCAU	Philadelphia	NBC	10
+WCAV	Charlottesville	CBS	19
+WCAX	Burlington	CBS	3
+WCBB	Augusta	PBS	10
+WCBD	Charleston	NBC	2
+WCBI	Columbus	CBS	4
+WCBS	New York	CBS	2
+WCCB	Charlotte	CW	18
+WCCO	Minneapolis	CBS	4
+WCCT	Waterbury	CW	20
+WCES		PBS	
+WCET	Cincinnati	PBS	48
+WCFE	Plattsburgh	PBS	57
+WCHS	Charleston	ABC	8
+WCIA	Champaign	CBS	3
+WCIU	The U	CW	
+WCIV	Charleston	ABC	4
+WCIX	Springfield	MeTV	49
+WCJB	Gainesville	ABC	20
+WCMH	Columbus	NBC	4
+WCMU	Mount Pleasant	PBS	28
+WCMV	Traverse City	PBS	27
+WCNC	Charlotte	NBC	36
+WCNY	Syracuse	PBS	24
+WCOV	Montgomery	FOX	20
+WCPB		PBS	
+WCPO	Cincinnati	ABC	9
+WCSC	Charleston	CBS	5
+WCSH	Portland	NBC	6
+WCTE	Cookeville	PBS	22
+WCTI	Greenville	ABC	12
+WCTV	Thomasville	CBS	6
+WCTX	Waterbury	MyNetworkTV	9
+WCVB	Boston	ABC	5
+WCVE	Richmond	PBS	22
+WCVN	Cincinnati A3 Virt	PBS	54
+WCWF	Green Bay	CW	14
+WCWG	Greensboro	CW	20
+WCWJ	Jacksonville	CW	17
+WCWN	Albany	CW	15
+WCWW	South Bend/Elkhart Area	CW	25
+WCYB	Bristol	NBC	5
+WDAF	Kansas City	FOX	4
+WDAM	Hattiesburg	NBC	7
+WDAY	Fargo	ABC	6
+WDBD	Jackson	FOX	40
+WDBJ	Roanoke	CBS	7
+WDCA	Washington	MyNetworkTV	20
+WDCQ	Bad Axe	PBS	19
+WDCW	Washington	CW	50
+WDEF	Chattanooga	CBS	12
+WDFX	Dothan	FOX	34
+WDHN	Dothan	ABC	18
+WDIO	Duluth	ABC	10
+WDIV	Detroit	NBC	4
+WDJT	Milwaukee	CBS	58
+WDKA	Paducah	MyNetworkTV	49
+WDKY	Lexington	FOX	56
+WDNI	Indianapolis		
+WDRB	Louisville	FOX	41
+WDSE	Duluth	PBS	8
+WDSU	New Orleans	NBC	6
+WDTN	Dayton	NBC	2
+WDTV	Weston	CBS	
+WDVM	DC News Now Washington D.C.	Independent	25
+WEAO	Cleveland	PBS	49
+WEAR	Mobile/Pensacola/Fort Walton Beach	ABC	3
+WEAU	Eau Claire	NBC	13
+WEBA	Augusta	PBS	14
+WECP	Panama City	CBS	18
+WECT	Wilmington	NBC	6
+WECX	La Crosse		
+WEDH	Hartford	PBS	24
+WEDU	Tampa	PBS	3
+WEDW	New York	PBS	49
+WEEK	Peoria	NBC	25
+WEHT	Evansville	ABC	25
+WEIQ		PBS	42
+WEMT	Greeneville	FOX	39
+WENH	New Hampshire	PBS	11
+WENY	Elmira	ABC	
+WESH	Orlando	NBC	2
+WETA	Arlington	PBS	26
+WETK	Burlington	PBS	32
+WETM	Elmira	NBC	18
+WETP	East Tennessee	PBS	2
+WEVV	Evansville	FOX	44
+WEWS	Cleveland	ABC	5
+WEYI	Saginaw	NBC	25
+WFAA	Dallas	ABC	8
+WFBN	Rockford		
+WFDC	Leesburg		
+WFFF	Burlington	FOX	44
+WFFT	Fort Wayne	FOX	55
+WFGX	Fort Walton Beach	MyNetworkTV	
+WFIE	Evansville	NBC	14
+WFIU	WTIU IN Bloomington	PBS	
+WFLA	Tampa	NBC	8
+WFLD	Chicago	FOX	32
+WFLI	Chattanooga	CW	23
+WFLX	West Palm Beach	FOX	29
+WFMJ	Youngstown	NBC	21
+WFMY	Greensboro	CBS	2
+WFMZ	69 News Philadelphia		
+WFNA	Mobile	CW	55
+WFOR	Miami	CBS	4
+WFOX	Jacksonville	FOX	30
+WFPT		PBS	
+WFQX	Cadillac	FOX	32
+WFRN		CBS	
+WFRV	Green Bay	CBS	5
+WFSB	Hartford	CBS	3
+WFSG	Panama City	PBS	56
+WFSU	Tallahassee	PBS	11
+WFTC	+	FOX	9
+WFTS	Tampa	ABC	28
+WFTV	Orlando	ABC	9
+WFTX	Cape Coral	FOX	36
+WFVX	Bangor	FOX	22
+WFWA	Fort Wayne	PBS	27
+WFXB	Myrtle Beach	FOX	43
+WFXG	Augusta	FOX	54
+WFXL	Albany	FOX	31
+WFXP	Erie	FOX	66
+WFXR	Roanoke	FOX	27
+WFXT	Boston	FOX	25
+WFXU		MyNetworkTV	57
+WFXV	Utica	FOX	33
+WFYI	Indianapolis	PBS	21
+WGAL	Lancaster	NBC	8
+WGBA	Green Bay	NBC	26
+WGBC	Meridian	NBC	30
+WGBH	Boston	PBS	2
+WGBY	Springfield	PBS	57
+WGCL	Atlanta	CBS	46
+WGCU	Fort Myers	PBS	30
+WGCW	Albany	CW	36
+WGEM	Quincy	NBC	10
+WGFL	Gainesville	CBS	4
+WGGB	Springfield	FOX	40
+WGHP	Greensboro	FOX	8
+WGMB	Baton Rouge	FOX	44
+WGME	Portland	CBS	13
+WGN	9 Chicago		
+WGNO	New Orleans	ABC	26
+WGNT	27 Hampton Roads		
+WGRZ	Buffalo	NBC	2
+WGTE	Toledo	PBS	30
+WGTU	Traverse City	ABC	29
+WGTV	Atlanta	PBS	8
+WGVU	Detroit	PBS	35
+WGXA	Macon	FOX	24
+WHA	Madison	PBS	21
+WHAM	Rochester	ABC	13
+WHAS	Louisville	ABC	11
+WHBF	Davenport/Rock Island/Moline	CBS	4
+WHBQ	Memphis	FOX	13
+WHDF	Florence	CW	15
+WHDH	7 News Boston		
+WHDT		Independent	
+WHEC	Rochester	NBC	10
+WHIO	Dayton	CBS	7
+WHIQ	Huntsville	PBS	25
+WHIZ	Zanesville	NBC	18
+WHLT	Hattiesburg	CBS	22
+WHMB	Indianapolis		
+WHME	Southbend IN		
+WHNS	Greenville	FOX	21
+WHNT	Huntsville	CBS	19
+WHO	Des Moines	NBC	13
+WHP	Harrisburg	CBS	21
+WHPM	Hattiesburg	FOX	22
+WHRM		PBS	
+WHRO	Norfolk	PBS	15
+WHSV	Harrisonburg	ABC	13
+WHTJ	Charlottesville	PBS	41
+WHTM	Harrisburg	ABC	27
+WHTX	Springfield MA		
+WHUT	Washington	PBS	32
+WHYY	Philadelphia	PBS	12
+WIAT	Birmingham	CBS	42
+WIBW	Topeka	CBS	13
+WICD	Champaign	ABC	15
+WICS	Springfield	ABC	20
+WICU	Erie	NBC	12
+WICZ	Binghamton	FOX	40
+WIFR	Rockford	CBS	23
+WILL	Champaign	PBS	12
+WILX	Onondaga	NBC	10
+WINK	Fort Myers	CBS	11
+WIPB	Muncie	PBS	49
+WIS	Columbia	NBC	10
+WISC	Madison	CBS	3
+WISE	Fort Wayne	CW	33
+WISH	Indianapolis		
+WISN	Milwaukee	ABC	12
+WITF	Harrisburg	PBS	33
+WITI	Milwaukee	FOX	6
+WITN	Washington	NBC	7
+WITV	Charleston	PBS	7
+WIV	Milwaukee WTMJ	NBC	
+WIVB	Buffalo	CBS	4
+WIVT	Binghamton	ABC	34
+WIYE	Parkersburg	CBS	
+WJAC	Johnstown	NBC	6
+WJAR	Rhode Island	NBC	10
+WJAX	Jacksonville	CBS	47
+WJBF	Augusta	ABC	6
+WJBK	Detroit	FOX	2
+WJCL	Savannah	ABC	22
+WJCT	Jacksonville	PBS	7
+WJET	Erie	ABC	24
+WJFW	Wausau	NBC	12
+WJHG	Panama City	NBC	7
+WJHL	Tri Cities	ABC	11
+WJKT	Jackson	FOX	16
+WJLA	Washington	ABC	7
+WJPM	Myrtle Beach	PBS	33
+WJRT	Flint	ABC	12
+WJSP		PBS	
+WJTV	Jackson	CBS	12
+WJW	Cleveland	FOX	8
+WJWJ	Savannah	PBS	16
+WJXT	Channel4 Jacksonville	CW	
+WJXX	Jacksonville	ABC	25
+WJZ	Baltimore	CBS	13
+WJZY	Charlotte	FOX	46
+WKAR	East Lansing	PBS	23
+WKAS	Charleston	PBS	25
+WKBD	Detroit	CW	50
+WKBN	Youngstown	CBS	27
+WKBT	La Crosse	CBS	8
+WKBW	Buffalo	ABC	7
+WKCF	Daytona Beach	CW	18
+WKEF	Dayton	ABC	22
+WKLE	Lexington	PBS	46
+WKMG	Orlando	CBS	6
+WKNO	Memphis	PBS	10
+WKOF	Syracuse	CBS	
+WKOP	Knoxville	PBS	15
+WKOW	Madison	ABC	27
+WKPC	Louisville	PBS	15
+WKPD	Paducah	PBS	29
+WKRC	Cincinnati	CBS	12
+WKRG	Mobile	CBS	5
+WKRN	Nashville	ABC	2
+WKTV	Utica	NBC	2
+WKU	Public Media WKYU	PBS	
+WKYC	Cleveland	NBC	3
+WKYT	Lexington	CBS	27
+WKYU		PBS	24
+WLAJ	Lansing	ABC	53
+WLAX	Crosse	FOX	25
+WLBT	Jackson	NBC	3
+WLBZ	Bangor	NBC	2
+WLED	Burlington	PBS	49
+WLEX	Lexington	NBC	18
+WLFI	Lafayette	CBS	18
+WLFL	Raleigh	CW	22
+WLIO	Lima	NBC	8
+WLIW	Garden City	PBS	21
+WLJT	Jackson	PBS	11
+WLKY	Louisville	CBS	32
+WLLC	Nashville		
+WLMT	30 Memphis	CW	30
+WLNE	Providence/New Bedford	ABC	6
+WLNS	Lansing	CBS	6
+WLNY	New York	CBS	10
+WLOS	Asheville	ABC	13
+WLOV	??? Tupelo	CW	
+WLOX	Gulfport	ABC	13
+WLPB	Baton Rouge	PBS	25
+WLRN	Miami	PBS	17
+WLS	Chicago	ABC	7
+WLTX	Columbia	CBS	19
+WLTZ	Columbus	NBC	38
+WLUC	Marquette	NBC	6
+WLUK	Green Bay	FOX	11
+WLVI	Boston	CW	56
+WLVT	Allentown	PBS	39
+WLWT	Cincinnati	NBC	5
+WMAE	Columbus Tupelo	PBS	12
+WMAH		PBS	
+WMAO	Greenwood	PBS	23
+WMAQ	Chicago	NBC	5
+WMAR	Baltimore	ABC	2
+WMAW		PBS	
+WMAZ	Macon	CBS	13
+WMBB	Panama City	ABC	13
+WMBD	Peoria	CBS	31
+WMBF	Myrtle Beach	NBC	32
+WMC	Memphis	NBC	5
+WMDN	Meridian	CBS	24
+WMDT	Salisbury	ABC	47
+WMEB		PBS	
+WMGT	Macon	NBC	41
+WMHT	Troy	PBS	17
+WMPB	Baltimore	PBS	29
+WMPN	Jackson	PBS	20
+WMPT	Baltimore	PBS	22
+WMSN	Madison	FOX	47
+WMTV	Madison	NBC	15
+WMTW	Portland	ABC	8
+WMUM	Macon	PBS	29
+WMUR	Manchester	ABC	9
+WMVS	Milwaukee	PBS	10
+WMYA	Greenville	MyNetworkTV	40
+WMYD	Detroit	CW	20
+WMYS	South Bend/Elkhart	MyNetworkTV	69
+WMYT	Charlotte	MyNetworkTV	12
+WMYV	Greensboro	MyNetworkTV	48
+WNAB	Nashville	CW	58
+WNAC	Providence	FOX	64
+WNBC	New York	NBC	4
+WNBD	Greenville	NBC	33
+WNBJ	Jackson	NBC	6
+WNBW	Gainesville	NBC	9
+WNCF	Montgomery	ABC	32
+WNCN	Raleigh	CBS	17
+WNCT	Greenville	CBS	9
+WNDU	South Bend	NBC	16
+WNED	Buffalo	PBS	17
+WNEM	Bay City	CBS	5
+WNEO	Alliance	PBS	45
+WNEP	Scranton	ABC	16
+WNET	New York	PBS	13
+WNGH	Chattanooga	PBS	18
+WNIN	Evansville	PBS	9
+WNIT	Michiana	PBS	34
+WNJN	New York	PBS	50
+WNJS	Philadelphia	PBS	23
+WNJT	New Jersey	PBS	52
+WNKY	Bowling Green	NBC	40
+WNLO	Buffalo	CW	23
+WNMU	Marquette	PBS	13
+WNNE	Burlington	CW	31
+WNOL	New Orleans	CW	38
+WNPT	Nashville	PBS	8
+WNSC	Charlotte	PBS	30
+WNTV	Greenville	PBS	29
+WNTZ	Alexandria	FOX	48
+WNUV	Baltimore	CW	54
+WNWO	Toledo	NBC	24
+WNYC			
+WNYF	Watertown	FOX	28
+WNYO	Buffalo	MyNetworkTV	49
+WNYT	Albany	NBC	13
+WNYW	New York	FOX	5
+WOAI	San Antonio	NBC	4
+WOAY	Beckley	ABC	
+WOFL	Orlando	FOX	35
+WOGX	Gainesville	FOX	51
+WOHL	Lima	ABC	35
+WOI	Des Moines	ABC	5
+WOIO	Cleveland	CBS	19
+WOLO	Columbia	ABC	25
+WOR	Poker Tour		
+WOSU	Columbus	PBS	34
+WOTV	Battle Creek	ABC	4
+WOUB	Athens	PBS	20
+WOVA	Parkersburg	FOX	22
+WOWK	Huntington	CBS	13
+WOWT	Omaha	NBC	6
+WPBF	West Palm Beach	ABC	25
+WPBI	Lafayette	FOX	16
+WPBN	Traverse City	NBC	7
+WPBS	Watertown	PBS	16
+WPBT	Miami	PBS	2
+WPBY	Lafayette	ABC	35
+WPCB	Cornerstone TV		
+WPCH	Peachtree Atlanta	CW	
+WPCW	Pittsburgh	CW	19
+WPDE	Florence	ABC	15
+WPEC	West Palm Beach	CBS	12
+WPFO	Portland	FOX	23
+WPGH	Pittsburgh	FOX	53
+WPGX	Panama City	FOX	28
+WPHL	PHL17 Philadelphia	CW	
+WPIX	New York	CW	11
+WPKD	Jeannette	CW	
+WPLG	Miami	ABC	10
+WPMI	Mobile	NBC	15
+WPMT	Harrisburg	FOX	43
+WPNE	Green Bay	PBS	38
+WPNT	Pittsburgh	MyNetworkTV	22
+WPNY	Utica		
+WPRI	Providence	CBS	12
+WPSD	Paducah	NBC	6
+WPSG	Philadelphia	CW	57
+WPSU	Johnstown	PBS	3
+WPTA	Fort Wayne	ABC	21
+WPTD	Dayton	PBS	16
+WPTO	Cincinnati	PBS	14
+WPTV	West Palm Beach	NBC	5
+WPTZ	Plattsburgh	NBC	5
+WPVD		PBS	36
+WPVI	Philadelphia	ABC	6
+WPWR	Chicago	MyNetworkTV	50
+WPXI	Pittsburgh	NBC	11
+WPXT	Portland	CW	34
+WQAD	Davenport	ABC	8
+WQCW	Portsmouth	CW	30
+WQEC		PBS	
+WQED	Pittsburgh	PBS	13
+WQHS	Cleveland		
+WQLN	Erie	PBS	54
+WQMY	Williamsport	MyNetworkTV	53
+WQOW	Eau Claire	ABC	18
+WQPT	Moline	PBS	24
+WQRF	Rockford	FOX	39
+WRAL	Raleigh	NBC	5
+WRAZ	Raleigh	FOX	50
+WRBL	Columbus	CBS	3
+WRBW	Orlando	FOX	65
+WRCB	Chattanooga	NBC	3
+WRCF	Daytona Beach		
+WRDE	Salisbury	NBC	31
+WRDW	Augusta	CBS	12
+WREG	Memphis	CBS	3
+WREX	Rockford	NBC	13
+WRGB	Albany	CBS	6
+WRGT	Dayton	CBS	45
+WRGX	Dothan	NBC	13
+WRIC	Richmond	ABC	8
+WRLH	Richmond	FOX	35
+WRLK	Columbia	PBS	35
+WROC	Rochester	CBS	8
+WRPT		PBS	31
+WRSP	Springfield	FOX	55
+WRTV	Indianapolis	ABC	6
+WSAV	Savannah	NBC	3
+WSAW	Wausau	CBS	7
+WSAZ	Huntington	NBC	3
+WSB	Atlanta	ABC	2
+WSBE	Ocean State Media	PBS	
+WSBK	Boston	MyNetworkTV	38
+WSBT	South Bend	CBS	22
+WSDW	Panama City		
+WSEE	Erie	CBS	35
+WSET	Lynchburg	ABC	13
+WSFA	Montgomery	NBC	12
+WSFL	Miami	CW	39
+WSFX	Wilmington	FOX	26
+WSHM	Springfield	CBS	3
+WSIL	Harrisburg	ABC	3
+WSIU	Carbondale	PBS	8
+WSKG	Binghamton	PBS	46
+WSLN	Rockford		
+WSLS	Roanoke	NBC	10
+WSMH	Flint	FOX	66
+WSMV	Nashville	NBC	4
+WSOC	Charlotte	ABC	9
+WSPA	Spartanburg	CBS	7
+WSPB	Lafayette	NBC	
+WSRE		PBS	
+WSTM	Syracuse	NBC	3
+WSTR	Cincinnati	MyNetworkTV	64
+WSVF	Harrisonburg	FOX	43
+WSVN	Miami	FOX	7
+WSVW	Harrisonburg	NBC	
+WSWB	Wilkes Barre	CW	38
+WSWG	Valdosta	CBS	44
+WSWP	Bluefield	PBS	9
+WSYM	Lansing	FOX	47
+WSYR	Syracuse	ABC	9
+WSYT	Syracuse	FOX	68
+WSYX	Columbus	ABC	6
+WTAE	Pittsburgh	ABC	4
+WTAJ	Altoona	CBS	10
+WTAP	Parkersburg	NBC	15
+WTAT	Charleston	FOX	24
+WTCI	Chattanooga	PBS	25
+WTCN	Palm Beach	MyNetworkTV	
+WTEN	Albany	ABC	10
+WTGB	Gainesville	CW	
+WTGC	Greenville NC		
+WTGS	Hardeeville	FOX	28
+WTHI	Terre Haute	CBS	10
+WTHR	Indianapolis	NBC	13
+WTIC	Hartford	FOX	61
+WTIU	Indianapolis	PBS	30
+WTJX	Charlotte Amalie	PBS	12
+WTKR	Norfolk	CBS	3
+WTLF	Tallahassee	CW	24
+WTLV	Jacksonville	NBC	12
+WTMJ	Milwaukee	NBC	4
+WTNC	Raleigh		
+WTNH	New Haven	ABC	8
+WTNZ	Knoxville	FOX	43
+WTOC	Savannah	CBS	11
+WTOG	Tampa Bay	CW	44
+WTOK	Meridian	ABC	11
+WTOL	Toledo	CBS	11
+WTOV	Steubenville	NBC	9
+WTRF	Wheeling	ABC	6
+WTSP	Tampa	CBS	10
+WTTA	St Petersburg	CW	38
+WTTE	Columbus	FOX	28
+WTTG	Washington	FOX	5
+WTTO	Birmingham	CW	21
+WTTV	Indianapolis	CBS	4
+WTTW	Chicago	PBS	11
+WTVA	Tupelo	NBC	9
+WTVC	Chattanooga	FOX	9
+WTVD	Raleigh/Durham	ABC	11
+WTVF	Nashville	CBS	5
+WTVG	Toledo	ABC	13
+WTVH	Syracuse	CBS	5
+WTVI	Charlotte	PBS	42
+WTVJ	Miami	NBC	6
+WTVM	Columbus	ABC	9
+WTVO	Rockford	ABC	17
+WTVP	Peoria	PBS	47
+WTVQ	Lexington	ABC	36
+WTVR	Richmond	CBS	6
+WTVS	Detroit	PBS	56
+WTVT	Tampa	FOX	13
+WTVW	Evansville		
+WTVX	Fort Pierce	CW	34
+WTVY	Dothan	CBS	4
+WTVZ	33 Hampton	MyNetworkTV	33
+WTWC	Tallahassee	FOX	40
+WTWO	Terre Haute	NBC	2
+WTXF	Philadelphia	FOX	29
+WTXL	Tallahassee	ABC	27
+WUAB	Cleveland	MyNetworkTV	43
+WUCF	Orlando	PBS	24
+WUCW	Saint Paul	CW	23
+WUFT	Gainesville	PBS	36
+WUHF	Rochester	FOX	31
+WUMN	Minneapolis		
+WUNC	Chapel Hill	PBS	4
+WUND	Norfolk	PBS	2
+WUNF	Greenville	PBS	33
+WUNG		PBS	
+WUNK	Greenville	PBS	25
+WUNL	Greensboro	PBS	26
+WUNU	Myrtle Beach	PBS	31
+WUPA	Atlanta	CW	69
+WUPV	Richmond	CW	8
+WUPW	Toledo	FOX	36
+WUSA	Washington	CBS	9
+WUTH	Hartford		
+WUTR	Utica	ABC	20
+WUTV	Buffalo	FOX	29
+WUVF	Fort Myers		
+WUVN	Hartford		
+WUXP	Nashville	MyNetworkTV	30
+WVAH	Charleston	FOX	11
+WVAN		PBS	
+WVAW	Charlottesville	ABC	16
+WVBT	Hampton Roads	FOX	43
+WVEC	Hampton Roads	ABC	13
+WVFX	Clarksburg	FOX	10
+WVIA	Scranton	PBS	21
+WVII	Bangor	ABC	7
+WVIR	Charlottesville	NBC	29
+WVIT	New Britain	NBC	30
+WVIZ	Cleveland	PBS	35
+WVLA	Baton Rouge	NBC	32
+WVLT	Knoxville	CBS	8
+WVNC	Charlotte	NBC	
+WVNS	Lewisburg	FOX	59
+WVNY	Burlington	ABC	22
+WVPB	Charleston	PBS	33
+WVTM	Birmingham	NBC	13
+WVTV	Milwaukee	CW	18
+WVUE	New Orleans	FOX	8
+WVUT	Vincennes	PBS	22
+WVVA	Bluefield	NBC	6
+WWAY	Wilmington	CBS	3
+WWBT	Richmond	NBC	12
+WWCP	Johnstown	FOX	8
+WWCW	Roanoke	CW	11
+WWHO	Columbus	CW	53
+WWJ	Detroit	CBS	62
+WWL	New Orleans	CBS	4
+WWLP	Springfield	NBC	22
+WWMT	Grand Rapids	CBS	3
+WWNY	Carthage	CBS	
+WWOR	New York	MyNetworkTV	9
+WWPI	Presque Isle	NBC	
+WWSB	Sarasota	ABC	7
+WWTI	Watertown	ABC	
+WWTV	Cadillac	CBS	9
+WXCW	Fort Myers	CW	46
+WXEL	West Palm Beach	PBS	42
+WXGA	Waycross	PBS	
+WXIA	Atlanta	NBC	11
+WXII	Winston Salem	NBC	12
+WXIN	Indianapolis	FOX	59
+WXIX	Cincinnati	FOX	19
+WXLV	Greensboro	ABC	45
+WXMI	Grand Rapids	FOX	17
+WXOH	Columbus		
+WXOW	Cross	ABC	19
+WXPX	the Spot 66 Tampa	Independent	
+WXSL	St. Louis	CW	22
+WXSP	Grand Rapids	MyNetworkTV	
+WXTL	Tallahassee		
+WXTX	Columbus	FOX	54
+WXVT	Cleveland	CBS	15
+WXXA	Albany	FOX	23
+WXXI	Rochester	PBS	21
+WXXV	Gulfport	FOX	25
+WXYZ	Detroit	ABC	7
+WYCN	Providence	NBC	
+WYCW	Asheville	CW	62
+WYDC	Corning	FOX	48
+WYDO	Greenville	FOX	14
+WYES	New Orleans	PBS	12
+WYFF	Greenville	NBC	4
+WYFX	Youngstown	FOX	62
+WYIN	Chicago	PBS	56
+WYMT	Hazard	CBS	57
+WYOU	Scranton	CBS	22
+WYOW	Wausau	CW	
+WYTV	Youngstown	ABC	33
+WYZZ	Bloomington	FOX	43
+WZAW	Wausau	FOX	33
+WZDX	Huntsville	FOX	54
+WZMQ	Marquette	CBS	
+WZTV	Nashville	FOX	17
+WZVN	Fort Myers	ABC	7
+WZZM	Grand Rapids	ABC	13

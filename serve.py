@@ -31,6 +31,9 @@ os.environ.setdefault('EPG_LIST_DIR', os.path.join(os.environ.get('CACHE_DIR', t
 from build import main as build, download  # noqa: E402
 from urllib.parse import urlsplit, urlunsplit  # noqa: E402
 import guide  # noqa: E402
+import logo_pick  # noqa: E402
+import name_tile  # noqa: E402
+import urllib.parse  # noqa: E402
 
 TOKEN = os.environ.get('ACCESS_TOKEN', '').strip().strip('/')
 TTL = int(os.environ.get('CACHE_MINUTES', '30')) * 60
@@ -95,11 +98,12 @@ class Playlist:
                 print(f'playlist {self.n}: downloading and cleaning...', flush=True)
                 try:
                     src = self.fetch()
-                    s = build(src, self.path + '.new', gen_prefix=self.n)
+                    s = build(src, self.path + '.new', gen_prefix=self.n, name_tiles=True, cache_dir=CACHE_DIR)
                     os.replace(self.path + '.new', self.path)      # swap in one step: apps never see half a file
                     self.built = time.time()
                     print(f'playlist {self.n} rebuilt: {s["kept"]} channels in {s["groups"]} groups '
                           f'({time.time() - t0:.0f}s)', flush=True)
+                    check_new_logos()
                 except Exception as e:        # keep serving the last good copy
                     print(f'playlist {self.n} rebuild failed: {type(e).__name__}: {e}', file=sys.stderr, flush=True)
         return self.path
@@ -136,6 +140,27 @@ _guide_lock = threading.Lock()
 _guide_built = [0.0]
 
 
+_probe_lock = threading.Lock()
+
+
+def check_new_logos():
+    """Measure logos we have not seen yet (in the background); big-enough ones are used from the next rebuild."""
+    if _probe_lock.locked():
+        return
+    urls = []
+    for f in os.listdir(CACHE_DIR):
+        if f.startswith('logos_to_check_') and f.endswith('.txt'):
+            urls += [u for u in open(os.path.join(CACHE_DIR, f)).read().split('\n') if u]
+
+    def run():
+        with _probe_lock:
+            n = logo_pick.probe(urls, os.path.join(CACHE_DIR, 'logo_dims.json'), limit=600)
+            if n:
+                print(f'checked {n} new logos', flush=True)
+    if urls:
+        threading.Thread(target=run, daemon=True).start()
+
+
 def refresh_guide(force=False):
     with _guide_lock:
         if not force and os.path.exists(GUIDE_PATH) and time.time() - _guide_built[0] < GUIDE_TTL:
@@ -165,6 +190,8 @@ class H(BaseHTTPRequestHandler):
         rest = p[len(base):] or '/'
         if rest in ('/guide.xml.gz', '/guide.xml', '/epg.xml.gz', '/epg.xml'):
             return self.send_guide(rest.endswith('.gz'))
+        if rest.startswith('/logo/') and rest.endswith('.png'):
+            return self.send_tile(urllib.parse.unquote(rest[6:-4]))
         m = re.fullmatch(r'/(?:([a-z0-9-]+)\.m3u)?', rest.lower())
         n = (m.group(1) or 'playlist') if m else None
         if n == 'playlist':
@@ -185,9 +212,26 @@ class H(BaseHTTPRequestHandler):
         nl = data.find(b'\n')
         if data.startswith(b'#EXTM3U') and nl > 0:
             data = f'#EXTM3U x-tvg-url="{url}" url-tvg="{url}"'.encode() + data[nl:]
+        data = data.replace(b'__SERVER__', f'http://{host}{base}'.encode())     # name tiles drawn by this server
         self.send_response(200)
         self.send_header('Content-Type', 'audio/x-mpegurl; charset=utf-8')
         self.send_header('Content-Length', str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
+    def send_tile(self, title):
+        try:
+            path = name_tile.tile_path(os.path.join(CACHE_DIR, 'tiles'), title)
+        except Exception as e:
+            print(f'tile failed: {e}', file=sys.stderr, flush=True)
+            self.send_error(500)
+            return
+        with open(path, 'rb') as f:
+            data = f.read()
+        self.send_response(200)
+        self.send_header('Content-Type', 'image/png')
+        self.send_header('Content-Length', str(len(data)))
+        self.send_header('Cache-Control', 'public, max-age=604800')
         self.end_headers()
         self.wfile.write(data)
 

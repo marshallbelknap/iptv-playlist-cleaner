@@ -135,6 +135,8 @@ def refresh_channel_list(src, path, list_dir):
     rows = []
     chan = re.compile(r'<channel id="([^"]+)"')
     dn = re.compile(r'<display-name[^>]*>([^<]*)</display-name>')
+    icon_re = re.compile(r'<icon src="([^"]+)"')
+    icons = {}
     cur, names, inside = None, [], False
     try:
         with gzip.open(path, 'rt', encoding='utf-8', errors='replace') as f:
@@ -146,6 +148,10 @@ def refresh_channel_list(src, path, list_dir):
                         cur, names, inside = html.unescape(m.group(1)), [], True
                 if inside and '<display-name' in line:
                     names += [html.unescape(x) for x in dn.findall(line)]
+                if inside and '<icon' in line and cur and cur not in icons:
+                    m = icon_re.search(line)
+                    if m:
+                        icons[cur] = html.unescape(m.group(1))
                 if '</channel>' in line:
                     inside = False
         if cur:
@@ -161,6 +167,11 @@ def refresh_channel_list(src, path, list_dir):
         for cid, nm in rows:
             f.write(f'{cid}\t{"|".join(nm[:3])}\n' if named else f'{cid}\n')
     os.replace(target + '.tmp', target)
+    if icons:                                      # official logos, used by the logo picker
+        with open(os.path.join(list_dir, f'{src}.icons.tsv.tmp'), 'w', encoding='utf-8') as f:
+            for cid, u in icons.items():
+                f.write(f'{src}\t{cid}\t{u}\n')
+        os.replace(os.path.join(list_dir, f'{src}.icons.tsv.tmp'), os.path.join(list_dir, f'{src}.icons.tsv'))
     if len(rows) != old_n:
         log(f'{src}: channel list now has {len(rows)} channels (was {old_n})')
 
@@ -266,7 +277,7 @@ def generated(cid, ch, lo, hi):
             out.append(prog(cid, day0, hi, text, f'{slot} - {text}'))
         return out
     title = display_title(name)
-    desc = {'24/7': f'Non-stop {title}.', 'Adult': None}.get(group, None)
+    desc = f'Non-stop {title}.' if group.startswith('24/7') else None
     t = day0
     while t < hi:                                  # 6-hour blocks: looks normal in the grid, keeps the file small
         out.append(prog(cid, t, min(t + timedelta(hours=6), hi), title, desc))
@@ -296,7 +307,7 @@ def build(out_path, playlists, cache_dir=None):
     with gzip.open(tmp, 'wt', encoding='utf-8', compresslevel=6) as out:
         out.write('<?xml version="1.0" encoding="UTF-8"?>\n<tv generator-info-name="iptv-playlist-cleaner">\n')
         for cid, ch in chans.items():
-            icon = f'<icon src="{esc(ch["logo"])}"/>' if ch['logo'] else ''
+            icon = f'<icon src="{esc(ch["logo"])}"/>' if ch['logo'] and '__SERVER__' not in ch['logo'] else ''
             out.write(f'<channel id="{esc(cid)}"><display-name>{esc(display_title(ch["name"]))}</display-name>'
                       f'{icon}</channel>\n')
         list_dir = os.environ.get('EPG_LIST_DIR') or os.path.join(cache_dir, 'channel_lists')

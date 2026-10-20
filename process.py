@@ -1,16 +1,97 @@
 # -*- coding: utf-8 -*-
 """Apply the rules to every entry. Two passes so local stations can share city names."""
+import os
 import re
 import collections
+from loops import loop_type, country_label, GROUPS as LOOP_GROUPS
 from rules import (SPANISH_CALLS, NOT_CALLSIGNS, US_STATES, basic_clean, extract_quality, strip_tail_tags, smart_case, is_non_english, JUNK_RE,
                    country_group, sports_group, PPV_GROUP, G247, ADULT_GROUP, COUNTRY_ORDER)
 from classify import (strip_slot_quality, CHANNEL_SRC, SRC_CATEGORY, LOCAL_SRC, LEAGUE_SRC, SERVICE_SRC, DROP_SRC, LEAGUE_GROUP,
                       EVENTS_TO_PPV, resolve_label, parse_slot, slot_name, parse_country_name, display_label,
-                      classify_category, parse_local, local_display, fix_mojibake, clean_event)
+                      classify_category, parse_local, local_display, fix_mojibake, clean_event,
+                      format_local, clean_city, STATE_NAMES)
 
 CHANNEL_LIKE_LABELS = {'NFL', 'NBA', 'MLB', 'NHL', 'WNBA', 'MLS', 'F1', 'EPL', 'UFC', 'Red Bull TV',
                        'Tennis', 'Golf', 'Soccer', 'PPV', 'Fubo Sports', 'GAA'}
 LEAGUE_CHANNEL_RE = re.compile(r'^(NFL|NBA|MLB|NHL|WNBA)\b(?! ?G\b)')
+
+_DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+
+
+def _load_tsv(name):
+    rows = []
+    path = os.path.join(_DATA, name)
+    if os.path.exists(path):
+        for line in open(path, encoding='utf-8'):
+            if line.strip() and not line.startswith('#'):
+                rows.append(line.rstrip('\n').split('\t'))
+    return rows
+
+
+US_STATIONS = {r[0]: {'city': r[1], 'net': r[2], 'num': r[3]} for r in _load_tsv('us_stations.tsv') if len(r) >= 4}
+CA_STATIONS = {}
+for _r in _load_tsv('ca_stations.tsv'):
+    if len(_r) >= 4:
+        CA_STATIONS[(_r[0].lower(), _r[1].lower().replace('.', ''))] = {'net': _r[0], 'city': _r[1], 'call': _r[2],
+                                                                        'num': _r[3]}
+CA_REGIONS = {'BC', 'Maritimes', 'Ontario', 'Atlantic', 'Newfoundland', 'Saskatchewan', 'Vancouver Island'}
+CA_CALL_INFO = {v['call']: v for v in CA_STATIONS.values()}
+CA_NET_CANON = {'ctv2': 'CTV2', 'ctv 2': 'CTV2', 'ctv': 'CTV', 'cbc': 'CBC', 'global': 'Global', 'citytv': 'Citytv',
+                'city tv': 'Citytv', 'city': 'Citytv', 'chch': 'CHCH', 'ntv': 'NTV', 'cjon': 'NTV', 'chek': 'CHEK',
+                'ckws': 'Global', 'chex': 'Global', 'omni': 'Omni', 'abc': 'ABC', 'cbs': 'CBS', 'nbc': 'NBC',
+                'fox': 'FOX', 'pbs': 'PBS', 'cw': 'CW'}
+CA_PROVINCE_WORDS = re.compile(r'\b(AB|BC|MB|NB|NL|NS|ON|PE|QC|SK|YT|NT|Alberta|British Columbia|Manitoba|'
+                               r'Ontario|Quebec|Québec|Saskatchewan|Nova Scotia|New Brunswick|Newfoundland|'
+                               r'Prince Edward Island|PEI|DT|HD|FHD|SD|Canada)\b', re.I)
+
+
+def ca_local(name):
+    """'CBC Calgary (CBRT DT)', 'CTV Edmonton Alberta HD', 'CBC New Brunswick / Fredericton NB'
+    -> 'Calgary - CBC - CBRT - 9'. Returns None when no place can be found."""
+    m = CA_LOCAL_RE.match(name)
+    if not m:
+        return None
+    net = CA_NET_CANON.get(re.sub(r'\s+', ' ', m.group(1).lower()), m.group(1))
+    rest = name[m.end():]
+    call = None
+    cm = re.search(r'\(([CKW][A-Z]{2,3})(?:[- ](?:DT|TV|HD))?\)', rest) or re.search(r'\b(C[BFHIJK][A-Z]{2})\b', rest)
+    if cm:
+        call = cm.group(1)
+        rest = rest.replace(cm.group(0), ' ')
+    rest = re.sub(r'\(([^)]*)\)', r' \1 ', rest)
+    rest = re.sub(r'^\s*\d{1,2}\b', ' ', rest)               # 'ABC 4 Seattle'
+    raw = [' '.join(x.split()).strip(' -,') for x in re.split(r'\s*/\s*', rest)]
+    for seg in raw:                                              # 'Global BC', 'NTV Newfoundland' are in the table
+        hit = CA_STATIONS.get((net.lower(), seg.lower().replace('.', '')))
+        if hit:
+            city = hit['city']
+            if city in CA_REGIONS:                               # 'Global BC' -> the station's home city
+                city = next((v['city'] for v in CA_STATIONS.values()
+                             if v['call'] == hit['call'] and v['city'] not in CA_REGIONS), city)
+            return format_local('CA', city, net, call or (hit['call'] if hit['call'] != net else None), hit['num'])
+    segs = [CA_PROVINCE_WORDS.sub(' ', x) for x in re.split(r'\s*/\s*', rest)]
+    segs = [' '.join(x.split()).strip(' -,') for x in segs]
+    segs = [x for x in segs if x]
+    city = None
+    for seg in segs:                                            # prefer a place we know for this network
+        if (net.lower(), seg.lower()) in CA_STATIONS:
+            city = seg
+            break
+    if not city and segs:
+        city = segs[-1] if len(segs) > 1 else segs[0]
+    if city:
+        city = city.replace('St Johns', "St. John's").replace("St John's", "St. John's").replace('Montréal', 'Montreal')
+    if not city and not call:
+        return None
+    if not city:                                                 # 'NTV Newfoundland': the network's only station
+        only = [v for (n, c), v in CA_STATIONS.items() if n == net.lower()]
+        if len(only) == 1:
+            city = only[0]['city']
+    info = CA_STATIONS.get((net.lower(), (city or '').lower().replace('.', ''))) or CA_CALL_INFO.get(call or '') or \
+        US_STATIONS.get(call or '') or {}
+    call = call or info.get('call')
+    return format_local('CA', city or info.get('city'), net, call if call != net else None, info.get('num'))
+
 
 CA_LOCAL_RE = re.compile(r'^(CBC|CTV ?2|CTV|Global|Citytv|City ?TV|City|CHCH|NTV|CJON|CHEK|CKWS|CHEX|'
                          r'ABC|CBS|NBC|FOX|PBS|CW)\b(?!\s*(News Network|News Channel|Kids|Comedy|Drama|'
@@ -122,7 +203,9 @@ def process_entry(c):
         n = re.sub(r'\bS(\d)\b', r'S0\1', n)
         n, q = extract_quality(n)
         n = re.sub(r"\b([A-Za-z]{3,}) S (?=[A-Za-z])", r"\1's ", n)      # 'RUPAUL S DRAG RACE'
-        return finish(rec, '24/7 ' + smart_case(tidy(n)), q)
+        title = smart_case(tidy(n))
+        rec['group'] = LOOP_GROUPS[loop_type(title, rec['src'])]
+        return finish(rec, '24/7 ' + title, q)
 
     is_event_src = src in LEAGUE_SRC or src in SERVICE_SRC or src == 'PPV Live Events'
     if is_event_src:
@@ -231,9 +314,10 @@ def process_entry(c):
             rec['group'] = country_group('US', 'Locals')
             rec['kind'] = 'local'
             rec['local'] = {'net': m_cw.group(1), 'num': None, 'call': None, 'sub': None, 'city': m_cw.group(2)}
-            return finish(rec, f'US: {m_cw.group(1)} {m_cw.group(2)}, {m_cw.group(3)}', q)
-        m_call = re.match(r'^([KW][A-Z]{2,3})(?:-?(?:TV|DT|LD|CD))?\s+([A-Z][A-Za-z .\'/-]+)$', name)
-        if m_call and m_call.group(1) not in NOT_CALLSIGNS and not re.search(r'\bNews\b', name):
+            return finish(rec, format_local('US', m_cw.group(2), m_cw.group(1)), q)
+        m_call = re.match(r'^([KW][A-Z]{2,3})(?:-(?:TV|DT|LD|CD))?\s+([A-Z][A-Za-z .\'/-]+)$', name)
+        if m_call and m_call.group(1) not in NOT_CALLSIGNS and not re.search(r'\bNews\b', name) \
+                and not re.match(r'^(World|Wild|West|Women|Kids|King|Kitchen)\b', name, re.I):
             name = f'{m_call.group(2)} ({m_call.group(1)})'
         elif re.fullmatch(r'[KW][A-Z]{2,3}', name) and name not in NOT_CALLSIGNS and src in LOCAL_SRC | {'United States', 'US Entertainment'}:
             name = f'({name})'
@@ -247,11 +331,30 @@ def process_entry(c):
             rec['kind'] = 'local'
             rec['q_pending'] = q
             return rec
+    if cc == 'CA' and re.match(r'^(?:CBC|CTV|Global|Citytv|City)\b.*\bNews\b', name, re.I):
+        rec['group'] = country_group('CA', 'News')
+        return finish(rec, f'CA: {norm_feed_words(smart_case(name))}', q)
     if cc == 'CA' and CA_LOCAL_RE.match(name) and CA_PLACES.search(name):
         rec['group'] = country_group('CA', 'Locals')
         nm = norm_feed_words(smart_case(name))
+        loc = ca_local(nm)
+        if loc and not re.match(r'^CA: (East|West|Pacific|Central|Mountain)\b', loc):
+            rec['kind'] = 'ca-local'
+            rec['lookup'] = nm                 # guide/logo matching still uses 'CBC Calgary'
+            return finish(rec, loc, q)
         return finish(rec, f'CA: {nm}', q)
 
+    # channels that are really one show / film series / actor on loop belong with the 24/7 channels
+    title = norm_feed_words(smart_case(name)).replace(' | ', ' - ')
+    lab = country_label(title)
+    if lab == 'X':
+        rec['drop'] = 'non-English'
+        return rec
+    if lab in LOOP_GROUPS:
+        rec['group'] = LOOP_GROUPS[lab]
+        rec['kind'] = '247'
+        rec['lookup'] = title                 # keep the guide match ('Blue Bloods' on Pluto has real listings)
+        return finish(rec, '24/7 ' + title, q)
     cat = classify_category(name, src)
     if cc == 'INT' and cat not in ('Sports', 'News', 'Music'):
         cat = 'General'
@@ -266,16 +369,26 @@ def process_all(entries):
     for r in recs:
         loc = r.get('local')
         if loc and loc['city']:
-            c = loc['city']
+            c = clean_city(loc['city'])
+            if not c:
+                continue
             score = 2 if not c.isupper() else 1
+            if c.lower() in STATE_NAMES or len(c.split()) > 3:      # 'Arizona', 'Arizona's Family Sports Phoenix'
+                score -= 1.5
             cities[loc['call']][c] += score
     for r in recs:
         loc = r.get('local')
-        if not loc:
+        if not loc or r.get('kind') != 'local':
             continue
         city = None
-        if cities.get(loc['call']):
+        if loc.get('call') and cities.get(loc['call']):
             city = cities[loc['call']].most_common(1)[0][0]
-        # also reuse a channel number seen elsewhere for this call sign
-        finish(r, 'US: ' + local_display(loc, city), r.pop('q_pending', None))
+        # fill gaps (city / network / channel number) from the station table pooled across providers
+        if not loc.get('call') and loc.get('city') and loc.get('net'):      # 'ABC: IN FORT WAYNE ABC 21'
+            key = (clean_city(loc['city']) or '').lower(), loc['net']
+            hits = [c for c, v in US_STATIONS.items() if (v['city'].lower(), v['net']) == key]
+            if len(hits) == 1:
+                loc['call'] = hits[0]
+        st = US_STATIONS.get(loc.get('call') or '', {})
+        finish(r, 'US: ' + local_display(loc, city or st.get('city') or None, st), r.pop('q_pending', None))
     return recs

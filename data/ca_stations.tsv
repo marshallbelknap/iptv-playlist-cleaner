@@ -1,0 +1,80 @@
+# network	city	call sign	channel   (major Canadian stations; used to complete "CA: City - Network - Call - Number")
+CTV	Toronto	CFTO	9
+CTV	Montreal	CFCF	12
+CTV	Ottawa	CJOH	13
+CTV	Vancouver	CIVT	32
+CTV	Calgary	CFCN	4
+CTV	Edmonton	CFRN	3
+CTV	Winnipeg	CKY	7
+CTV	Regina	CKCK	2
+CTV	Saskatoon	CFQC	8
+CTV	Halifax	CJCH	5
+CTV	Sydney	CJCB	4
+CTV	Moncton	CKCW	2
+CTV	Saint John	CKLT	9
+CTV	Kitchener	CKCO	13
+CTV	Sudbury	CICI	5
+CTV	Timmins	CITO	3
+CTV	North Bay	CKNY	10
+CTV	Sault Ste. Marie	CHBX	2
+CTV	Prince Albert	CIPA	9
+CTV	Yorkton	CICC	10
+CTV	Lethbridge	CFCN-5	13
+CTV	Barrie	CKVR	3
+CTV2	Barrie	CKVR	3
+CTV2	Windsor	CHWI	16
+CTV	Windsor	CHWI	16
+CTV2	London	CFPL	10
+CTV2	Ottawa	CHRO	43
+CTV2	Vancouver Island	CIVI	53
+CTV2	Victoria	CIVI	53
+CTV2	Atlantic	CJCH	5
+CBC	Toronto	CBLT	5
+CBC	Montreal	CBMT	6
+CBC	Ottawa	CBOT	4
+CBC	Vancouver	CBUT	2
+CBC	Calgary	CBRT	9
+CBC	Edmonton	CBXT	5
+CBC	Winnipeg	CBWT	6
+CBC	Regina	CBKT	9
+CBC	Halifax	CBHT	3
+CBC	St. John's	CBNT	8
+CBC	Fredericton	CBAT	4
+CBC	Charlottetown	CBCT	13
+CBC	Windsor	CBET	9
+CBC	Yellowknife	CFYK	8
+Global	Toronto	CIII	41
+Global	Montreal	CKMI	46
+Global	Vancouver	CHAN	8
+Global	BC	CHAN	8
+Global	Calgary	CICT	2
+Global	Edmonton	CITV	13
+Global	Winnipeg	CKND	9
+Global	Regina	CFRE	11
+Global	Saskatoon	CFSK	4
+Global	Halifax	CIHF	8
+Global	Maritimes	CIHF	8
+Global	Okanagan	CHBC	2
+Global	Lethbridge	CISA	7
+Global	Peterborough	CHEX	12
+Global	Kingston	CKWS	11
+Global	Ontario	CIII	41
+Citytv	Toronto	CITY	57
+Citytv	Montreal	CJNT	62
+Citytv	Vancouver	CKVU	10
+Citytv	Calgary	CKAL	5
+Citytv	Edmonton	CKEM	51
+Citytv	Winnipeg	CHMI	13
+Citytv	Saskatchewan	CHSS	4
+Omni	Toronto	CFMT	47
+Omni	Vancouver	CHNM	42
+Omni	Calgary	CJCO	38
+Omni	Edmonton	CJEO	56
+CHCH	Hamilton	CHCH	11
+CHEK	Victoria	CHEK	6
+CHEK	Vancouver Island	CHEK	6
+NTV	St. John's	CJON	9
+CTV2	Toronto	CKVR	3
+NTV	Newfoundland	CJON	9
+Global	BC	CHAN	8
+CTV	Atlantic	CJCH	5

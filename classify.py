@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Turn one raw playlist entry into (group, clean name, metadata) or a drop reason."""
+import os
 import re
 from rules import (ENGLISH_CC, FOREIGN_CC, SPANISH_CALLS, PLUTO_REGIONS, SOURCE_TAGS, basic_clean, extract_quality,
                    strip_tail_tags, smart_case, is_non_english, JUNK_RE, NEWS_RE, SPORTS_RE, MOVIES_RE,
@@ -504,13 +505,41 @@ NET_CANON = {'MYNETWORKTV': 'MyNetworkTV', 'MYTV': 'MyNetworkTV', 'MY': 'MyNetwo
              'METV': 'MeTV', 'ME TV': 'MeTV'}
 
 
+_KNOWN_CALLS = None
+CITY_LIKE_CALLS = {'WACO', 'KENT', 'WAKE', 'WARE', 'WAYNE', 'KING', 'WALL', 'KEYS'}
+
+
+def known_calls():
+    """Call signs we know are real stations (local-guide list + station table)."""
+    global _KNOWN_CALLS
+    if _KNOWN_CALLS is None:
+        base = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+        calls = set()
+        for f, rx in (('epg/US_LOCALS1.txt', r'([KW][A-Z]{2,3})(?=[-.(]|$)'), ('us_stations.tsv', r'^([KW][A-Z]{2,3})\t')):
+            path = os.path.join(base, f)
+            if os.path.exists(path):
+                for line in open(path, encoding='utf-8'):
+                    calls.update(re.findall(rx, line))
+        _KNOWN_CALLS = calls
+    return _KNOWN_CALLS
+
+
 def find_callsign(name):
+    """Best call sign in a name: one in brackets first, then a known station, then anything plausible.
+    'WACO' (the city) or 'WORLD' (read as WOR-LD) are not call signs."""
+    cands = []
     for m in CALL_RE.finditer(name):
         cs = m.group(1)
-        if cs in NOT_CALLSIGNS:
+        if cs in NOT_CALLSIGNS or m.group(0).upper().replace('-', '') in NOT_CALLSIGNS:
             continue
-        return m
-    return None
+        if re.fullmatch(r'[A-Z]+', m.group(0)) and len(m.group(0)) > len(cs):   # 'WORLD' = WOR+LD glued
+            continue
+        bracketed = bool(re.search(r'[(\[]\s*' + re.escape(m.group(0)), name))
+        known = cs in known_calls()
+        if cs in CITY_LIKE_CALLS and not bracketed:
+            continue
+        cands.append((not bracketed, not known, m.start(), m))
+    return min(cands, key=lambda c: c[:3])[3] if cands else None
 
 
 def parse_local(name, loose=False):
@@ -573,17 +602,48 @@ def parse_local(name, loose=False):
     return {'net': net, 'num': num, 'call': call, 'sub': sub, 'city': city}
 
 
-def local_display(loc, city_override=None):
-    net = loc['net']
-    if not net:
-        return f"{city_override or loc['city'] or loc['call']} ({loc['call']})"
-    if not loc['call']:
-        return ' '.join(x for x in [net, loc['num'], loc['city']] if x)
-    parts = [net]
-    if loc['num']:
-        parts.append(loc['num'])
-    city = city_override or loc['city']
-    if city:
-        parts.append(city)
-    call = loc['call'] + (f"-DT{loc['sub']}" if loc['sub'] else '')
-    return ' '.join(parts) + f' ({call})'
+def format_local(cc, city=None, net=None, call=None, num=None):
+    """'US: Boston - NBC - WBTS - 10'. Missing parts are left out."""
+    return f'{cc}: ' + ' - '.join(p for p in (city, net, call, num) if p)
+
+
+STATE_NAMES = set('''alabama alaska arizona arkansas california colorado connecticut delaware florida georgia hawaii idaho
+illinois indiana iowa kansas kentucky louisiana maine maryland massachusetts michigan minnesota mississippi missouri
+montana nebraska nevada ohio oklahoma oregon pennsylvania tennessee texas utah vermont virginia washington wisconsin
+wyoming'''.split())
+
+
+def clean_city(city):
+    """'UTAH 16 Salt Lake City' -> 'Salt Lake City'; 'PHL17 Philadelphia' -> 'Philadelphia'; '30 Memphis' -> 'Memphis'."""
+    if not city:
+        return None
+    city = re.sub(r'[?*#+]+', ' ', city).replace('Hanolulu', 'Honolulu').replace('Bismark', 'Bismarck')
+    words = [w for w in re.split(r'\s+', city.strip(' -/,')) if w]
+    words = [w for w in words if not re.search(r'\d', w)
+             and not (re.fullmatch(r'[KW][A-Z]{2,3}', w) and w not in CITY_LIKE_CALLS)
+             and w.lower() not in ('tv', 'hd', 'news', 'channel', 'encore', 'the')]
+    while len(words) > 1 and words[-1] in US_STATES and words[-1] != 'DC':      # 'Ada OK' -> 'Ada'
+        words = words[:-1]
+    dedup = []
+    for w in words:                                                             # 'Arizona Arizona'
+        if not dedup or dedup[-1].lower() != w.lower():
+            dedup.append(w)
+    words = dedup
+    if words and all(w.isupper() for w in words if w.isalpha()) and len(' '.join(words)) > 3:
+        words = smart_case(' '.join(words)).split()
+    while len(words) > 1 and words[0].isupper() and words[0].lower() in STATE_NAMES:   # 'UTAH ...'
+        words = words[1:]
+    out = ' '.join(words).strip(' -/,')
+    if out.upper() in CITY_LIKE_CALLS:
+        out = out.title()
+    return out if len(out) > 1 else None
+
+
+def local_display(loc, city_override=None, station=None):
+    """US local name (without the 'US: ' prefix), completed from the station table where needed."""
+    st = station or {}
+    call = loc.get('call')
+    if call and loc.get('sub'):
+        call = f"{call}-DT{loc['sub']}"
+    return format_local('US', clean_city(city_override) or clean_city(loc.get('city')) or clean_city(st.get('city')),
+                        loc.get('net') or st.get('net'), call, loc.get('num') or st.get('num'))[4:]

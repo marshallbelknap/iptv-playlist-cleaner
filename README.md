@@ -24,6 +24,19 @@ In Container Manager: Project > Create > "Create docker-compose.yml", paste `doc
 fill in the provider links and token, Build. To update later: Project > iptv-cleaner > Action > Build
 (or Image > Update), which pulls the latest image.
 
+## Naming and groups
+- Local stations: `US: Boston - NBC - WBTS - 10` (City - Network - Call sign - Channel). Missing parts are filled
+  from `data/us_stations.tsv` / `data/ca_stations.tsv` (pooled from all providers), otherwise left out.
+- Copies of the same channel keep the same name (quality suffix 4K/FHD/HD/SD and +1 are kept).
+- 24/7 loops are split into `24/7 | TV Shows`, `24/7 | Movies`, `24/7 | Actors & Directors`, `24/7 | Kids & Animation`.
+  Show/movie/actor channels found in country groups move there too (`data/loop_channels.tsv`, hand-checked; rules in `loops.py`).
+
+## Logos
+`logo_pick.py`: league/service logo for every sports and event channel (`logos/`), 24/7 tiles, then tv-logos,
+the official logo from the matched guide (upsized), iptv-org (>= 256 px), the provider's logo if big enough,
+and finally a clean name tile drawn by the server (`/logo/<name>.png`). The server measures new logos in the
+background so only high-quality ones are used.
+
 ## Guide (EPG)
 The server builds one guide for all playlists at `http://<machine-ip>:8765/<ACCESS_TOKEN>/guide.xml.gz`
 (also `/guide.xml`), and every playlist it serves already points to it.
