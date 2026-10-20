@@ -20,7 +20,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from epgmap import EpgIndex, EPG_URLS  # noqa: E402
+from epgmap import EpgIndex, EPG_URLS, EPG_DIR  # noqa: E402
 
 try:
     from zoneinfo import ZoneInfo
@@ -120,6 +120,49 @@ def fetch(src, cache_dir):
         if os.path.exists(tmp):
             os.remove(tmp)
     return path if os.path.exists(path) else None
+
+
+def refresh_channel_list(src, path, list_dir):
+    """Write the channel list of a freshly downloaded guide, so channels new to that guide get matched
+    automatically. Only runs when the guide file is newer than the list made from it."""
+    named = os.path.exists(os.path.join(EPG_DIR, f'{src}.tsv'))
+    if not named and not os.path.exists(os.path.join(EPG_DIR, f'{src}.txt')):
+        return
+    ext = 'tsv' if named else 'txt'
+    target = os.path.join(list_dir, f'{src}.{ext}')
+    if os.path.exists(target) and os.path.getmtime(target) >= os.path.getmtime(path):
+        return
+    rows = []
+    chan = re.compile(r'<channel id="([^"]+)"')
+    dn = re.compile(r'<display-name[^>]*>([^<]*)</display-name>')
+    cur, names, inside = None, [], False
+    try:
+        with gzip.open(path, 'rt', encoding='utf-8', errors='replace') as f:
+            for line in f:
+                if '<channel' in line:
+                    for m in chan.finditer(line):
+                        if cur:
+                            rows.append((cur, names))
+                        cur, names, inside = html.unescape(m.group(1)), [], True
+                if inside and '<display-name' in line:
+                    names += [html.unescape(x) for x in dn.findall(line)]
+                if '</channel>' in line:
+                    inside = False
+        if cur:
+            rows.append((cur, names))
+    except (OSError, EOFError) as e:
+        log('could not read channel list of', src, e)
+        return
+    old_n = sum(1 for _ in open(os.path.join(EPG_DIR, f'{src}.{ext}'), encoding='utf-8'))
+    if len(rows) < max(1, old_n // 2):             # looks like a broken/partial download: keep what we have
+        return
+    os.makedirs(list_dir, exist_ok=True)
+    with open(target + '.tmp', 'w', encoding='utf-8') as f:
+        for cid, nm in rows:
+            f.write(f'{cid}\t{"|".join(nm[:3])}\n' if named else f'{cid}\n')
+    os.replace(target + '.tmp', target)
+    if len(rows) != old_n:
+        log(f'{src}: channel list now has {len(rows)} channels (was {old_n})')
 
 
 def copy_programmes(path, wanted, out, lo, hi):
@@ -256,9 +299,13 @@ def build(out_path, playlists, cache_dir=None):
             icon = f'<icon src="{esc(ch["logo"])}"/>' if ch['logo'] else ''
             out.write(f'<channel id="{esc(cid)}"><display-name>{esc(display_title(ch["name"]))}</display-name>'
                       f'{icon}</channel>\n')
-        for src, ids in sorted(wanted.items()):
+        list_dir = os.environ.get('EPG_LIST_DIR') or os.path.join(cache_dir, 'channel_lists')
+        for src in sorted(EPG_URLS):              # every source, so channels new to a guide are picked up
             path = fetch(src, cache_dir)
             if path:
+                refresh_channel_list(src, path, list_dir)
+            ids = wanted.get(src)
+            if path and ids:
                 got = copy_programmes(path, ids, out, lo, hi)
                 covered |= got
                 log(f'{src}: listings for {len(got)} of {sum(len(v) for v in ids.values())} channels')

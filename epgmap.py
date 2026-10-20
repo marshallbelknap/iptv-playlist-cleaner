@@ -6,6 +6,8 @@ import re
 import unicodedata
 
 EPG_DIR = os.environ.get('EPG_DIR', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'epg'))
+# fresher channel lists written by guide.py from the guides it downloads (same file names); preferred when present
+EPG_LIST_DIR = os.environ.get('EPG_LIST_DIR', '')
 SOURCES = {  # country -> guide lists searched in order (real TV listings first, free streaming services after)
     'US': ['US2', 'US_SPORTS1', 'FANDUEL1', 'PLEX1', 'DISTROTV1', 'CA2', 'METV', 'PEACOCK1', 'TBNPLUS1',
            'SAMSUNG_US', 'PLUTO_US', 'ROKU', 'PLEX_US', 'WHALETVPLUS1'],
@@ -143,14 +145,19 @@ class EpgIndex:
         self.fkeys = {}
         self.all_ids = set()
         self.source_of = {}   # id -> list name
-        for f in sorted(os.listdir(EPG_DIR)):
+        files = {f: os.path.join(EPG_DIR, f) for f in os.listdir(EPG_DIR)}
+        if EPG_LIST_DIR and os.path.isdir(EPG_LIST_DIR):
+            for f in os.listdir(EPG_LIST_DIR):
+                if f in files:                     # only replace lists we know how to use
+                    files[f] = os.path.join(EPG_LIST_DIR, f)
+        for f in sorted(files):
             if f.endswith('.tsv'):
-                self._load_named(f[:-4], os.path.join(EPG_DIR, f))
+                self._load_named(f[:-4], files[f])
                 continue
             if not f.endswith('.txt'):
                 continue
             name = f[:-4]
-            ids = [html.unescape(l.strip()) for l in open(os.path.join(EPG_DIR, f)) if l.strip()]
+            ids = [html.unescape(l.strip()) for l in open(files[f], encoding='utf-8') if l.strip()]
             self.lists[name] = ids
             self.all_ids.update(ids)
             for i in ids:

@@ -25,6 +25,9 @@ import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# guide.py refreshes the guide channel lists here; the cleaner matches against them (set before importing)
+os.environ.setdefault('EPG_LIST_DIR', os.path.join(os.environ.get('CACHE_DIR', tempfile.gettempdir()),
+                                                   'guide_sources', 'channel_lists'))
 from build import main as build, download  # noqa: E402
 from urllib.parse import urlsplit, urlunsplit  # noqa: E402
 import guide  # noqa: E402
