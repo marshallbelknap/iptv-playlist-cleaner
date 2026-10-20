@@ -3,7 +3,7 @@
 
 Environment:
   PROVIDER_URL_<NAME>                  one per provider; the name becomes the playlist file name,
-                                       e.g. PROVIDER_URL_PIA -> /pia.m3u, PROVIDER_URL_2 -> /playlist2.m3u
+                                       e.g. PROVIDER_URL_PRIVATE_IPTV -> /private-iptv.m3u
                                        (PROVIDER_URL alone works as playlist 1)
   ACCESS_TOKEN                         optional; when set, playlists live under /<token>/
   CACHE_MINUTES                        rebuild at most this often (default 30)

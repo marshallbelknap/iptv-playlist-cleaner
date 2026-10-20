@@ -10,9 +10,9 @@ sets epgshare01 guide ids and fixes logos. Stream URLs are never modified.
     python3 build.py "https://pia.cx/m3u/USER/PASS" playlist_clean.m3u changes.csv
 
 ## Always-current playlists (event names update when the provider renames slots)
-    PROVIDER_URL_PIA="https://provider-one/..." PROVIDER_URL_4XOTT="http://provider-two/get.php?..." \
+    PROVIDER_URL_PRIVATE_IPTV="https://provider-one/..." PROVIDER_URL_KINGDOM_IPTV="http://provider-two/get.php?..." \
     ACCESS_TOKEN=some-long-word python3 serve.py 8765
-Point TiviMate/UHF at `http://<machine-ip>:8765/<ACCESS_TOKEN>/pia.m3u` (and `4xott.m3u`) — the part after
+Point TiviMate/UHF at `http://<machine-ip>:8765/<ACCESS_TOKEN>/private-iptv.m3u` (and `kingdom-iptv.m3u`) — the part after
 `PROVIDER_URL_` names the playlist
 and set the app's playlist auto-update interval. Each playlist is rebuilt from the provider at most
 every `CACHE_MINUTES` (default 30). `/playlist.m3u` is an alias for the first one.
