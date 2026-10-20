@@ -69,7 +69,56 @@ def clean_for_lookup(name):
     return re.sub(r' (4K|FHD|HD|SD)$', '', nm)
 
 
-def main(src, out, report=None):
+SHIFT_SEP = '~'      # 'SkyCrime.uk~+60' = that channel's guide moved 60 minutes later (built by guide.py)
+CALL_IN_NAME = re.compile(r'\b([KW][A-Z]{2,3})(?:-(?:DT|TV|LD|CD|CA)(\d)?)?\b')
+WEST_WORDS = re.compile(r'\s*\b(West|Pacific)\b', re.I)
+
+
+def channel_guide(epg, cc, nm):
+    """Guide id for a regular channel, borrowing (and time-shifting) the main feed when needed."""
+    hit = epg.lookup(cc, nm)
+    if hit:
+        return hit
+    if re.search(r'\+1\b', nm):                       # 'Crime Inv +1' -> 'Crime Inv' one hour later
+        base = epg.lookup(cc, re.sub(r'\s*\+1\b', '', nm).strip())
+        if base:
+            return f'{base}{SHIFT_SEP}+60'
+    if cc in ('US', 'CA') and WEST_WORDS.search(nm):   # 'Cinemax Hits West' -> East feed three hours later
+        base = epg.lookup(cc, WEST_WORDS.sub('', nm).strip())
+        if base:
+            return f'{base}{SHIFT_SEP}+180'
+    if cc == 'US':                                     # 'FOX Lima (WLIO-DT2)', 'WKYC Cleveland 3'
+        for m in CALL_IN_NAME.finditer(nm):
+            if m.group(1) in epg.locals:
+                hit = epg.local(m.group(1), m.group(2))
+                if hit:
+                    return hit
+    return None
+
+
+def gen_id(prefix, r, used):
+    """Stable id for a channel that has no published guide; guide.py writes its listings.
+    Event slots are keyed by slot ('NFL 02'), not by event text, so a renamed slot keeps its guide row."""
+    base = r['name']
+    if r['kind'] == 'event':
+        m = re.match(r'^([^:]+?\s\d{1,3})(?::|$)', base)
+        base = m.group(1) if m else base.split(':')[0] + ' ' + base.split(':', 1)[-1][:40]
+    else:                                   # copies of the same channel share one guide row
+        base = re.sub(r'\s*\(\d+\)$', '', base)
+        base = re.sub(r'\s+(4K|FHD|HD|SD)$', '', base)
+        slug = re.sub(r'[^a-z0-9]+', '-', base.lower()).strip('-')[:60] or 'channel'
+        return f'{prefix}.{slug}'
+    slug = re.sub(r'[^a-z0-9]+', '-', base.lower()).strip('-')[:60] or 'channel'
+    gid = f'{prefix}.{slug}'
+    n = 1
+    while gid in used:
+        n += 1
+        gid = f'{prefix}.{slug}-{n}'
+    used.add(gid)
+    return gid
+
+
+def main(src, out, report=None, gen_prefix='gen'):
     if re.match(r'https?://', src):
         req = urllib.request.Request(src, headers={'User-Agent': 'TiviMate/5.0'})
         tmp = out + '.source.m3u'
@@ -118,7 +167,7 @@ def main(src, out, report=None):
         if r['kind'] == 'local' and r['local'] and r['local'].get('call'):
             tvg_id = epg.local(r['local']['call'], r['local'].get('sub')) or ''
         elif r['kind'] in ('channel', 'league-channel'):
-            tvg_id = epg.lookup(cc, nm) or ''
+            tvg_id = channel_guide(epg, cc, nm) or ''
         if not tvg_id and e['attrs'].get('tvg-id') in epg.all_ids:
             tvg_id = e['attrs']['tvg-id']
         stats['epg ' + ('matched' if tvg_id else 'none') + ' (' + r['kind'] + ')'] += 1
@@ -161,6 +210,11 @@ def main(src, out, report=None):
             r['name'] = f"{r['name']} ({n})"
     kept.sort(key=lambda r: (group_rank(r['group']), sort_key(r)))
 
+    used = set()
+    for r in kept:
+        if not r['tvg_id']:
+            r['tvg_id'] = gen_id(gen_prefix, r, used)
+            r['generated'] = True
     epg_urls = ','.join(EPG_URLS.values())
     with open(out, 'w', encoding='utf-8') as f:
         f.write(f'#EXTM3U x-tvg-url="{epg_urls}" url-tvg="{epg_urls}"\n')

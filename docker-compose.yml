@@ -1,4 +1,4 @@
-# Synology Container Manager > Project > Create > paste this, then fill in the three values below.
+# Synology Container Manager > Project > Create > paste this, then fill in the provider links and token.
 services:
   iptv-cleaner:
     image: ghcr.io/marshallbelknap/iptv-playlist-cleaner:latest
@@ -12,4 +12,8 @@ services:
       PROVIDER_URL_PRIVATE_IPTV: "PASTE_PRIVATE_IPTV_M3U_LINK_HERE"
       PROVIDER_URL_KINGDOM_IPTV: "PASTE_KINGDOM_IPTV_M3U_LINK_HERE"
       ACCESS_TOKEN: "PICK_ANY_LONG_RANDOM_WORD"
-      CACHE_MINUTES: "30"
+      CACHE_MINUTES: "30"     # how often playlists are re-cleaned
+      GUIDE_MINUTES: "60"     # how often the guide is rebuilt (event slots, new listings)
+      GUIDE_DAYS: "3"         # how many days ahead the guide goes (lower = smaller, faster to load)
+    volumes:
+      - ./cache:/cache        # keeps downloaded guide data between restarts

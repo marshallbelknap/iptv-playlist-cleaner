@@ -6,16 +6,19 @@ import re
 import unicodedata
 
 EPG_DIR = os.environ.get('EPG_DIR', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'epg'))
-SOURCES = {  # country -> epgshare01 lists searched in order
-    'US': ['US2', 'US_SPORTS1', 'PLEX1', 'DISTROTV1', 'CA2'],
-    'CA': ['CA2', 'US2'],
-    'UK': ['UK1', 'IE1'],
-    'IE': ['IE1', 'UK1'],
-    'AU': ['AU1'],
+SOURCES = {  # country -> guide lists searched in order (real TV listings first, free streaming services after)
+    'US': ['US2', 'US_SPORTS1', 'FANDUEL1', 'PLEX1', 'DISTROTV1', 'CA2', 'METV', 'PEACOCK1', 'TBNPLUS1',
+           'SAMSUNG_US', 'PLUTO_US', 'ROKU', 'PLEX_US', 'WHALETVPLUS1'],
+    'CA': ['CA2', 'US2', 'SAMSUNG_CA', 'PLUTO_CA', 'PLEX_CA', 'ROKU'],
+    'UK': ['UK1', 'IE1', 'SAMSUNG_GB', 'PLUTO_GB', 'PLEX_GB', 'RAKUTEN1'],
+    'IE': ['IE1', 'UK1', 'SAMSUNG_GB', 'PLUTO_GB'],
+    'AU': ['AU1', 'FOXTEL', 'KAYO', 'PLEX_AU'],
     'NZ': ['NZ1'],
-    'INT': ['BEIN1', 'UK1', 'US2'],
+    'INT': ['BEIN1', 'UK1', 'US2', 'MUSICBOX1', 'DELUXEMUSIC1', 'SAMSUNG_US', 'PLUTO_US', 'ROKU'],
     'ZA': ['ZA1'],
 }
+_E = 'https://epgshare01.online/epgshare01/epg_ripper_%s.xml.gz'
+_M = 'https://raw.githubusercontent.com/matthuisman/i.mjh.nz/master/%s.xml.gz'
 EPG_URLS = {
     'US2': 'https://epgshare01.online/epgshare01/epg_ripper_US2.xml.gz',
     'US_LOCALS1': 'https://epgshare01.online/epgshare01/epg_ripper_US_LOCALS1.xml.gz',
@@ -29,7 +32,15 @@ EPG_URLS = {
     'PLEX1': 'https://epgshare01.online/epgshare01/epg_ripper_PLEX1.xml.gz',
     'DISTROTV1': 'https://epgshare01.online/epgshare01/epg_ripper_DISTROTV1.xml.gz',
     'ZA1': 'https://epgshare01.online/epgshare01/epg_ripper_ZA1.xml.gz',
+    **{k: _E % k for k in ('FANDUEL1', 'PEACOCK1', 'TBNPLUS1', 'WHALETVPLUS1', 'MUSICBOX1', 'DELUXEMUSIC1', 'RAKUTEN1')},
+    **{k: _M % v for k, v in {'PLUTO_US': 'PlutoTV/us', 'PLUTO_CA': 'PlutoTV/ca', 'PLUTO_GB': 'PlutoTV/gb',
+                              'SAMSUNG_US': 'SamsungTVPlus/us', 'SAMSUNG_CA': 'SamsungTVPlus/ca',
+                              'SAMSUNG_GB': 'SamsungTVPlus/gb', 'ROKU': 'Roku/all', 'PLEX_US': 'Plex/us',
+                              'PLEX_CA': 'Plex/ca', 'PLEX_GB': 'Plex/gb', 'PLEX_AU': 'Plex/au', 'PBS': 'PBS/all',
+                              'METV': 'MeTV/epg', 'FOXTEL': 'Foxtel/epg', 'KAYO': 'Kayo/epg'}.items()},
 }
+# id -> source list, so the guide builder knows which files to download
+NAMED_PREFIX = re.compile(r'^(?:pluto tv|samsung tv plus|samsung|roku|plex|the roku channel)\s+', re.I)
 
 # words that carry no identity
 DROP_WORDS = {'hd', 'fhd', 'uhd', 'sd', '4k', 'tv', 'channel', 'network', 'the', 'us', 'usa', 'uk', 'ca',
@@ -99,8 +110,10 @@ ALIASES = {  # normalised clean name -> normalised epg key
     'gold': 'u and gold', 'u and gold': 'u and gold', 'dave': 'u and dave', 'u and dave': 'u and dave',
     'nick': 'nickelodeon', 'syfy': 'syfy', 'sky syfy': 'sky sci fi', 'baby': 'baby', 'seven': '7', 'nine': '9', 'ten': '10', 'channel 9': '9', 'channel 7': '7', 'channel 10': '10',
     'the weather': 'weather', 'weather': 'weather', 'masn': 'masn mid atlantic sports',
-    'nesn': 'nesn new england sports', 'tbn': 'trinity broadcasting',
+    'nesn': 'nesn new england sports', 'tbn': 'trinity broadcasting', 'mtv 2': 'mtv2 music television',
 }
+CA_PLACE_WORDS = re.compile(r'\b(alberta|ab|ontario|on|british columbia|bc|quebec|qc|manitoba|mb|saskatchewan|sk|'
+                            r'nova scotia|ns|new brunswick|nb|newfoundland|nl|pei|dt|east|west)\b', re.I)
 
 
 def norm(s):
@@ -129,13 +142,19 @@ class EpgIndex:
         self.locals = {}      # call -> {sub: id}
         self.fkeys = {}
         self.all_ids = set()
-        for f in os.listdir(EPG_DIR):
+        self.source_of = {}   # id -> list name
+        for f in sorted(os.listdir(EPG_DIR)):
+            if f.endswith('.tsv'):
+                self._load_named(f[:-4], os.path.join(EPG_DIR, f))
+                continue
             if not f.endswith('.txt'):
                 continue
             name = f[:-4]
             ids = [html.unescape(l.strip()) for l in open(os.path.join(EPG_DIR, f)) if l.strip()]
             self.lists[name] = ids
             self.all_ids.update(ids)
+            for i in ids:
+                self.source_of.setdefault(i, name)
             if name == 'US_LOCALS1':
                 for i in ids:
                     m = re.match(r'^([KW][A-Z]{2,3})-(?:DT|TV|CD|LD|CA)(\d?)\.us_locals1$', i)
@@ -147,7 +166,9 @@ class EpgIndex:
                 continue
             idx = {}
             for i in ids:
-                base = re.sub(r'\.(us2|us|uk|ca2|au|nz|ie|bein|plex|distro|za)$', '', i)
+                base = re.sub(r'\.(us2|us|uk|ca2|au|nz|ie|bein|plex|distro|za|be|de|musicbox|PEACOCK)$', '', i)
+                base = re.sub(r'^(?:\[[A-Z0-9]+\]\.|UK:\.)', '', base)
+                base = re.sub(r'\.-\.Rakuten\.TV$', '', base)
                 base = re.sub(r'^plex\.tv\.', '', base)
                 base = re.sub(r'\.\[FAST\]$', '', base)
                 if name == 'US_SPORTS1':
@@ -168,6 +189,35 @@ class EpgIndex:
                         if i not in lst:
                             lst.append(i)
             self.index[name] = idx
+
+    def _load_named(self, name, path):
+        """Lists whose ids are opaque (Pluto, Samsung, Roku, Plex...): one 'id<TAB>name|name' per line."""
+        idx = {}
+        ids = []
+        for line in open(path, encoding='utf-8'):
+            if '\t' not in line:
+                continue
+            i, names = line.rstrip('\n').split('\t', 1)
+            ids.append(i)
+            self.source_of.setdefault(i, name)
+            if name == 'PBS':                      # PBS member stations are keyed by call sign
+                m = re.match(r'^([KW][A-Z]{2,3})$', i)
+                if m:
+                    self.locals.setdefault(m.group(1), {}).setdefault('1', i)
+                continue
+            for nm in names.split('|')[:2]:
+                if not nm or re.fullmatch(r'[\d.]+', nm):
+                    continue
+                for variant in {nm, NAMED_PREFIX.sub('', nm)}:
+                    k, feed = key_of(variant, cc='XX')
+                    for kk in {k, k.replace(' ', '')}:
+                        if kk:
+                            lst = idx.setdefault((kk, feed), [])
+                            if i not in lst:
+                                lst.append(i)
+        self.lists[name] = ids
+        self.all_ids.update(ids)
+        self.index[name] = idx
 
     def local(self, call, sub=None):
         d = self.locals.get(call)
@@ -198,6 +248,15 @@ class EpgIndex:
 
     def lookup(self, cc, clean_name):
         """clean_name: name without country prefix / quality suffix."""
+        hit = self._lookup(cc, clean_name)
+        if hit or cc != 'CA':
+            return hit
+        # 'CTV Edmonton Alberta', 'CBC Calgary (CBRT DT)' -> 'CTV Edmonton', 'CBC Calgary'
+        nm = re.sub(r'\s*\([^)]*\)', ' ', clean_name)
+        nm = re.sub(r'\s+', ' ', CA_PLACE_WORDS.sub(' ', nm)).strip()
+        return self._lookup(cc, nm) if nm and nm != clean_name else None
+
+    def _lookup(self, cc, clean_name):
         nm = clean_name
         nm = re.sub(r'\s*\((?:[A-Z]{2,5})\)\s*$', '', nm)  # trailing (OAN) etc
         k, feed = key_of(nm, cc=cc)
