@@ -16,4 +16,7 @@ services:
       GUIDE_MINUTES: "60"     # how often the guide is rebuilt (event slots, new listings)
       GUIDE_DAYS: "3"         # how many days ahead the guide goes (lower = smaller, faster to load)
     volumes:
-      - ./cache:/cache        # keeps downloaded guide data between restarts
+      - iptv-cache:/cache     # keeps downloaded guide data between restarts (managed by Docker, no folder needed)
+
+volumes:
+  iptv-cache:
