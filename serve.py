@@ -116,9 +116,21 @@ class Playlist:
         return self.path
 
     def fetch(self):
-        """Download from the server that worked last time, falling back through the backups."""
+        """Download from the server that worked last time, falling back through the backups.
+        Through a VPN proxy, wait and retry a few times: the VPN may still be connecting."""
         if not re.match(r'https?://', self.src):
             return self.src
+        tries = 4 if self.proxy else 1
+        for attempt in range(1, tries + 1):
+            try:
+                return self._fetch_once()
+            except Exception:
+                if attempt == tries:
+                    raise
+                print(f'playlist {self.n}: retrying in 30s (the VPN may still be connecting)', flush=True)
+                time.sleep(30)
+
+    def _fetch_once(self):
         order = list(range(self.good, len(self.urls))) + list(range(0, self.good))
         dest = self.path + '.new.source.m3u'
         last = None
