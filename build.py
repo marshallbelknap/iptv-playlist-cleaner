@@ -125,15 +125,18 @@ USER_AGENTS = [
 ]
 
 
-def download(url, dest):
+def download(url, dest, proxy=None):
     """Stream a provider playlist to disk (some are 80+ MB). Tries a few app identities, since some
-    providers refuse certain ones. Raises on network/HTTP errors."""
+    providers refuse certain ones. proxy: optional 'http://host:port' (e.g. a VPN container's proxy).
+    Raises on network/HTTP errors."""
     import urllib.error
+    handlers = [urllib.request.ProxyHandler({'http': proxy, 'https': proxy})] if proxy else []
+    opener = urllib.request.build_opener(*handlers)
     last = None
     for ua in dict.fromkeys(USER_AGENTS):
         req = urllib.request.Request(url, headers={'User-Agent': ua, 'Accept': '*/*'})
         try:
-            with urllib.request.urlopen(req, timeout=30) as r, open(dest, 'wb') as f:
+            with opener.open(req, timeout=30) as r, open(dest, 'wb') as f:
                 while True:
                     b = r.read(1 << 20)
                     if not b:

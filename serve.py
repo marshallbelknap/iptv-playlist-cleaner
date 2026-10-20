@@ -7,6 +7,8 @@ Environment:
                                        (PROVIDER_URL alone works as playlist 1)
   PROVIDER_MIRRORS_<NAME>              optional backup servers for that provider, separated by spaces or commas
                                        (e.g. "vpn.4xott.us tv.trexiptv.com"); tried in order when one is down
+  PROVIDER_PROXY_<NAME>                optional proxy for that provider's playlist downloads, e.g. a VPN
+                                       container's proxy "http://vpn:8888" (PROVIDER_PROXY = every provider)
   ACCESS_TOKEN                         optional; when set, playlists live under /<token>/
   CACHE_MINUTES                        rebuild playlists at most this often (default 30)
   GUIDE_MINUTES                        rebuild the guide this often (default 60)
@@ -62,6 +64,15 @@ def mirrors():
     return out
 
 
+def proxies():
+    out = {}
+    for k, v in os.environ.items():
+        m = re.fullmatch(r'PROVIDER_PROXY_([A-Za-z0-9_]+)', k)
+        if m and v.strip():
+            out[slug(m.group(1))] = v.strip()
+    return out
+
+
 def with_host(url, host):
     """Same login/path on another server: 'http://a/get.php?u=1' + 'b.com' -> 'http://b.com/get.php?u=1'."""
     u = urlsplit(url)
@@ -73,6 +84,8 @@ def with_host(url, host):
 
 PROVIDERS = providers()
 MIRRORS = mirrors()
+PROXIES = proxies()
+DEFAULT_PROXY = os.environ.get('PROVIDER_PROXY', '').strip() or None
 
 
 class Playlist:
@@ -80,6 +93,7 @@ class Playlist:
         self.n, self.src = n, src
         self.urls = [src] + [with_host(src, h) for h in MIRRORS.get(n, [])] if re.match(r'https?://', src) else [src]
         self.good = 0                             # index of the server that worked last time
+        self.proxy = PROXIES.get(n) or DEFAULT_PROXY
         self.path = os.path.join(CACHE_DIR, f'{n}_clean.m3u')
         self.lock = threading.Lock()
         self.built = 0.0
@@ -111,7 +125,7 @@ class Playlist:
         for i in order:
             host = urlsplit(self.urls[i]).netloc
             try:
-                download(self.urls[i], dest)
+                download(self.urls[i], dest, proxy=self.proxy)
                 if i != self.good:
                     print(f'playlist {self.n}: using server {host}', flush=True)
                 self.good = i
@@ -226,6 +240,7 @@ if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else int(os.environ.get('PORT', '8765'))
     base = f'/{TOKEN}' if TOKEN else ''
     for n in LISTS:
-        print(f'serving playlist {n} on :{port}{"/<token>" if TOKEN else ""}/{n}.m3u', flush=True)
+        via = f' (downloads via proxy {urlsplit(LISTS[n].proxy).netloc})' if LISTS[n].proxy else ''
+        print(f'serving playlist {n} on :{port}{"/<token>" if TOKEN else ""}/{n}.m3u{via}', flush=True)
     print(f'serving guide on :{port}{"/<token>" if TOKEN else ""}/guide.xml.gz', flush=True)
     ThreadingHTTPServer(('0.0.0.0', port), H).serve_forever()
