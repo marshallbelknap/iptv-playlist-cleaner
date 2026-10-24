@@ -336,11 +336,20 @@ def process_entry(c):
     if JUNK_RE.search(t) or re.fullmatch(r'[\W\d_]*', t):
         rec['drop'] = 'test / placeholder feed'
         return rec
+    mc = re.match(r"^MC\s+(.+?)\s*\((?:M)\)\s*$", t)
+    if src == '24/7 Streams' and mc:                          # 'MC '80s (M)' = Music Choice radio channel
+        rec['cc'] = 'US'
+        rec['kind'] = 'channel'
+        rec['group'] = country_group('US', 'Music')
+        return finish(rec, 'US: Music Choice: ' + smart_case(mc.group(1)).replace("'", "'"))
     if src == '24/7 Streams':
         rec['group'] = G247
         rec['kind'] = '247'
         if is_non_english(t) or re.match(r'^(MX|ES|AR|IN|FR)\b', t) or re.search(r'\((FR|ES|DE|IT|PT|NL)\)\s*$', t):
             rec['drop'] = 'non-English'
+            return rec
+        if re.match(r'^(24/7\s*:?\s*)?Oneplay\b', t, re.I):        # Czech streaming service channels
+            rec['drop'] = 'non-English (Oneplay, Czech)'
             return rec
         n = re.sub(r'^24/7\s*:?\s*', '', t)
         n = re.sub(r'^(?:M\d|VIBE|MC|US)\s*[:|]?\s*', '', n)

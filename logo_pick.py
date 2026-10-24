@@ -2,12 +2,12 @@
 """Choose a proper, high-quality logo for every channel.
 
   Sports | <league/service>   -> that league's / service's logo (event label first, e.g. 'AHL' in Hockey (Other))
-  PPV & Events                -> the event service's logo (UFC, DAZN, Peacock ...) or a PPV / sport tile
-  24/7 | ...                  -> 24/7 tile for that group
-  Adult                       -> the provider's logo when it is big enough, else an 18+ tile
+  PPV & Events                -> the organiser's / service's official logo (UFC, WWE, DAZN, Peacock ...)
+  24/7 | ...                  -> the show's / film's own logo (Wikipedia, FAST services)
+  Adult                       -> tv-logos / studio brand logo / provider logo, else no logo
   everything else             -> tv-logos repo  ->  official logo from the matched guide (upsized)
                                  -> iptv-org database (>= 256 px)  ->  provider logo (if big enough)
-                                 -> network logo (locals)  ->  a clean name tile
+                                 -> network logo (locals)  ->  no logo (never a made-up one)
 
 'Big enough' = at least MIN_SIDE px on its long side and not portrait (posters are not logos). Sizes come from
 data/logo_dims.tsv (checked when this was built) plus a cache the server fills by checking new logos itself.
@@ -25,13 +25,31 @@ from logos import LogoIndex, TVLOGOS_RAW, NETWORK_LOGOS  # noqa: F401
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, 'data')
-REPO_LOGOS = os.environ.get('LOGO_BASE', 'https://raw.githubusercontent.com/marshallbelknap/iptv-playlist-cleaner/main/logos/')
 MIN_SIDE = 256
 TV = TVLOGOS_RAW + 'countries/'
 
 
+def _load_official():
+    out = {}
+    p = os.path.join(DATA, 'sports_logos.tsv')
+    if os.path.exists(p):
+        for line in open(p, encoding='utf-8'):
+            f = line.rstrip('\n').split('\t')
+            if len(f) >= 2 and not line.startswith('#'):
+                out[f[0]] = f[1]
+    return out
+
+
+OFFICIAL = _load_official()                 # league / service -> its official logo (Wikipedia / Commons)
+REPO_ALIAS = {'ucl': 'ucl', 'seriea': 'seriea', 'ligue1': 'ligue1', 'primevideo': 'primevideo', 'foxsports': 'foxsports',
+              'bbcsport': 'bbcsport', 'victoryplus': 'victoryplus', 'bleacherreport': 'bleacherreport',
+              'trillertv': 'trillertv', 'superleague': 'superleague', 'facup': 'facup', 'cbcsports': 'cbcsports',
+              'gleague': 'gleague', 'espn-play': 'espn', 'rally-tv': 'rally-tv', 'national-league': 'national-league'}
+
+
 def repo(name):
-    return REPO_LOGOS + name + '.png'
+    """Official logo for a league/service key, or None (we never draw our own)."""
+    return OFFICIAL.get(REPO_ALIAS.get(name, name))
 
 
 # ---- league / service logos --------------------------------------------------------------------------
@@ -81,8 +99,21 @@ BRANDS = {
     'sky sports red button': TV + 'united-kingdom/sky-sports-main-event-uk.png',
     'tnt sports': TV + 'united-kingdom/tnt-sports-1-uk.png', 'viaplay xtra': TV + 'united-kingdom/viaplay-sports-1-uk.png',
     'viaplay': TV + 'united-kingdom/viaplay-sports-1-uk.png', 'world cup': repo('fifa'), 'world cup 2026': repo('fifa'),
-    'cebl': repo('basketball'), 'khl': repo('hockey'), 'ojhl': repo('hockey'), 'sphl': repo('hockey'),
-    'oua': repo('sports'), 'pay per view': repo('ppv'), 'live event': repo('live-event'),
+    'cebl': repo('cebl'), 'khl': repo('khl'), 'ojhl': repo('ojhl'), 'sphl': repo('sphl'), 'oua': repo('oua'),
+    'usac': repo('usac'), 'cfl': repo('cfl'), 'ufl': repo('ufl'), 'lpga': repo('lpga'), 'liv golf': repo('livgolf'),
+    'ushl': repo('ushl'), 'bchl': repo('bchl'), 'nahl': repo('nahl'), 'u sports': repo('usports'), 'nll': repo('nll'),
+    'pll': repo('pll'), 'euroleague': repo('euroleague'), 'nbl': repo('nbl'), 'big bash': repo('bbl'), 'ipl': repo('ipl'),
+    'one championship': repo('one'), 'bkfc': repo('bkfc'), 'glory': repo('glory'), 'cage warriors': repo('cage'),
+    'roh': repo('roh'), 'tna': repo('tna'), 'nwa': repo('nwa'), 'mlw': repo('mlw'), 'njpw': repo('njpw'),
+    'f1': repo('f1'), 'nhra': repo('nhra'), 'imsa': repo('imsa'), 'wec': repo('wec'), 'wrc': repo('wrc'),
+    'supercars': repo('supercars'), 'btcc': repo('btcc'), 'wsbk': repo('wsbk'), 'pbr': repo('pbr'),
+    'x games': repo('xgames'), 'kings league': repo('kingsleague'), 'liga mx': repo('ligamx'),
+    'eredivisie': repo('eredivisie'), 'saudi pro league': repo('saudipro'), 'usl': repo('usl'),
+    'concacaf': repo('concacaf'), 'uefa conference league': repo('uecl'), 'nations league': repo('nations'),
+    'efl championship': repo('championship'), 'scottish premiership': repo('scottishprem'), 'urc': repo('urc'),
+    'premiership rugby': repo('premrugby'), 'super rugby': repo('superrugby'), 'six nations': repo('sixnations'),
+    'npc': repo('npc'), 'shl': repo('shl'), 'del': repo('del'), 'liiga': repo('liiga'), 'eihl': repo('eihl'),
+    'hockey east': repo('hockeyeast'), 'tsn': repo('tsn'), 'sportsnet': repo('sportsnet'),
 }
 CA_NETWORK_LOGOS = {'CTV': 'canada/ctv-ca.png', 'CTV2': 'canada/ctv-2-ca.png', 'CBC': 'canada/cbc-ca.png',
                     'Global': 'canada/global-ca.png', 'Citytv': 'canada/city-tv-ca.png', 'CHCH': 'canada/chch-ca.png',
@@ -95,8 +126,43 @@ SPORTS_GROUP = {   # 'Sports | X' -> brand key (used when the event label has no
     'Other': None, 'WNBA': 'wnba', 'Prime Video': 'prime video', 'La Liga': 'laliga', 'GAA': 'gaa', 'Serie A': 'serie a',
     'SPFL': 'spfl', 'MotoGP': 'motogp', 'Darts': 'darts', 'Ligue 1': 'ligue 1', 'Golf': 'golf',
 }
-LOOP_TILES = {'24/7 | TV Shows': repo('247-tv-shows'), '24/7 | Movies': repo('247-movies'),
-              '24/7 | Actors & Directors': repo('247-actors'), '24/7 | Kids & Animation': repo('247-kids')}
+LOOP_GROUPS = ('24/7 | TV Shows', '24/7 | Movies', '24/7 | Actors & Directors', '24/7 | Kids & Animation')
+# organisers named in the event text ('PPV 01: Money in the Bank 2026', 'Event 04: GCW Fight Club')
+EVENT_ORGS = [(r'\b(wwe|raw|smackdown|wrestlemania|royal rumble|summerslam|money in the bank|survivor series|'
+               r'elimination chamber|crown jewel|night of champions|backlash|saturday night.s main event)\b', 'wwe'),
+              (r'\bnxt\b', 'wwenxt'), (r'\b(aew|dynamite|collision|all in|all out|full gear|revolution|double or nothing|'
+              r'forbidden door|worlds end)\b', 'aew'), (r'\bufc\b', 'ufc'), (r'\bpfl\b', 'pfl'),
+              (r'\bbkfc|bare knuckle', 'bkfc'), (r'\bone (championship|fight night|friday)', 'one'),
+              (r'\btna\b|bound for glory|slammiversary', 'tna'), (r'\broh\b|ring of honor', 'roh'),
+              (r'\bnjpw|wrestle kingdom', 'njpw'), (r'\bgcw\b|game changer', 'gcw'), (r'\bnwa\b', 'nwa'),
+              (r'\bmlw\b', 'mlw'), (r'\bcmll\b', 'cmll'), (r'\baaa\b|triplemania', 'lucha'),
+              (r'\bmisfits\b', 'misfits'), (r'matchroom', 'matchroom'), (r'golden boy', 'goldenboy'),
+              (r'cage warriors', 'cage'), (r'\blfa\b', 'lfa'), (r'oktagon', 'oktagon'), (r'power slap', 'powerslap'),
+              (r'\busac\b', 'usac'), (r'world of outlaws|\bwoo\b', 'woo'), (r'high limit', 'hlt'),
+              (r'\bnascar\b', 'nascar'), (r'\bindycar\b', 'indycar'), (r'\bf1\b|formula 1|grand prix', 'f1'),
+              (r'\bmotogp\b', 'motogp'), (r'\bnhra\b', 'nhra'), (r'\barca\b', 'arca'), (r'\bimsa\b', 'imsa'),
+              (r'supercross', 'supercross'), (r'tomorrowland', 'tomorrowland'), (r'\batp\b', 'atp'),
+              (r'\bwta\b', 'wta'), (r'us open', 'usopen'), (r'wimbledon', 'wimbledon'), (r'roland|french open', 'rg'),
+              (r'australian open', 'ao'), (r'\bnrl\b|roosters|rabbitohs|broncos|storm vs|panthers vs|eels|knights|'
+              r'dolphins vs|titans|raiders|sea eagles|sharks vs|dragons vs|cowboys vs|bulldogs vs|warriors vs|wests tigers', 'nrl'),
+              (r'\burc\b|munster|leinster|ulster|connacht|stormers|bulls vs|sharks|lions vs|glasgow|edinburgh|'
+              r'cardiff|ospreys|scarlets|dragons|zebre|benetton', 'urc'),
+              (r'premiership rugby|gloucester|harlequins|saracens|bath vs|leicester tigers|northampton|sale sharks|'
+              r'exeter|bristol bears|newcastle red bulls', 'premrugby'),
+              (r'tasman|auckland|canterbury|wellington|waikato|otago|southland|counties manukau|bay of plenty|'
+              r'hawke.s bay|taranaki|manawatu|northland|north harbour', 'npc'), (r'six nations', 'sixnations'),
+              (r'super rugby', 'superrugby'), (r'liga mx', 'ligamx'), (r'eredivisie', 'eredivisie'),
+              (r'bundesliga', 'bundesliga'), (r'serie a\b', 'seriea'), (r'la ?liga', 'laliga'), (r'ligue 1', 'ligue1'),
+              (r'premier league|\bepl\b', 'epl'), (r'champions league|\bucl\b', 'ucl'), (r'europa league', 'uel'),
+              (r'conference league', 'uecl'), (r'nations league', 'nations'), (r'world cup', 'worldcup'),
+              (r'\bmls\b', 'mls'), (r'\busl\b', 'usl'), (r'concacaf', 'concacaf'), (r'libertadores', 'libertadores'),
+              (r'sudamericana', 'sudamericana'), (r'saudi', 'saudipro'), (r'a-league', 'aleague'), (r'fa cup', 'facup'),
+              (r'kings league', 'kingsleague'), (r'\bnfl\b', 'nfl'), (r'\bnba\b', 'nba'), (r'\bnhl\b', 'nhl'),
+              (r'\bmlb\b', 'mlb'), (r'\bwnba\b', 'wnba'), (r'\bncaa', 'ncaa'), (r'\bcfl\b', 'cfl'),
+              (r'\bpdc\b|darts', 'pdc'), (r'\bpga\b', 'pga'), (r'\blpga\b', 'lpga'), (r'liv golf', 'livgolf'),
+              (r'snooker', 'snooker'), (r'premier padel', 'premierpadel'), (r'\bpbr\b|bull riding', 'pbr'),
+              (r'x games', 'xgames'), (r'olympic', 'olympics')]
+EVENT_ORGS = [(re.compile(rx, re.I), k) for rx, k in EVENT_ORGS]
 SPORT_WORDS = [(r'soccer|football|futbol|fútbol|\bfc\b|\bvs?\.? ', 'soccer'), (r'hockey', 'hockey'),
                (r'tennis', 'tennis'), (r'rugby', 'rugby'), (r'boxing|fight|ufc|mma', 'boxing'), (r'golf', 'golf')]
 TRUSTED = re.compile(r'^https?://(raw\.githubusercontent\.com/(tv-logo|marshallbelknap)/|dtil\.tmsimg\.com/|'
@@ -196,12 +262,28 @@ class Picker:
                 if len(f) >= 3 and not line.startswith('#'):
                     self.overrides[(f[0], f[1])] = f[2]
         self.missing = []
+        self.shows_ns = {}
+        self.shows = {}                       # 24/7 show / film / person -> its title card, poster or photo
+        p = os.path.join(DATA, 'show_logos.tsv')
+        if os.path.exists(p):
+            import logos as L
+            for line in open(p, encoding='utf-8'):
+                f = line.rstrip('\n').split('\t')
+                if len(f) >= 3 and not line.startswith('#'):
+                    for n in (f[0], f[1]):
+                        k = L.lkey(re.sub(r'\s*\([^)]*\)$', '', n))
+                        if len(k) >= 2:
+                            self.shows.setdefault(k, f[2])
+                            self.shows_ns.setdefault(_skey(re.sub(r'\s*\([^)]*\)$', '', n)), f[2])
         self.aliases = []                     # (regex, logo): hand-checked brand / family logos
+        self.adult_aliases = []               # studio brands, used only inside the Adult group
         p = os.path.join(DATA, 'logo_aliases.tsv')
         if os.path.exists(p):
             for line in open(p, encoding='utf-8'):
                 f = line.rstrip('\n').split('\t')
-                if len(f) >= 2 and not line.startswith('#'):
+                if len(f) >= 3 and f[2] == 'adult':
+                    self.adult_aliases.append((re.compile(f[0], re.I), f[1], False))
+                elif len(f) >= 2 and not line.startswith('#'):
                     self.aliases.append((re.compile(f[0], re.I), f[1], len(f) > 2 and f[2] == 'late'))
 
     def _load_icons(self, path):
@@ -287,35 +369,38 @@ class Picker:
                 return hit
         return None
 
-    def name_tile(self, name):
-        title = re.sub(r'^[A-Z]{2,3}: ', '', name)
-        title = re.sub(r'\s+(4K|FHD|HD|SD)$', '', title)
-        if self.server_base:
-            return f'{self.server_base}/logo/{urllib.parse.quote(title)}.png'
-        return repo('tv')
 
     def pick(self, r, cc, lookup_name, tvg_id, provider_logo):
         g, name, kind = r['group'], r['name'], r['kind']
-        if g in LOOP_TILES:
-            return LOOP_TILES[g]
+        if g in LOOP_GROUPS:                      # the show's / film's / person's own logo or picture
+            return self.loop_logo(lookup_name, provider_logo)
         if g == 'Adult':
-            return provider_logo if self.ok(provider_logo) else repo('adult')
+            bare = re.sub(r'^[A-Z]{2,3}: ', '', lookup_name)
+            return (self.tvlogos(cc or 'INT', bare) or self.iptv_any(cc, bare) or
+                    next((u for rx, u, late in self.adult_aliases + self.aliases if rx.search(bare)), None) or provider_logo or '')
         if g.startswith('Sports | ') or g == 'PPV & Events':
+            if kind == 'league-channel':          # 'NFL Network', 'NBA TV': the channel's own logo
+                hit = self.tvlogos('US', lookup_name) or self.tvlogos(cc, lookup_name)
+                if hit:
+                    return hit
             b = brand_of(name)
             for k in (b, bkey(r.get('label')), re.sub(r'\s+(uk|us|ca|au|intl)$', '', b)):
-                if k in BRANDS:
+                if BRANDS.get(k):
                     return BRANDS[k]
             for k in ('b/r', 'netflix', 'espn play', 'btn+', 'big10+', 'pay per view', 'world cup', 'national league'):
-                if k in b:
+                if k in b and (BRANDS.get(k) or BRANDS.get('bleacher report')):
                     return BRANDS.get(k) or BRANDS.get('bleacher report')
+            text = name.split(':', 1)[1] if ':' in name else name
+            for rx, k in EVENT_ORGS:              # the organiser named in the event text
+                if rx.search(text) and OFFICIAL.get(k):
+                    return OFFICIAL[k]
             if g.startswith('Sports | '):
                 k = SPORTS_GROUP.get(g[9:])
-                if k and k in BRANDS:
+                if k and BRANDS.get(k):
                     return BRANDS[k]
-            for rx, k in SPORT_WORDS:
-                if re.search(rx, name, re.I):
-                    return BRANDS[k]
-            return BRANDS['ppv'] if g == 'PPV & Events' else repo('sports')
+            if provider_logo and self.usable(provider_logo):
+                return provider_logo
+            return ''                             # an empty slot: no event yet, so nothing to show
         # channels, locals, everything else
         if kind == 'local':
             hit = self.local_logo(r, name)
@@ -372,10 +457,46 @@ class Picker:
                 return u
         if re.search(r'\bevent \d+\b|\(event only\)|fight night|\bfight\b', lookup_name, re.I) and \
                 (g.endswith('| Sports') or g == 'PPV & Events'):
-            return BRANDS['boxing'] if re.search(r'fight', lookup_name, re.I) else BRANDS['event']
+            for rx, k in EVENT_ORGS:
+                if rx.search(lookup_name) and OFFICIAL.get(k):
+                    return OFFICIAL[k]
         self.missing.append((cc, lookup_name, provider_logo or '', icon or ''))
         return provider_logo or icon or PLATFORM_LOGOS.get(r.get('platform') or '') or \
             self.family_logo(cc, lookup_name) or self.network_word(lookup_name) or ''
+
+    def loop_logo(self, lookup_name, provider_logo):
+        import logos as L
+        t = re.sub(r'^24/7\s+', '', re.sub(r'^[A-Z]{2,3}: ', '', lookup_name))
+        t = re.sub(r'\s+(S\d{2}(E\d+)?|\d{1,3})$', '', t).strip()
+        t = re.sub(r'\s+(19|20)\d\d$', '', t).strip()          # 'Yellowstone 2018'
+        for v in (t, re.sub(r'\s+(by|from)\s+\S.*$', '', t), re.sub(r'\s+(Channel|Classic|Classics|Vault)$', '', t)):
+            hit = self.by_name.get(L.lkey(v)) or self.shows.get(L.lkey(v)) or self.shows_ns.get(_skey(v))
+            if hit:
+                return hit
+        for rx, u, late in self.aliases:
+            if not late and rx.search(t):
+                return u
+        if provider_logo:
+            return provider_logo
+        hit = self.tvlogos('US', t) or self.iptv_any('US', t)
+        if hit:
+            return hit
+        from rapidfuzz import process as rf, fuzz
+        k = L.lkey(t)
+        k2 = re.sub(r'^(marvel s|marvels|disney s|disneys|tom clancy s|tom clancys|dc s|dcs)\s+', '', k)
+        if k2 != k and self.shows.get(k2):
+            return self.shows[k2]
+        words = k2.split()                        # 'avatar last airbender book 1 water' -> 'avatar last airbender'
+        for n in range(len(words) - 1, 1, -1):
+            head = ' '.join(words[:n])
+            if len(head) >= 8 and self.shows.get(head):
+                return self.shows[head]
+        if len(k) >= 6 and self.shows:
+            m = rf.extractOne(k, list(self.shows), scorer=fuzz.ratio, score_cutoff=92)
+            if m:
+                return self.shows[m[0]]
+        self.missing.append(('247', lookup_name, '', ''))
+        return ''
 
     def local_logo(self, r, name):
         """Station's own logo (Wikipedia) for its main channel; the network's logo for a subchannel."""
@@ -447,6 +568,14 @@ REGION = (r'Sydney|Melbourne|Brisbane|Perth|Adelaide|Canberra|Hobart|Darwin|Gold
           r'National|Regional|East|West|Pacific|Central|North|South|London|Scotland|Wales|Northern Ireland|NI|'
           r'Toronto|Vancouver|Montreal|Calgary|Edmonton|Ottawa|Alberta|Ontario|Quebec|BC|Atlantic|Prairies|'
           r'Main|Feed|Backup|Live|Channel|TV|Network|Plus|Extra|\d+')
+
+
+def _skey(s):
+    """Loose key: no accents, punctuation or spaces ('M*A*S*H' = 'Mash', 'Shōgun' = 'Shogun')."""
+    import unicodedata
+    s = unicodedata.normalize('NFKD', s or '').encode('ascii', 'ignore').decode().lower()
+    s = re.sub(r'^the\s+', '', s)
+    return re.sub(r'[^a-z0-9]', '', s)
 
 
 def variants(name):

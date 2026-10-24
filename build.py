@@ -193,6 +193,7 @@ def main(src, out, report=None, gen_prefix='gen', name_tiles=False, cache_dir=No
         pool = json.load(open(pool_path)) if pool_path and os.path.exists(pool_path) else {}
     except ValueError:
         pool = {}
+    pool = {k: v for k, v in pool.items() if '/iptv-playlist-cleaner/' not in v and '/logo/' not in v}  # never our own art
     # a channel's logo from another copy of the same channel (one source has it, another does not)
     same_name_logo = {}
     for e, r in zip(entries, recs):

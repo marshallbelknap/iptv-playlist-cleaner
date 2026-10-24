@@ -38,13 +38,16 @@ fill in the provider links and token, Build. To update later: Project > iptv-cle
   Show/movie/actor channels found in country groups move there too (`data/loop_channels.tsv`, hand-checked; rules in `loops.py`).
 
 ## Logos
-`logo_pick.py` only uses real logos, never generated ones: league/service logo for every sports and event channel
-(`logos/`), 24/7 tiles, the station's own logo (Wikipedia) for locals, hand-checked brand logos
-(`data/logo_aliases.tsv`), tv-logos, the official logo from the matched guide (upsized), iptv-org, the logos
-free streaming services publish (Pluto, Samsung, Roku, Plex, Xumo - `data/fast_logos.tsv`), the provider's logo,
-then the same channel's logo from the other playlist. Big, landscape logos are preferred; the server measures
-new logos in the background. A handful of obscure feeds with no logo anywhere are left blank rather than given
-an invented one (they are listed in the cache as `logos_missing_<playlist>.tsv`).
+`logo_pick.py` only uses real, official logos - nothing is ever drawn or generated. Sports and event channels get
+the league's / organiser's official logo (`data/sports_logos.tsv`, from Wikipedia/Wikimedia; event text such as
+'UFC 312' or 'WWE Raw' picks the organiser). 24/7 channels get the show's or film's own logo
+(`data/show_logos.tsv`, from Wikipedia) or the logo the free streaming service publishes. Everything else:
+the station's own logo for locals, hand-checked brand logos (`data/logo_aliases.tsv`), tv-logos, the official
+logo from the matched guide (upsized), iptv-org, Pluto / Samsung / Roku / Plex / Xumo logos
+(`data/fast_logos.tsv`), the provider's logo, then the same channel's logo from the other playlist.
+When none of those has a logo (obscure 24/7 titles, adult feeds, unnamed 'PPV 08' event slots before the
+provider fills them in) the logo is left blank rather than invented; they are listed in the cache as
+`logos_missing_<playlist>.tsv`.
 
 ## Guide (EPG)
 The server builds one guide for all playlists at `http://<machine-ip>:8765/<ACCESS_TOKEN>/guide.xml.gz`

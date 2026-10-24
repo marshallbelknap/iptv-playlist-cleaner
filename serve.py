@@ -32,7 +32,6 @@ from build import main as build, download  # noqa: E402
 from urllib.parse import urlsplit, urlunsplit  # noqa: E402
 import guide  # noqa: E402
 import logo_pick  # noqa: E402
-import name_tile  # noqa: E402
 import urllib.parse  # noqa: E402
 
 TOKEN = os.environ.get('ACCESS_TOKEN', '').strip().strip('/')
@@ -190,8 +189,6 @@ class H(BaseHTTPRequestHandler):
         rest = p[len(base):] or '/'
         if rest in ('/guide.xml.gz', '/guide.xml', '/epg.xml.gz', '/epg.xml'):
             return self.send_guide(rest.endswith('.gz'))
-        if rest.startswith('/logo/') and rest.endswith('.png'):
-            return self.send_tile(urllib.parse.unquote(rest[6:-4]))
         m = re.fullmatch(r'/(?:([a-z0-9-]+)\.m3u)?', rest.lower())
         n = (m.group(1) or 'playlist') if m else None
         if n == 'playlist':
@@ -216,22 +213,6 @@ class H(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-Type', 'audio/x-mpegurl; charset=utf-8')
         self.send_header('Content-Length', str(len(data)))
-        self.end_headers()
-        self.wfile.write(data)
-
-    def send_tile(self, title):
-        try:
-            path = name_tile.tile_path(os.path.join(CACHE_DIR, 'tiles'), title)
-        except Exception as e:
-            print(f'tile failed: {e}', file=sys.stderr, flush=True)
-            self.send_error(500)
-            return
-        with open(path, 'rb') as f:
-            data = f.read()
-        self.send_response(200)
-        self.send_header('Content-Type', 'image/png')
-        self.send_header('Content-Length', str(len(data)))
-        self.send_header('Cache-Control', 'public, max-age=604800')
         self.end_headers()
         self.wfile.write(data)
 

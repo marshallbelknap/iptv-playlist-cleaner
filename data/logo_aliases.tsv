@@ -83,7 +83,7 @@ bare knuckle|\bbkfc\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/B
 ^tv ?land	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/tv-land-us.png
 ^sho ?2\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/showtime-2-us.png
 ^(more|outer|thriller)max	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/cinemax-us.png
-^flo ?racing	https://raw.githubusercontent.com/marshallbelknap/iptv-playlist-cleaner/main/logos/flosports.png
+^flo ?racing	https://thumb.wikimedia.org/wikipedia/en/thumb/2/21/FloSports_Logo.svg/960px-FloSports_Logo.svg.png
 ^t2 tennis	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/tennis-channel-us.png
 ^cinebox\b|^docubox\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Cineverse_logo.svg/960px-Cineverse_logo.svg.png
 ^(religious )?3abn	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/3abn-us.png
@@ -110,10 +110,34 @@ bare knuckle|\bbkfc\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/B
 ^reelz	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Reelz.svg/960px-Reelz.svg.png
 ^(the )?shockwave$	https://images.pluto.tv/channels/68b784d03e17b7676a0378f7/colorLogoPNG_1760108955019.png
 ^\[?wbcb\b|youngstown - wbcb	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/WFMJ-DT2_%28WBCB%29_2024.svg/960px-WFMJ-DT2_%28WBCB%29_2024.svg.png
-^super sports ch \d	https://raw.githubusercontent.com/marshallbelknap/iptv-playlist-cleaner/main/logos/live-event.png
 ^logo\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/logo-us.png
 ^country music television|^cmt\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/cmt-us.png
 ^yes (tv|hamilton|burlington)	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/YesTV_Canada.svg/960px-YesTV_Canada.svg.png
 ^we ?tv\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/we-tv-us.png
 ^w!? ?(- ?watch|$)	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/u-and-w-uk.png
 ^w ?\+1	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/u-and-w-plus-uk.png
+^(24/7 )?(cm )?netflix\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/960px-Netflix_2015_logo.svg.png
+^(24/7 )?(cm )?(apple tv|apple tv\+|cm apple)	https://thumb.wikimedia.org/wikipedia/en/thumb/a/ae/Apple_TV_%28logo%29.svg/960px-Apple_TV_%28logo%29.svg.png
+^(24/7 )?(cm )?(prime video|amazon)\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Prime_Video_logo_%282024%29.svg/960px-Prime_Video_logo_%282024%29.svg.png
+^(24/7 )?paramount\+	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Paramount_Plus.svg/960px-Paramount_Plus.svg.png
+^(24/7 )?peacock\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/NBCUniversal_Peacock_Logo_%282026%29.svg/960px-NBCUniversal_Peacock_Logo_%282026%29.svg.png
+^(24/7 )?hbo ?max\b|^(24/7 )?hbomax	https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/HBO_Max_%282025%29.svg/960px-HBO_Max_%282025%29.svg.png
+^(24/7 )?(cm )?disney ?\+	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/64/Disney%2B_2024.svg/960px-Disney%2B_2024.svg.png
+^(24/7 )?hulu\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Hulu_logo_%282018%29.svg/960px-Hulu_logo_%282018%29.svg.png
+^(24/7 )?bbc ?iplayer	https://thumb.wikimedia.org/wikipedia/en/thumb/f/fd/BBC_iPlayer_logo_%282021%29.svg/960px-BBC_iPlayer_logo_%282021%29.svg.png
+^(24/7 )?sky ?mix\b	https://upload.wikimedia.org/wikipedia/en/2/28/Sky_Mix_2026_Stacked_Logo.png
+\bbrazzers\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Brazzers_logo.svg/960px-Brazzers_logo.svg.png	adult
+\bbang ?bros\b	https://upload.wikimedia.org/wikipedia/commons/9/92/Bang_Bros_logo.png	adult
+\breality ?kings\b	https://upload.wikimedia.org/wikipedia/en/1/1f/RealityKings_Logo.png	adult
+^private\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Private_logo.svg/960px-Private_logo.svg.png	adult
+\bdorcel\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Dorcel-2022.svg/960px-Dorcel-2022.svg.png	adult
+\bvivid\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Vivid_Entertainment_logo.svg/960px-Vivid_Entertainment_logo.svg.png	adult
+\bplayboy\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Play_Boy_TV_logo.svg/960px-Play_Boy_TV_logo.svg.png	adult
+\bpenthouse\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Penthouse_text_logo.svg/960px-Penthouse_text_logo.svg.png	adult
+\bnaughty america\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Naughty_America_vertical_transparent.svg/960px-Naughty_America_vertical_transparent.svg.png	adult
+\bdigital playground\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Digital_Playground_logo.svg/960px-Digital_Playground_logo.svg.png	adult
+\bwicked\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Wicked_logo.svg/960px-Wicked_logo.svg.png	adult
+\btwistys\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Twistys_logo.svg/960px-Twistys_logo.svg.png	adult
+\bkink\b	https://thumb.wikimedia.org/wikipedia/en/thumb/3/35/Kink.com_logo.svg/960px-Kink.com_logo.svg.png	adult
+\bpornhub\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Pornhub-logo.svg/960px-Pornhub-logo.svg.png	adult
+\bxvideos\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Xvideos_logo_%282023%29.svg/960px-Xvideos_logo_%282023%29.svg.png	adult
