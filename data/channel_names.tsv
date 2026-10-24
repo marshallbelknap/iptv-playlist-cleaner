@@ -43,7 +43,7 @@ US	spectrumsportsnetla	Spectrum SportsNet LA
 US	spectrumsportsnet	Spectrum SportsNet
 US	sundance	SundanceTV
 US	tcm	TCM
-US	vice	Vice
+US	vice	Vice TV
 US	we	WE tv
 US	yahoofinance	Yahoo Finance
 US	todayallday	Today All Day
@@ -270,7 +270,7 @@ CA	lovenature	Love Nature
 CA	history	History
 CA	weather	The Weather Network
 CA	fight	Fight Network
-CA	treehouse	Treehouse
+CA	treehouse	Treehouse TV
 CA	ctvdrama	CTV Drama Channel
 CA	ctvcomedy	CTV Comedy Channel
 CA	ctvlife	CTV Life Channel
@@ -326,7 +326,7 @@ US	americanheroes	American Heroes Channel
 US	nationalgeographic	National Geographic
 US	natgeowild	Nat Geo Wild
 US	teennick	TeenNick
-US	newenglandcablenews	NBC Boston News (NECN)
+US	newenglandcablenews	Spectrum News NECN
 US	blacknews	Black News Channel
 US	freespeech	Free Speech TV
 US	land	TV Land
@@ -389,3 +389,346 @@ US	fanduelsportsnetworkcarolinas	FanDuel Sports Network Carolinas
 US	chicagosports	Chicago Sports Network
 US	chicagosportsplus	Chicago Sports Network Plus
 US	lifetimemoviefavorites	Lifetime Movie Favorites
+US	afvfamily	AFV Family
+US	365blk	365BLK
+US	allblkgems	ALLBLK Gems
+US	amg	AMG TV
+US	animexhidive	Anime x HIDIVE
+US	awe	AWE
+US	aweplus	AWE Plus
+US	legokids	LEGO Kids TV
+US	livepdpresents	Live PD Presents
+US	mea	MEA TV
+US	nrb	NRB TV
+US	pursuitup	PursuitUP
+US	tan	TAN TV
+US	getcomedy	GET Comedy
+US	buzzr	Buzzr
+US	boomerang	Boomerang
+US	beachfloridaalabama	Beach TV Florida & Alabama
+US	beachkeywestfloridakeys	Beach TV Key West & Florida Keys
+US	beachmyrtlebeachgrandstrand	Beach TV Myrtle Beach & The Grand Strand
+US	filmrisewestern	FilmRise Western
+US	justicecentral	Justice Central TV
+US	nost	NOST
+US	1championship	ONE Championship
+US	pll	PLL Network
+US	realmadrid	Real Madrid TV
+US	sundancewest	SundanceTV West
+US	tbn	TBN
+US	inspwest	INSP West
+US	newdetectives	The New Detectives
+US	moviextra	The Movie Channel Xtra
+US	musicchoicekidzonly	Music Choice Kidz Only!
+US	musicchoicethrowbackjamz	Music Choice Throwback Jamz
+US	musicchoice60s80srockpop	Music Choice 60s-80s Rock & Pop
+US	musicchoicedanceedm	Music Choice Dance/EDM
+US	musicchoice1lvcrewradio	Music Choice 1LV Crew Radio
+US	musicchoicercscountry	Music Choice RC's Country
+US	musicchoicercshawaiian	Music Choice RC's Hawaiian
+US	musicchoicercslatinfusion	Music Choice RC's Latin Fusion
+US	musicchoicefreddyshits	Music Choice Freddy's Hits
+US	stingraynaturescape	Stingray Naturescape
+US	stingraydjazz	Stingray DJAZZ
+US	zenlifebystingray	ZenLIFE by Stingray
+US	qelloconcertsbystingray	Qello Concerts by Stingray
+US	cmtmusic	CMT Music
+US	nickmusic	NickMusic
+US	spectrumbaynews9	Spectrum Bay News 9
+US	bloombergoriginals	Bloomberg Originals
+US	scrippsnews	Scripps News
+US	infowars	Infowars
+US	tyt	TYT Network
+US	spectrumnews1maine	Spectrum News 1 Maine
+US	afnsports	AFN Sports
+US	spacecityhomealternate	Space City Home Network Alternate
+US	sportsnetpittsburghalternate	SportsNet Pittsburgh Alternate
+US	altitudesports	Altitude Sports
+US	big10alternate	Big Ten Network Alternate
+US	bnpparibasopenstadium4	BNP Paribas Open Stadium 4
+US	cwpresentswwenxt	CW Presents WWE NXT
+US	cowboyplussports	Cowboy+ Sports
+US	longhorn	Longhorn Network
+US	elevensports	Eleven Sports
+US	fifaplus	FIFA+
+US	fifapluswomen	FIFA+ Women
+US	fanduelsportsextra	FanDuel Sports Network Extra
+US	fanduelracing	FanDuel Racing
+US	fntsysports	FNTSY Sports Network
+US	ginxesports	Ginx Esports TV
+US	gol	GolTV
+US	hbcugo	HBCU GO
+US	luchalibreaaa	Lucha Libre AAA
+US	mav	MAVTV
+US	msg2plus	MSG2 Plus
+US	nextlevelsports	Next Level Sports
+US	pac12	Pac-12 Network
+US	pac12arizona	Pac-12 Arizona
+US	pac12bayarea	Pac-12 Bay Area
+US	pac12losangeles	Pac-12 Los Angeles
+US	pac12mountain	Pac-12 Mountain
+US	pac12oregon	Pac-12 Oregon
+US	pac12washington	Pac-12 Washington
+US	pflmma	PFL MMA
+US	redbull	Red Bull TV
+US	t2tennis	T2 Tennis
+US	tnawrestling	TNA Wrestling
+US	willow	Willow
+US	nbcsn	NBCSN
+US	hbohits	HBO Hits
+US	hbohitswest	HBO Hits West
+US	hbodrama	HBO Drama
+US	hbodramawest	HBO Drama West
+US	hbomovies	HBO Movies
+US	hbomovieswest	HBO Movies West
+US	cinemaxclassics	Cinemax Classics
+US	cinemaxclassicswest	Cinemax Classics West
+US	cinemaxaction	Cinemax Action
+US	cinemaxactionwest	Cinemax Action West
+US	cinemaxhits	Cinemax Hits
+US	cinemaxhitswest	Cinemax Hits West
+US	discoveryturbo	Discovery Turbo
+US	discoveryturbowest	Discovery Turbo West
+US	catchycomedy	Catchy Comedy
+US	circlecountry	Circle Country
+US	mtvclassic	MTV Classic
+US	oanplus	OAN Plus
+US	schwab	Schwab Network
+US	hallmarkfamily	Hallmark Family
+US	spectrumnews1wisconsin	Spectrum News 1 Wisconsin
+US	plutoclassiccrimedrama	Pluto TV Classic TV Crime Drama
+US	terramaterwild	Terra Mater Wild
+US	crimecultskillers	Crime Cults Killers
+US	lovepets	Love Pets
+US	3abn	3ABN
+US	3abndaretodream	3ABN Dare to Dream Network
+US	3abninternational	3ABN International Network
+US	3abnkids	3ABN Kids Network
+US	3abnpraisehimmusic	3ABN Praise Him Music Network
+US	3abnproclaim	3ABN Proclaim! Network
+US	tbnwomenoffaith	TBN Women of Faith
+US	yippee	Yippee TV
+US	heroesiconswest	Heroes & Icons West
+US	upwest	UPtv West
+US	fe	FETV
+US	classicdoctorwho	Classic Doctor Who
+US	direclive	DIRECTV Live
+US	direclive2	DIRECTV Live 2
+US	historyhit	History Hit
+US	mhzmysteries	MHz Mysteries
+US	nickelodeonwest	Nickelodeon West
+US	outproud	OUTtv Proud
+US	truecrmz	True CRMZ
+US	tmz	TMZ
+US	twnelements	TWN Elements
+US	tvoai	TVOAI Channel
+US	vrplus	VR+
+US	neworleans	New Orleans TV
+US	cnninternational	CNN International
+US	dwnews	DW News
+US	nhkworldjapan	NHK World-Japan
+US	cgtn	CGTN
+US	ntdnews	NTD News
+US	rtamerica	RT America
+US	musicchoicehiphoprnb	Music Choice Hip Hop and R&B
+UK	ualibiplus1	U&Alibi +1
+UK	uedenplus1	U&Eden +1
+UK	ugoldplus1	U&Gold +1
+UK	uyesterdayplus1	U&Yesterday +1
+UK	udramaplus1	U&Drama +1
+UK	udavejavu	U&Dave Ja Vu
+UK	comedycentralextra	Comedy Central Extra
+UK	comedycentralextraplus1	Comedy Central Extra +1
+UK	crimeinvestigationplus1	Crime & Investigation +1
+UK	discoveryplus1	Discovery Channel +1
+UK	nationalgeographicplus1	National Geographic +1
+UK	nickjrplus1	Nick Jr. +1
+UK	nickelodeonplus1	Nickelodeon +1
+UK	musthaveideas	Must Have Ideas
+UK	bbcworldservice	BBC World Service
+UK	bbc3cbbc	BBC Three / CBBC
+UK	bbc4cbeebies	BBC Four / CBeebies
+UK	bbc1islands	BBC One Channel Islands
+UK	4south	Channel 4 South & East
+UK	historyhit	History Hit
+UK	shorts	ShortsTV
+UK	greatmystery	Great! Mystery
+UK	greatromanceplus1	Great! Romance +1
+UK	mytimemovie	MyTime Movie Network
+UK	tntsportsboxoffice	TNT Sports Box Office
+UK	eurosport2	Eurosport 2
+UK	fifaplus	FIFA+
+UK	ginxesports	Ginx Esports TV
+UK	mu	MUTV
+UK	laliga	LaLiga TV
+UK	rugbypass	RugbyPass TV
+UK	talksport	talkSPORT
+UK	tntsports	TNT Sports
+UK	skysportsmainevent	Sky Sports Main Event
+INT	rtdocumentary	RT Documentary
+INT	cgtn	CGTN
+INT	cna	CNA
+INT	nd24x7	NDTV 24x7
+INT	rt	RT
+INT	beinsports1english	beIN Sports 1 English
+INT	beinsports2english	beIN Sports 2 English
+INT	beinsports3english	beIN Sports 3 English
+INT	supersportaction	SuperSport Action
+INT	supersportblitz	SuperSport Blitz
+INT	supersportcricket	SuperSport Cricket
+INT	supersportevents	SuperSport Events
+INT	supersportfootball	SuperSport Football
+INT	supersportgolf	SuperSport Golf
+INT	supersportgrandstand	SuperSport Grandstand
+INT	supersportlaliga	SuperSport LaLiga
+INT	supersportmaximo	SuperSport Maximo
+INT	supersportmotorsport	SuperSport Motorsport
+INT	supersportpremierleague	SuperSport Premier League
+INT	supersportplay1	SuperSport Play 1
+INT	supersportplay2	SuperSport Play 2
+INT	supersportpsl	SuperSport PSL
+INT	supersportrugby	SuperSport Rugby
+INT	supersporttennis	SuperSport Tennis
+INT	supersportvariety1	SuperSport Variety 1
+INT	supersportvariety2	SuperSport Variety 2
+INT	supersportvariety3	SuperSport Variety 3
+INT	supersportvariety4	SuperSport Variety 4
+INT	hubsports1	Hub Sports 1
+INT	eurosport1	Eurosport 1
+INT	erceuropeanracing	ERC European Racing Channel
+ZA	supersportblitz	SuperSport Blitz
+ZA	supersportcricket	SuperSport Cricket
+ZA	supersportfootball	SuperSport Football
+ZA	supersportmaximo	SuperSport Maximo
+ZA	supersportpremierleague	SuperSport Premier League
+ZA	supersportpsl	SuperSport PSL
+ZA	supersportrugby	SuperSport Rugby
+CA	oln	OLN
+CA	joy	JOYTV
+CA	wildbrain	WildBrainTV
+CA	fashioncanada	FashionTV Canada
+CA	dtour	DTour
+CA	crimeplusinvestigation	Crime + Investigation
+CA	ontarioparliament	Ontario Parliament Network
+CA	nicktoons	Nicktoons
+CA	stingraydjazz	Stingray DJAZZ
+CA	amiaudio	AMI-audio
+CA	ami	AMI-tv
+CA	3abncanada	3ABN Canada
+CA	cp24	CP24
+CA	revel	Revel TV
+AU	news24	News24
+AU	news24weather	News24 Weather
+AU	news24world	News24 World
+AU	news24now	News24 Now
+AU	foxfooty	FOX Footy
+AU	foxcricket	FOX Cricket
+AU	foxleague	FOX League
+AU	skyracing1	Sky Racing 1
+AU	skythoroughbredcentral	Sky Thoroughbred Central
+AU	redbull	Red Bull TV
+AU	redbullmelbourne	Red Bull TV Melbourne
+AU	redbullperth	Red Bull TV Perth
+AU	abcentertains	ABC Entertains
+AU	abcentertainsmelbourne	ABC Entertains Melbourne
+AU	abcfamily	ABC Family
+AU	abcfamilymelbourne	ABC Family Melbourne
+AU	abcact	ABC TV ACT
+AU	abcnsw	ABC TV NSW
+AU	abcnt	ABC TV NT
+AU	abcqld	ABC TV QLD
+AU	abcsa	ABC TV SA
+AU	abctas	ABC TV TAS
+AU	abcvic	ABC TV VIC
+AU	abcwa	ABC TV WA
+AU	sanfl	SANFL
+AU	vfl	VFL
+AU	wslchampionshiptour	WSL Championship Tour
+AU	9gemgoldcoast	9Gem Gold Coast
+AU	9gemlismore	9Gem Lismore
+AU	9gemnewcastle	9Gem Newcastle
+AU	9gogoldcoast	9Go! Gold Coast
+AU	9golismore	9Go! Lismore
+AU	9gonewcastle	9Go! Newcastle
+AU	9lifegoldcoast	9Life Gold Coast
+AU	9lifelismore	9Life Lismore
+AU	9lifenewcastle	9Life Newcastle
+AU	9rushgoldcoast	9Rush Gold Coast
+AU	9rushlismore	9Rush Lismore
+AU	9rushnewcastle	9Rush Newcastle
+AU	9goldcoast	Nine Gold Coast
+AU	9lismore	Nine Lismore
+AU	9newcastle	Nine Newcastle
+AU	9brisbane	Nine Brisbane
+AU	9melbourne	Nine Melbourne
+AU	9perth	Nine Perth
+AU	10perth	10 Perth
+AU	7two	7two
+AU	7twomelbourne	7two Melbourne
+AU	7mate	7mate
+AU	7matemelbourne	7mate Melbourne
+AU	7flixbrisbane	7flix Brisbane
+AU	7flixcanberra	7flix Canberra
+AU	7flixperth	7flix Perth
+AU	7flix	7flix
+AU	nickelodeon	Nickelodeon
+AU	nicktoons	Nicktoons
+AU	nicktoons90s	Nicktoons 90s
+NZ	whakaatamaori	Whakaata Maori
+NZ	discoveryplus1	Discovery +1
+NZ	nickelodeon	Nickelodeon
+NZ	redbull	Red Bull TV
+IE	rte2plus1	RTE2 +1
+IE	rtejr	RTE Jr
+IE	oireachtas	Oireachtas TV
+US	msgsportsnet	MSG Sportsnet
+US	msgsportsnet2	MSG Sportsnet 2
+US	msg	MSG
+UK	dpworldtour	DP World Tour
+US	dpworldtour	DP World Tour
+UK	bbc1eastwest	BBC One East West
+INT	nhkworldjapan	NHK World-Japan
+INT	rtamerica	RT America
+INT	dwnews	DW News
+INT	nowsports	Now Sports
+US	3abncanada	3ABN Canada
+US	thrillermaxwest	ThrillerMax West
+US	shorts	ShortsTV
+US	outlawwestern	Outlaw Western
+US	grjngowesternmovies	Grjngo Western Movies
+US	western	Western TV
+CA	rev	Rev TV
+AU	dwnews	DW News
+US	miramaxmovie	Miramax Movie Channel
+US	lifetimemovieslovedrama	Lifetime Movies Love & Drama
+US	nbclxhome	NBC LX Home
+US	starzencorewesternswest	Starz Encore Westerns West
+US	plutowesterns	Pluto TV Westerns
+US	plutoreality	Pluto TV Reality
+US	plutoclassicfamilies	Pluto TV Classic TV Families
+US	plutoclassicmoviewesterns	Pluto TV Classic Movie Westerns
+US	xtremeoutdoorbyhistory	Xtreme Outdoor by History
+US	musicchoicemax	Music Choice Max
+CA	qelloconcertsbystingray	Qello Concerts by Stingray
+US	lovenature	Love Nature
+US	vicewest	Vice TV West
+US	nationalgeographicwest	National Geographic West
+UK	skysportsgolf	Sky Sports Golf
+UK	bbcnews	BBC News
+US	greatamericanfaithliving	Great American Faith & Living
+US	alwaysfunny	Always Funny
+US	xite90sthrowback	XITE 90s Throwback
+US	stingrayhotcountry	Stingray Hot Country
+US	stingrayclassicrock	Stingray Classic Rock
+US	stingrayremember80s	Stingray Remember the 80s
+US	maverickblackcinema	Maverick Black Cinema
+US	classiccarauctionsbyhistory	Classic Car Auctions by History
+US	nasaplus	NASA+
+US	whatstea	What's the Tea
+US	justin	Just In
+US	eastenders	EastEnders
+US	foodxp	FoodXP
+US	chrishansenstrublu	Chris Hansen's TruBlu
+US	aboutkcontentbycjenm	About K Content by CJ ENM
+US	chrishansenstrublucrime	Chris Hansen's TruBlu Crime Network
+US	trublucrime	TruBlu Crime Channel

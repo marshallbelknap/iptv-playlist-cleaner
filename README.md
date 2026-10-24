@@ -29,6 +29,18 @@ fill in the provider links and token, Build. To update later: Project > iptv-cle
   from `data/us_stations.tsv` (every US station on Wikipedia: market, network, subchannels, branded channel number,
   logo) and `data/ca_stations.tsv`. Branded names ('ABC7 Chicago', 'KIRO 7 Seattle', 'Boston 25') are recognised
   as locals too. A subchannel shows its own number, e.g. `US: Asheville - MyNetworkTV - WLOS - 13.2`.
+  One station has one name everywhere: its own market from the table, whatever city the provider wrote
+  (`CA: Calgary - Citytv - CKAL - 5`, never "Alberta" for one copy and "Calgary" for another). Where two states
+  have a market with the same name the state is added (`US: Portland, ME` / `US: Portland, OR`,
+  `US: Lafayette, IN` / `US: Lafayette, LA`). When the provider's own guide id names the station (`FOX 29` with
+  `WFLX.us`, `CTV 2` with `CTV2 Vancouver Island`) that station is used.
+- Everything local sits in `<Country> | Locals`, area first: stations' own 24/7 news streams
+  (`US: Boston - CBS News Boston`, `US: Denver - ABC 7 Denver News`, `US: New York - FOX 5 Local New York`, one name
+  per station whichever service carries it, never the broadcast channel's guide), regional cable news
+  (`US: Brooklyn - News 12 Brooklyn`, `US: Albany, NY - Spectrum News 1 Albany`, `US: Boston - Spectrum News NECN`),
+  the city editions of WeatherNation and Local Now, community/government channels (`US: Washington DC - DC Council
+  Channel`, `CA: Hamilton - Cable 14`) and the national network feeds (`US: ABC`, `US: FOX West`, `CA: CBC`).
+  A station the provider names without saying which one stays as it is (`US: FOX 15`) rather than being guessed.
 - Channels go to their home country (`origin.py`, using iptv-org's channel database): CNN or WGN in a Canada
   group become US channels, BBC News in an Australia group a UK one, RTE in a UK group an Irish one. A channel
   stays where it is when that country has its own version (HGTV Canada, Adult Swim Canada). US stations carried in
@@ -40,6 +52,10 @@ fill in the provider links and token, Build. To update later: Project > iptv-cle
   `Investigation Discovery`, `Showtime` / `Paramount+ with Showtime`, old regional sports network names) and
   `data/channel_names.tsv` holds the official name where one is known; otherwise the spelling most copies use wins.
   The quality suffix (4K/FHD/HD/SD), West feeds and +1 channels stay separate, since those are different streams.
+  Renamed or replaced channels use their current name (iptv-org `replaced_by`, checked by hand: Sky Sports Arena
+  -> Sky Sports+, NECN -> Spectrum News NECN, NASA TV -> NASA+, Great American Living -> Great American Faith &
+  Living, Apple TV+ -> Apple TV). `data/channel_categories.tsv` pins the group of channels providers file under the
+  wrong category (MSG and NBCSN are sport, CP24 is news).
 - Event start times are written one way, in Eastern time, at the end of the name: `(Oct 10 7:30 PM ET)`
   (`eventtime.py` reads 'Saturday, 10 October 2026 15:00', 'Sun 11 Oct 18:30 EDT', '1pm', '11-10-2026 - 20:00
   (GMT)' and other provider formats). Matchups read `A vs B`.
@@ -75,7 +91,8 @@ The server builds one guide for all playlists at `http://<machine-ip>:8765/<ACCE
 
 ## Files
 - rules.py / classify.py / process.py – naming, language and grouping rules (edit these to tweak)
-- canon.py – one identity and one name per channel (with data/channel_aliases.tsv, data/channel_names.tsv)
+- canon.py – one identity and one name per channel (with data/channel_aliases.tsv, data/channel_names.tsv,
+  data/channel_categories.tsv)
 - eventtime.py – event start times in one format
 - epgmap.py – guide-id matching (aliases at the top)
 - guide.py – builds the combined guide

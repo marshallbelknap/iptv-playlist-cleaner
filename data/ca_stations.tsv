@@ -1,4 +1,7 @@
-# network	city	call sign	channel   (major Canadian stations; used to complete "CA: City - Network - Call - Number")
+# network	city	call sign	channel	[alias]
+# One row per station (its city of licence and network) - that is the name every copy of the station gets:
+# "CA: City - Network - Call - Number". Rows marked 'alias' are other place names providers use for the same
+# station ('CTV Atlantic', 'Global BC'); they only help find the station and never change its name.
 CTV	Toronto	CFTO	9
 CTV	Montreal	CFCF	12
 CTV	Ottawa	CJOH	13
@@ -20,15 +23,11 @@ CTV	Sault Ste. Marie	CHBX	2
 CTV	Prince Albert	CIPA	9
 CTV	Yorkton	CICC	10
 CTV	Lethbridge	CFCN-5	13
-CTV	Barrie	CKVR	3
 CTV2	Barrie	CKVR	3
 CTV2	Windsor	CHWI	16
-CTV	Windsor	CHWI	16
 CTV2	London	CFPL	10
 CTV2	Ottawa	CHRO	43
-CTV2	Vancouver Island	CIVI	53
 CTV2	Victoria	CIVI	53
-CTV2	Atlantic	CJCH	5
 CBC	Toronto	CBLT	5
 CBC	Montreal	CBMT	6
 CBC	Ottawa	CBOT	4
@@ -46,39 +45,47 @@ CBC	Yellowknife	CFYK	8
 Global	Toronto	CIII	41
 Global	Montreal	CKMI	46
 Global	Vancouver	CHAN	8
-Global	BC	CHAN	8
 Global	Calgary	CICT	2
 Global	Edmonton	CITV	13
 Global	Winnipeg	CKND	9
 Global	Regina	CFRE	11
 Global	Saskatoon	CFSK	4
 Global	Halifax	CIHF	8
-Global	Maritimes	CIHF	8
-Global	Okanagan	CHBC	2
+Global	Kelowna	CHBC	2
 Global	Lethbridge	CISA	7
 Global	Peterborough	CHEX	12
+Global	Oshawa	CHEX-2	22
 Global	Kingston	CKWS	11
-Global	Ontario	CIII	41
 Citytv	Toronto	CITY	57
 Citytv	Montreal	CJNT	62
 Citytv	Vancouver	CKVU	10
 Citytv	Calgary	CKAL	5
 Citytv	Edmonton	CKEM	51
 Citytv	Winnipeg	CHMI	13
-Citytv	Saskatchewan	CHSS	4
 Omni	Toronto	CFMT	47
 Omni	Vancouver	CHNM	42
 Omni	Calgary	CJCO	38
 Omni	Edmonton	CJEO	56
 CHCH	Hamilton	CHCH	11
 CHEK	Victoria	CHEK	6
-CHEK	Vancouver Island	CHEK	6
 NTV	St. John's	CJON	9
-CTV2	Toronto	CKVR	3
-NTV	Newfoundland	CJON	9
-Global	BC	CHAN	8
-CTV	Atlantic	CJCH	5
-CTV2	Halifax	CJCH	5
-CTV2	Vancouver	CIVI	53
-CTV2	Alberta	CKAL	5
-CTV	Red Deer	CFRN	3
+Yes TV	Hamilton	CITS	14
+CTV2	Vancouver Island	CIVI	53	alias
+CTV2	Vancouver	CIVI	53	alias
+CTV2	Toronto	CKVR	3	alias
+CTV	Red Deer	CFRN	3	alias
+CTV	Atlantic	CJCH	5	alias
+CTV	Nova Scotia	CJCH	5	alias
+Global	BC	CHAN	8	alias
+Global	Maritimes	CIHF	8	alias
+Global	Ontario	CIII	41	alias
+Global	Okanagan	CHBC	2	alias
+Global	Durham	CHEX-2	22	alias
+CHEK	Vancouver Island	CHEK	6	alias
+NTV	Newfoundland	CJON	9	alias
+NTV	Saint John's	CJON	9	alias
+CBC	Yellowknife North	CFYK	8	alias
+CBC	North	CFYK	8	alias
+Yes TV	Burlington	CITS	14	alias
+Yes TV	Toronto	CITS	14	alias
+Citytv	Kamloops	CFJC	4

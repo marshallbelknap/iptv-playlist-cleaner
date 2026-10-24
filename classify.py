@@ -461,6 +461,9 @@ def parse_country_name(t, default_cc):
             tk = m2.group(1)
             if tk.upper() in FOREIGN_CC or tk in ('Latin', 'Asian', 'Arabic', 'Polish', 'Taiwanese', 'Carib'):
                 info['foreign'] = tk
+            elif re.fullmatch(r'[KW][A-Z]{3}', tk) and tk not in SOURCE_TAGS and tk in known_calls() and \
+                    not re.search(r'Sport|Network|Channel|\bTV\b|News', t[m2.end():], re.I):
+                pass                                  # 'US (KMWE) Minnesota': a station's call sign, keep it
             elif tk in SOURCE_TAGS or re.fullmatch(r'[A-Z0-9]{1,4}', tk) or tk in ('Faith',):
                 t = t[m2.end():]
         # "IN (TO) ...", "AR ...", foreign word prefixes in US Entertainment
@@ -607,8 +610,15 @@ def parse_local(name, loose=False):
     return {'net': net, 'num': num, 'call': call, 'sub': sub, 'city': city}
 
 
+US_CITY_STATE = {}          # call -> 'Portland, ME' where the market name alone is ambiguous (filled by process)
+
+
 def format_local(cc, city=None, net=None, call=None, num=None):
     """'US: Boston - NBC - WBTS - 10'. Missing parts are left out."""
+    if cc == 'US' and call and city:
+        full = US_CITY_STATE.get(call.split('-')[0])
+        if full and full.split(',')[0] == city:
+            city = full                          # 'Portland' -> 'Portland, ME' (Portland, OR is another market)
     return f'{cc}: ' + ' - '.join(p for p in (city, net, call, num) if p)
 
 
@@ -622,7 +632,7 @@ def clean_city(city):
     """'UTAH 16 Salt Lake City' -> 'Salt Lake City'; 'PHL17 Philadelphia' -> 'Philadelphia'; '30 Memphis' -> 'Memphis'."""
     if not city:
         return None
-    city = re.sub(r'[?*#+]+', ' ', city).replace('Hanolulu', 'Honolulu').replace('Bismark', 'Bismarck')
+    city = re.sub(r'[?*#+]+', ' ', city).replace('Hanolulu', 'Honolulu').replace('Bismark', 'Bismarck').replace('Aplena', 'Alpena').replace('APLENA', 'ALPENA')
     words = [w for w in re.split(r'\s+', city.strip(' -/,')) if w]
     words = [w for w in words if not re.search(r'\d', w)
              and not (re.fullmatch(r'[KW][A-Z]{2,3}', w) and w not in CITY_LIKE_CALLS)

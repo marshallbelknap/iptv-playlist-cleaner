@@ -124,6 +124,7 @@ def gen_id(prefix, r, used):
 
 CANON_KINDS = ('channel', 'league-channel')
 DEBUG_ROWS = []
+CA_LOCAL_NAME = re.compile(r'^(?P<city>.*?) - (?P<net>[^-]+?) - (?P<call>C[A-Z]{2,3}(?:-\d+)?) - (?P<num>[\d.]+)$')
 LOCAL_NAME = re.compile(r'^US: (?P<city>.*?) - (?P<net>[^-]+?) - (?P<call>[KW][A-Z]{2,3}(?:-[A-Z]{2}\d?)?) - (?P<num>[\d.]+)$')
 
 
@@ -145,6 +146,73 @@ def logo_name_fits(url, names):
     return False
 
 
+# provider misspellings of 24/7 titles (the official title on the right)
+TITLE_FIX = {'Arnold Schwarznegger': 'Arnold Schwarzenegger', 'Avata the Last Airbender': 'Avatar the Last Airbender',
+             'Dukes of Hazard': 'The Dukes of Hazzard', 'The Dog Whisperer with Caesar Millan': 'Dog Whisperer with Cesar Millan',
+             'Ful House': 'Full House', 'Gardians of the Galaxy': 'Guardians of the Galaxy', 'Hogans Heros': "Hogan's Heroes",
+             'Johny Test': 'Johnny Test', 'Law Order Criminal Inten': 'Law & Order: Criminal Intent',
+             'Law Order Criminal Intent': 'Law & Order: Criminal Intent', 'Liam Nesson': 'Liam Neeson',
+             'Lizard Licks Towing': 'Lizard Lick Towing', 'Samuel L. Jakson': 'Samuel L. Jackson',
+             'Samuel L Jackson': 'Samuel L. Jackson', 'The Six Millio Dollar Man': 'The Six Million Dollar Man',
+             'Six Million Dollar Man': 'The Six Million Dollar Man', 'Steven Segal': 'Steven Seagal',
+             'Sylvester Stallon': 'Sylvester Stallone', 'The Adams Family': 'The Addams Family',
+             'The Fresh Ptince of Bel Air': 'The Fresh Prince of Bel-Air', 'The Graha Norton Show': 'The Graham Norton Show',
+             'Ink Masters': 'Ink Master', 'James Bonds 007': 'James Bond 007', 'Nash Bridges Channe': 'Nash Bridges',
+             "F ck That's Delicious": "F*ck, That's Delicious", 'Fuck Thats Delicious': "F*ck, That's Delicious",
+             'Bojack Horseman': 'BoJack Horseman', 'Sex in the City': 'Sex and the City',
+             'The Heat of the Night': 'In the Heat of the Night', 'Love Hip Hop Miami': 'Love & Hip Hop Miami',
+             'Love and Hip Hop Atlanta': 'Love & Hip Hop Atlanta', 'Love and Hip Hop Hollywood': 'Love & Hip Hop Hollywood',
+             'Planet Earth 2': 'Planet Earth II', 'Mr Bean Animated': 'Mr Bean: The Animated Series',
+             'Mr Bean the Animated Series': 'Mr Bean: The Animated Series', 'Spongebob Squarepants Universe': 'SpongeBob Universe',
+             'GZ Curse of Oak Island': 'The Curse of Oak Island', 'Dick Van Dyke': 'The Dick Van Dyke Show',
+             'Texas Ranger': 'Walker, Texas Ranger', 'Walker Texas Ranger': 'Walker, Texas Ranger',
+             'The Teenage Witch': 'Sabrina the Teenage Witch', 'Love Boat 1976': 'The Love Boat', 'First 48': 'The First 48',
+             'The Steve Harvey': 'The Steve Harvey Show', 'Three Stooges': 'The Three Stooges',
+             'When They See US': 'When They See Us', 'FBI Most Wanted S01': 'FBI: Most Wanted S01',
+             'Ginny & Georgia': 'Ginny and Georgia', 'Rupaul\'s Drag Race 0': "RuPaul's Drag Race",
+             'Rupaul\'s Drag Race': "RuPaul's Drag Race", 'Happy Ending': 'Happy Endings',
+             'Bj and the Bear': 'B.J. and the Bear', "Dc's Legends of Tomorrow": "DC's Legends of Tomorrow",
+             'Dcc: Making the Team': 'DCC: Making the Team', 'Seaquest Dsv': 'SeaQuest DSV', 'Tacoma Fd': 'Tacoma FD',
+             'Gcb': 'GCB', 'Jcvd': 'JCVD', 'Jfk: One Day in America': 'JFK: One Day in America',
+             'Jj Villards Fairy Tales': "JJ Villard's Fairy Tales", 'My 600 Lb Life': 'My 600-lb Life',
+             'Dream Corp Llc': 'Dream Corp LLC', 'Homicide Hunter Lt Joe Kenda': 'Homicide Hunter: Lt. Joe Kenda',
+             'Perpetual Grace Ltd': 'Perpetual Grace, LTD', 'Pj Masks': 'PJ Masks', 'The Pjs': 'The PJs',
+             'The Hard Times of Rj Berger': 'The Hard Times of RJ Berger', 'Ss GB': 'SS-GB', 'Ms Marvel': 'Ms. Marvel',
+             'Dr Ken': 'Dr. Ken', 'Dr Strange': 'Doctor Strange', 'Robert Downey Jr': 'Robert Downey Jr.',
+             'Car 54, Where Are You': 'Car 54, Where Are You?', 'Car 54, Where Are You!': 'Car 54, Where Are You?',
+             'The Office Au': 'The Office (AU)', 'The Office AU': 'The Office (AU)', 'Magnum P.I (1980)': 'Magnum, P.I.',
+             'Magnum, P.I. (1980)': 'Magnum, P.I.', 'Magnum Pi': 'Magnum, P.I.', 'Magnum P.I.': 'Magnum, P.I.',
+             'Live PD Greatest Shifts': 'Live PD: Greatest Shifts',
+             'National Treasure Edge of History': 'National Treasure: Edge of History',
+             'Tony Robinsons History of Britain': "Tony Robinson's History of Britain"}
+
+
+def tidy_247(t, group=''):
+    """One spelling per 24/7 title: no provider prefixes ('Cm Netflix 1'), no 'by A&E' tails, no typos;
+    actor channels without 'Movies' / 'Collection' ('Vin Diesel Movies' = 'Vin Diesel')."""
+    t = re.sub(r'^(?:Cm|GZ)\s+(?=[A-Z])|^C\s+(?=Hollywood\b)', '', t)
+    t = re.sub(r'\s+by\s+(?:A&E|Lifetime|History|Lionsgate|Mech\+|AMC|VideoElephant|FilmRise)$', '', t)
+    t = re.sub(r'\+$', '', t).strip()
+    t = re.sub(r"^Its\b", "It's", t)
+    t = re.sub(r'\bTv\+', 'TV+', t)                       # 'Apple Tv+ Series 1'
+    t = re.sub(r',\s*us\|\s*', ', ', t, flags=re.I)          # 'Car 54,us| Where Are You'
+    t = re.sub(r'(?<=\w) And (?=\w)', ' and ', t)          # 'Only Fools And Horses'
+    t = re.sub(r'\b(Disney|Paramount|Discovery|Peacock|ESPN)\s*Plus\b', r'\1+', t)   # 'Disney Plus 1' -> 'Disney+ 1'
+    t = re.sub(r'\bApple TV(?: ?Plus|\+)', 'Apple TV', t)  # Apple TV+ has been called Apple TV since October 2025
+    t = re.sub(r'\+(?=[A-Za-z])', '+ ', t)                 # 'Disney+pixar' -> 'Disney+ Pixar'
+    t = re.sub(r'\+ ([a-z])', lambda m: '+ ' + m.group(1).upper(), t)
+    t = re.sub(r'\bPrime Video Serie\b', 'Prime Video Series', t)
+    t = re.sub(r'\bSci-fi\b', 'Sci-Fi', t)
+    t = re.sub(r'^(?:A&E|MTV|BBC|Pluto TV)\s+(?=(?:Alaska State Troopers|Live PD|Geordie Shore|Jersey Shore|'
+               r'Ridiculousness|Antiques Roadshow|Top Gear|Sherlock)\b)', '', t)   # the network is not the show's name
+    t = re.sub(r'\bIn Paris\b', 'in Paris', t)
+    if group.endswith('Actors & Directors'):
+        t = re.sub(r'\s+(?:Movies?|Collection|Films?)$', '', t)
+    m = re.match(r'^(.*?)(\s+S\d\d)?$', t)
+    title, season = m.group(1), m.group(2) or ''
+    return TITLE_FIX.get(title, title) + season
+
+
 def canonicalize(recs, namer):
     """Every copy of a channel gets the same name: 'US: FOX News Channel HD' / 'US: Fox News (FNC)' ->
     'US: FOX News HD' / 'US: FOX News'. Quality (4K/FHD/HD/SD) stays, since those are different streams."""
@@ -161,7 +229,10 @@ def canonicalize(recs, namer):
                 namer.vote_group(key, r['group'])
         elif r['kind'] == '247':                  # '24/7 The Matrix' / '24/7 Matrix', "24/7 Bob's Burgers" / '24/7 Bobs Burgers'
             _cc, base, q = split_name(r['name'])
-            base = re.sub(r'^24/7\s+', '', base)
+            raw247 = re.sub(r'^24/7\s+', '', base)
+            base = tidy_247(raw247, r.get('group') or '')
+            if not r.get('lookup') and raw247 != base:
+                r['lookup'] = raw247              # 'Storage Wars by A&E' is the name the free services use
             key = namer.add('247', base)
             r['ident'] = key
             todo.append((r, '247', q))
@@ -188,6 +259,21 @@ def canonicalize(recs, namer):
             if m:
                 by_station[(m['call'].split('-')[0], m['num'])][base] += 1
     best = {k: max(v.items(), key=lambda kv: (kv[1], len(kv[0])))[0] for k, v in by_station.items()}
+    # Canadian stations: one name per call sign (the station table gives every copy the station's own city)
+    ca_names = defaultdict(Counter)
+    for r in recs:
+        if not r['drop'] and r['kind'] == 'ca-local':
+            m = CA_LOCAL_NAME.match(split_name(r['name'])[1])
+            if m:
+                ca_names[m['call']][split_name(r['name'])[1]] += 1
+    for r in recs:
+        if not r['drop'] and r['kind'] == 'ca-local':
+            cc, base, q = split_name(r['name'])
+            m = CA_LOCAL_NAME.match(base)
+            if m:
+                r['ident'] = ('CALOCAL', m['call'])
+                top = max(ca_names[m['call']].items(), key=lambda kv: (kv[1], kv[0]))[0]
+                r['name'] = 'CA: ' + top + (f' {q}' if q else '')
     for r in recs:
         if not r['drop'] and r['kind'] == 'local':
             cc, base, q = split_name(r['name'])
@@ -218,7 +304,7 @@ def cc_of(r):
 
 def lookup_names(r, namer):
     """Names to look a channel up under: its display name, then every other spelling copies used."""
-    out = [clean_for_lookup(r.get('lookup') or r['name'])]
+    out = [clean_for_lookup(r.get('lookup') or r['name'])] + [clean_for_lookup(x) for x in r.get('lookups') or []]
     if r['kind'] == '247':                        # '24/7 Star Trek' -> 'Star Trek' (FAST services have many of these)
         t = re.sub(r'^24/7\s+', '', clean_for_lookup(r['name']))
         out = [t, r.get('lookup')] if r.get('lookup') else [t]
@@ -226,6 +312,9 @@ def lookup_names(r, namer):
         parts = re.sub(r' (4K|FHD|HD|SD)$', '', r['name'][4:]).split(' - ')
         if len(parts) >= 2:
             out = [f'{parts[1]} {parts[0]}'] + ([parts[2]] if len(parts) >= 3 else []) + out
+            if len(parts) >= 3:                   # other names guides use for the station: 'Global Maritimes'
+                from process import CA_STATIONS
+                out += [f"{v['net']} {v['city']}" for v in CA_STATIONS.values() if v['call'] == parts[2]]
     if r.get('ident') and r['kind'] in CANON_KINDS:
         for v, _n in (namer.seen.get(r['ident'], Counter()) + namer.other.get(r['ident'], Counter())).most_common():
             out.append(v)
@@ -243,6 +332,11 @@ def local_call_sub(r):
         sub = num.split('.')[1] if '.' in num else '1'
         return call, ('1' if sub in ('', '1') else sub)
     return call, loc.get('sub')
+
+
+def BROADCAST_ID(gid):
+    """A local station's over-the-air channel guide ('KMGH-DT.us_locals1')."""
+    return bool(re.search(r'\.us_locals\d|^[KW][A-Z]{2,3}(-(?:TV|DT|LD|CD))?\.', gid.split(SHIFT_SEP)[0]))
 
 
 def guide_candidates(epg, cc, nm):
@@ -387,6 +481,8 @@ def main(src, out, report=None, gen_prefix='gen', name_tiles=False, cache_dir=No
             for c2 in ([cc, 'US'] if r0['kind'] == '247' and cc != 'US' else [cc]):
                 for nm in names:
                     cands = guide_candidates(epg, c2, nm)
+                    if r0.get('stream'):          # a station's news stream is not its broadcast channel
+                        cands = [c for c in cands if not BROADCAST_ID(c)]
                     if cands:
                         tvg_id, alts = cands[0], cands[1:]
                         break
@@ -397,16 +493,21 @@ def main(src, out, report=None, gen_prefix='gen', name_tiles=False, cache_dir=No
             ids = Counter(e['attrs'].get('tvg-id') for e, _ in members if e['attrs'].get('tvg-id') in epg.all_ids)
             for gid, _n in ids.most_common():
                 src = epg.source_of.get(gid)
+                if r0.get('stream') and BROADCAST_ID(gid):
+                    continue
                 if (src in SOURCES.get(cc, []) or src in ('US_LOCALS1', 'PBS')) and \
                         any(epg.trusted(gid, 'provider', nm, cc) for nm in names):
                     tvg_id = gid
                     break
-        pkey = f'{"" if r0["kind"] == "247" else cc}|{gk[1] if isinstance(gk, tuple) else gk}'
+        gpart = ('/'.join(map(str, gk[1:])) if len(gk) > 2 else gk[1]) if isinstance(gk, tuple) else gk
+        pkey = f'{"" if r0["kind"] == "247" else cc}|{gpart}'      # ('STREAM', 'other', 'KMGH') -> 'other/KMGH'
         if r0['kind'] != 'event':                 # the other playlist settled on a guide for this channel: same here
             prev = gpool.get(pkey)
             if prev and r0['kind'] not in ('local',) and not any(
                     epg.trusted(prev[0], 'pool', nm, cc) for nm in names):
                 prev = None                       # no longer looks like this channel: decide afresh
+            if prev and r0.get('stream') and BROADCAST_ID(prev[0]):
+                prev = None
             if prev and (not tvg_id or r0['kind'] == '247' or prev[0] in alts):
                 tvg_id, alts = prev[0], list(dict.fromkeys(prev[1:] + [x for x in [tvg_id] + alts if x and x != prev[0]]))
             if tvg_id:

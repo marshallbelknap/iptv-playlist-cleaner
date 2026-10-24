@@ -23,6 +23,16 @@ REGIONAL = {'sportsnet', 'tsn', 'cbc', 'ctv', 'global', 'citytv', 'omni', 'cp24'
 # trailing '(XYZ)' tags that only repeat the name or mark a backup: 'FOX Business (FBN)', 'TNT (BK)'
 TAIL_ABBR = re.compile(r'\s*\((?:[A-Z][A-Za-z0-9&+]{1,5}|[Bb][Kk]|ST|VCS|Backup|Alt|Event Only|event only)\)\s*$')
 JUNK = re.compile(r'\s*(\?\?+|[●◉★•○◆■]|\*+)\s*')
+# provider typos and leftovers that would otherwise become a second spelling of a channel
+TYPOS = [(re.compile(r'^Religious\s+(?=3abn|3ABN)', re.I), ''), (re.compile(r'^Puto TV\b'), 'Pluto TV'),
+         (re.compile(r'^erra Mater\b', re.I), 'Terra Mater'), (re.compile(r'\(St Loius\)'), ''),
+         (re.compile(r'\bMonterial\b'), 'Montreal'), (re.compile(r"\bIdea's\b"), 'Ideas'),
+         (re.compile(r'^Spectrum New 1\b'), 'Spectrum News 1'), (re.compile(r'\bCinemaxx More Maxx\b'), 'MoreMax'),
+         (re.compile(r'^BBC BBC\b'), 'BBC'), (re.compile(r'^TBN TBN\b'), 'TBN'),
+         (re.compile(r'\bNick\.JR\b', re.I), 'Nick Jr.'), (re.compile(r'\s*/\s*Peppa Pig$'), ''),
+         (re.compile(r"\\'96"), '-'), (re.compile(r'^Comedy Cent Xtra\b'), 'Comedy Central Extra'),
+         (re.compile(r'^Crime Inv\b(?!estigation)'), 'Crime & Investigation'),
+         (re.compile(r'\bAnimal Plnt\b'), 'Animal Planet'), (re.compile(r'^Set Sports\b'), 'Sky Sports')]
 
 
 def _ascii(s):
@@ -45,12 +55,22 @@ def _load_table(name):
 
 ALIASES = _load_table('channel_aliases.tsv')      # (cc, key) -> canonical key
 NAMES = _load_table('channel_names.tsv')          # (cc, canonical key) -> official display name
+CATEGORY = _load_table('channel_categories.tsv')  # (cc, canonical key) -> 'Sports' / 'Movies' / ...
+
+
+def group_key(k):
+    """('US', 'hbowest') -> ('US', 'hbo'): a channel's West, Pacific and +1 feeds sit in its group."""
+    cc, key = k
+    base = re.sub(r'(?<=.{3})(west|pacific|plus1)$', '', key)
+    return (cc, ALIASES.get((cc, base)) or base)
 
 
 def clean(name):
     """Tidy a name without changing which channel it is: stray marks, unbalanced brackets, backup tags,
     abbreviations repeated in brackets ('Game Show Network (GSN)', 'The Movie Channel (TMC) East')."""
     n = JUNK.sub(' ', name)
+    for rx, rp in TYPOS:
+        n = rx.sub(rp, n)
     n = re.sub(r'\(\s*(East|West|Pacific)\s*$', r'\1', n)          # 'Paramount+ With Showtime (East'
     n = re.sub(r'[,;/]+\s*$', '', n)                                # 'fyi,', 'NESN /'
     n = re.sub(r"\b(\d0)'(?=\s|$)", r'\1s', n)                       # "Hollywood Suite 70'" 
@@ -176,7 +196,33 @@ DISPLAY_FIX = [(re.compile(r'^Music Choice:\s+'), 'Music Choice '),
                (re.compile(r"'(\d0)'?s\b"), r'\1s'),            # "'70's" / "'90s" -> '70s' / '90s'
                (re.compile(r"\b(\d0)'s\b"), r'\1s'),
                (re.compile(r'\s+-\s+(?=\()'), ' '),               # 'Spectrum News 1 - (Kentucky)'
-               (re.compile(r'\(\s+|\s+\)'), lambda m: m.group(0).strip())]
+               (re.compile(r'(?<=\w)\s+:\s+'), ': '),               # 'The Gaming Central : League of Legends'
+               (re.compile(r'\(\s+|\s+\)'), lambda m: m.group(0).strip()),
+               (re.compile(r'^ITV 1\b'), 'ITV1'),
+               (re.compile(r'^ITV \+1 (.+)$'), r'ITV1 \1 +1'),             # 'ITV +1 Granada' -> 'ITV1 Granada +1'
+               (re.compile(r'^ITV (?=(?:Anglia|Border|Central|Granada|Meridian|Tyne Tees|Wales|West Country|Yorkshire|'
+                           r'Channel Islands|London)\b)'), 'ITV1 '),
+               (re.compile(r'(?<!\+)\s*\+1$'), ' +1'),                      # 'E4+1' / 'E4 +1' -> 'E4 +1' (not 'ESPN+ 1')
+               (re.compile(r'^(.+?) \+1 (.+)$'), r'\1 \2 +1'),
+               (re.compile(r"\b[A-Z][a-z]+\b"), lambda m: TOKEN_CASE.get(m.group(0), m.group(0))),
+               (re.compile(r'\b(?:WE|We) ?TV\b|\bWEtv\b|\bWeTV\b'), 'WE tv')]
+# brand capitals a title-cased provider name loses ('Afv Family' -> 'AFV Family', 'Xite Hits' -> 'XITE Hits')
+TOKEN_CASE = {'Afv': 'AFV', 'Allblk': 'ALLBLK', 'Amg': 'AMG', 'Awe': 'AWE', 'Bek': 'BEK', 'Awsn': 'AWSN',
+              'Xite': 'XITE', 'Mgm': 'MGM', 'Edm': 'EDM', 'Pd': 'PD', 'Oln': 'OLN', 'Aaa': 'AAA', 'Hidive': 'HIDIVE',
+              'Lego': 'LEGO', 'Rvtv': 'RVTV', 'Tvoai': 'TVOAI', 'Twn': 'TWN', 'Mhz': 'MHz', 'Bnp': 'BNP',
+              'Fifa': 'FIFA', 'Nxt': 'NXT', 'Hbcu': 'HBCU', 'Pll': 'PLL', 'Tmz': 'TMZ', 'Tyt': 'TYT', 'Ntd': 'NTD',
+              'Cgtn': 'CGTN', 'Ndtv': 'NDTV', 'Crmz': 'CRMZ', 'Rtl': 'RTL', 'Ufc': 'UFC', 'Wwe': 'WWE', 'Aew': 'AEW',
+              'Pga': 'PGA', 'Nhra': 'NHRA', 'Pbr': 'PBR', 'Lpga': 'LPGA', 'Atp': 'ATP', 'Wta': 'WTA', 'Mls': 'MLS',
+              'Nfl': 'NFL', 'Nba': 'NBA', 'Nhl': 'NHL', 'Mlb': 'MLB', 'Espn': 'ESPN', 'Hbo': 'HBO', 'Bbc': 'BBC',
+              'Itv': 'ITV', 'Cnn': 'CNN', 'Cnbc': 'CNBC', 'Msnbc': 'MSNBC', 'Abc': 'ABC', 'Cbs': 'CBS', 'Nbc': 'NBC',
+              'Pbs': 'PBS', 'Bet': 'BET', 'Cmt': 'CMT', 'Mtv': 'MTV', 'Tbn': 'TBN', 'Ewtn': 'EWTN', 'Tlc': 'TLC',
+              'Amc': 'AMC', 'Ifc': 'IFC', 'Tcm': 'TCM', 'Gsn': 'GSN', 'Hgtv': 'HGTV', 'Cbc': 'CBC', 'Ctv': 'CTV',
+              'Tsn': 'TSN', 'Rds': 'RDS', 'Rte': 'RTE', 'Fxx': 'FXX', 'Fxm': 'FXM', 'Wfn': 'WFN', 'Vsin': 'VSiN',
+              'Dtour': 'DTour', 'Djazz': 'DJAZZ', 'Hollywire': 'HollyWire', 'Floracing': 'FloRacing',
+              'Shortstv': 'ShortsTV', 'Talksport': 'talkSPORT', 'Mavtv': 'MAVTV', 'Speedvision': 'SPEEDVISION',
+              'Fm': 'FM', 'Wm': 'WM', 'Dj': 'DJ', 'Mx': 'MX', 'Mtm': 'MTM', 'Pmc': 'PMC', 'Nbt': 'NBT', 'Ptvn': 'PTVN',
+              'Prc': 'PRC', 'Gv': 'GV', 'Tci': 'TCI', 'Enm': 'ENM', 'Chrgd': 'CHRGD', 'Yrf': 'YRF', 'Vvs': 'VVS',
+              'Trublu': 'TruBlu', 'Foodxp': 'FoodXP', 'Eastenders': 'EastEnders', 'Ntv': 'NTV', 'Au': 'AU', 'Uk': 'UK'}
 
 
 def tidy_display(s):
@@ -242,12 +288,15 @@ class Namer:
         return k
 
     def vote_group(self, k, group):
-        self.my_groups[k][group] += 1
+        self.my_groups[group_key(k)][group] += 1
 
     def group(self, k):
         """The group most copies of this channel are in (a channel sits in one group, not 'News' here and
-        'Sports' there); a specific category beats General when the votes tie."""
-        votes = Counter(self.my_groups.get(k, {})) + self.groups.get(k, Counter())
+        'Sports' there; its West and +1 feeds with it); a specific category beats General when the votes tie."""
+        gk = group_key(k)
+        if gk in CATEGORY:                            # hand-checked: 'MLS on Apple TV' is sport, not General
+            return f'{k[0]} | {CATEGORY[gk]}'
+        votes = Counter(self.my_groups.get(gk, {})) + self.groups.get(gk, Counter())
         if not votes:
             return None
         return max(votes.items(), key=lambda kv: (kv[1], not kv[0].endswith('General'), kv[0]))[0]

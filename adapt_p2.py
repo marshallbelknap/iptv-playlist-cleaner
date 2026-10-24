@@ -226,6 +226,10 @@ def adapt_entry(e):
         lb = LOCAL_B.match(t)
         if lb:
             t = f"{lb.group('net')} {lb.group('city').title()} ({lb.group('call')})"
+        lv = re.match(r"^(?P<city>[A-Z][A-Z .'/-]+?), (?P<st>[A-Z]{2})\s+(?P<net>ABC|CBS|NBC|FOX|PBS|CW)\s+(?P<num>\d+)\s+"
+                      r"\(VIRTUAL\)", t)
+        if lv:                         # 'WHEELING, WV PBS 65 (VIRTUAL) CLEVELAND': the last word is the relay, not the city
+            t = f"{lv.group('net')} {lv.group('num')} {lv.group('city').title()} {lv.group('st')}"
     # 'SIOUX FALLS SD (KSFY)' -> drop the state code so it isn't read as a quality tag
     t = re.sub(r'\s+(?:' + '|'.join(US_STATE_CODES) + r')\s+(?=\([KW][A-Z]{2,3}(?:-[A-Z0-9]+)?\))', ' ', t)
     if src == 'P2 Intl Music':

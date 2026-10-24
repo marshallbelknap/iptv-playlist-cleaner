@@ -75,7 +75,7 @@ KAXX	San Antonio		42			Texas
 KAYU	Spokane	FOX	28	MyNetworkTV=28.2;FOX=28.1;Antenna TV/MyTV=28.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/KAYU_Fox_28_2015.svg/960px-KAYU_Fox_28_2015.svg.png 675x160	Washington (state)	Coeur d'Alene
 KAZA	Los Angeles	MeTV	54	MeTV=54.1	https://upload.wikimedia.org/wikipedia/commons/3/38/Me-TV_Hollywood.png 350x153	California	Avalon
 KAZD	Dallas	WEST	55	WEST=55.1;MeTV=55.2	https://upload.wikimedia.org/wikipedia/commons/5/55/West_dallas_Logo.png 814x351	Texas	Fort Worth|Lake Dallas
-KAZF							
+KAZF	Flagstaff	Independent	32		https://upload.wikimedia.org/wikipedia/en/8/82/Arizona%27s_Family_Sports_Logo.jpg	Arizona	
 KAZH	Harlingen		57			Texas	Brownsville|McAllen
 KAZQ	Albuquerque	Independent	32	Non-commercial religious independent=32.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/AO%2BWebsite%2BBanner%2BGradiant-1440w.webp/960px-AO%2BWebsite%2BBanner%2BGradiant-1440w.webp 1042x250	New Mexico	Santa Fe
 KAZT	Phoenix	CW	7	Independent=7.2;CW=7.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/KAZT_2024.svg/960px-KAZT_2024.svg.png 1459x634	Arizona	
@@ -87,7 +87,6 @@ KBCB	Bellingham	TCT	24	TCT=24.1		Washington (state)	Seattle|Tacoma|Vancouver
 KBCW	San Francisco	CW	44				
 KBDH	Bend		29			Oregon	
 KBDI	Denver	PBS	12	PBS=12.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/KBDI-TV_%282020%29.svg/960px-KBDI-TV_%282020%29.svg.png 198x59	Colorado	Broomfield
-KBEH							
 KBEO	Jackson		11				
 KBFD	Honolulu	Independent	32	Independent=32.1;KBS World=32.2	https://upload.wikimedia.org/wikipedia/commons/f/fe/KBFD_logo.png 220x62	Hawaii	
 KBFK	Bakersfield		34			California	
@@ -100,7 +99,7 @@ KBGU	St. Louis		33			Missouri
 KBHE	Rapid City	PBS	9			South Dakota	
 KBID	Fresno	Al Jazeera English	31			California	
 KBIM	Roswell	CBS	10	FOX=10.2;Independent=10.2	https://upload.wikimedia.org/wikipedia/en/1/1d/KBIM-TV_News_10_logo.png 210x209	New Mexico	Carlsbad
-KBIN		PBS	32			Iowa	Omaha
+KBIN	Council Bluffs	PBS	32			Iowa	Omaha
 KBIS	Sacramento		38			California	
 KBIT	Monterey	Diya TV	24			California	Salinas
 KBJE	Tyler		29			Texas	Kilgore-Longview
@@ -123,7 +122,7 @@ KBOI	Boise	CBS	2	CW=2.2;CBS=2.1;CW+=2.2;Charge!=2.3	https://thumb.wikimedia.org/
 KBOP	Dallas		20			Texas	Fort Worth
 KBPX	Houston	Vida Vision	46			Texas	
 KBRO	Denver		34			Colorado	
-KBRR		FOX	10			Minnesota	Grand Forks
+KBRR	Thief River Falls	FOX	10			Minnesota	Grand Forks
 KBSD	Garden City	CBS	6	CBS=6.1		Kansas	Dodge City|Ensign
 KBSE	Boise	Jewelry Television	33.3			Idaho	
 KBSH	Hays	CBS	7	CBS=7.1		Kansas	Great Bend
@@ -160,7 +159,7 @@ KCCW	Bemidji	CBS	12			Minnesota	Walker
 KCCX	Corpus Christi		24			Texas	
 KCDN	Kansas City	Daystar	43			Missouri	
 KCDO	Denver	Independent	3	Independent=3.1;ABC=7.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/KCDO_The_Spot_-_Denver_3_%282025%29.svg/960px-KCDO_The_Spot_-_Denver_3_%282025%29.svg.png 1000x613	Colorado	Sterling
-KCDT		PBS	26			Idaho	Spokane
+KCDT	Coeur d'Alene	PBS	26			Idaho	Spokane
 KCEB	Tyler	Fubo Sports Network	54	Fubo Sports Network=54.1;Outlaw=54.2		Texas	Kilgore-Longview|Longview
 KCEC	Denver	Univision	14	Univision=14.1	https://upload.wikimedia.org/wikipedia/en/4/41/Univision_Colorado_logo.png 354x272	Colorado	Boulder
 KCEI	Taos		18			New Mexico	
@@ -169,7 +168,7 @@ KCET	Los Angeles	PBS	28	PBS=28.1	https://thumb.wikimedia.org/wikipedia/commons/t
 KCFG	Flagstaff		9				
 KCFT	Anchorage	Independent	35	Independent=35.1	https://upload.wikimedia.org/wikipedia/commons/1/1d/KCFT_logo.png 200x120	Alaska	Concord
 KCFW	Kalispell	NBC	9			Montana	
-KCGE		PBS	16			Minnesota	Grand Forks
+KCGE	Crookston	PBS	16			Minnesota	Grand Forks
 KCHF	Albuquerque	Independent	11	Independent=11.1	https://upload.wikimedia.org/wikipedia/commons/2/2f/Kchf-tv-logo-color-2022.png 186x209	New Mexico	Santa Fe
 KCHY	Cheyenne	NBC	13				
 KCIB		Independent	5			Arkansas	Monroe
@@ -304,7 +303,6 @@ KENH	Little Rock		41			Arkansas
 KENS	San Antonio	CBS	5	Estrella TV=5.2;CBS=5.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/KENS_5_CBS_%28blue%29.svg/960px-KENS_5_CBS_%28blue%29.svg.png 990x242	Texas	
 KENV	Elko	Roar	10		https://upload.wikimedia.org/wikipedia/commons/1/1c/KENV-DT_2018_logo.jpg 167x161	Nevada	Salt Lake City
 KENW	Clovis	PBS	3	PBS=3.2	https://upload.wikimedia.org/wikipedia/en/7/7e/KENW.TV.Wiki2.png 651x150	New Mexico	Portales
-KENWDT2		PBS	3				
 KEOT	Abilene		31			Texas	
 KEPB	Eugene	PBS	28			Oregon	
 KEPR	Kennewick	CBS	19	CW=19.2;FOX=19.3;CBS=19.1;CW+=19.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/KEPR_%282021%29.svg/960px-KEPR_%282021%29.svg.png 512x168	Washington (state)	Pasco|Richland
@@ -314,7 +312,6 @@ KERO	Bakersfield	ABC	23	ABC=23.1	https://thumb.wikimedia.org/wikipedia/commons/t
 KESD	Sioux Falls	PBS	8			South Dakota	
 KESE	Yuma	Telemundo	3	Telemundo=35.1	https://upload.wikimedia.org/wikipedia/en/0/09/KESE_logo_2019.png 300x288	Arizona	El Centro
 KESQ	Palm Springs	ABC	3	CBS=42.2;CW=2.3;Telemundo=15.2;FOX=33.2;ABC=42.1;CW+=2.3	https://upload.wikimedia.org/wikipedia/commons/0/04/KESQ_ABC_3.png 256x256	California	
-KET		PBS					
 KETA	Oklahoma City	PBS	13			Oklahoma	
 KETC	St. Louis	PBS	9	PBS=9.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Nine_PBS.svg/960px-Nine_PBS.svg.png 920x200	Missouri	
 KETD	Denver	Estrella TV	53	Estrella TV=53.1	https://upload.wikimedia.org/wikipedia/commons/7/78/KETD_2020_Logo_%28cropped%29.webp 261x200	Colorado	Castle Rock
@@ -325,14 +322,13 @@ KETK	Tyler	NBC	56	NBC=56.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/c
 KETS	Little Rock	PBS	2			Arkansas	
 KETV	Omaha	ABC	7	ABC=7.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/KETV_logo.svg/960px-KETV_logo.svg.png 512x439	Nebraska	Council Bluffs
 KETX	Tyler						
-KETZ		PBS	12			Arkansas	Monroe
+KETZ	El Dorado	PBS	12			Arkansas	Monroe
 KEUS	San Angelo	Univision	41	Univision=41.1;LATV=41.2;AltaVision=41.88	https://upload.wikimedia.org/wikipedia/commons/4/47/KEUS31.png 278x272	Texas	
 KEUV	Eureka	Univision	35	Univision=35.1	https://upload.wikimedia.org/wikipedia/commons/1/19/Univision_Eureka_2019.webp 360x359	California	
 KEVA	Boise	Univision	34			Idaho	
 KEVC	Palm Springs	UniMás	5	UniMás=5.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/KEVC-CD_%282021%29.svg/960px-KEVC-CD_%282021%29.svg.png 914x361	California	Indio
 KEVN	Rapid City	FOX	7	ABC=3.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/KEVN-LD_logo_%282024%29.svg/960px-KEVN-LD_logo_%282024%29.svg.png 549x182	South Dakota	
 KEVU	Eugene	MyNetworkTV	23	Independent=23.1;Dabl=23.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/KEVU_My_Eugene_TV.webp/960px-KEVU_My_Eugene_TV.webp 986x782	Oregon	
-KEY							
 KEYC	Mankato	CBS	12	FOX=12.2;CBS=12.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/KEYC_wordmark_2024.svg/960px-KEYC_wordmark_2024.svg.png 501x141	Minnesota	St. James
 KEYE	Austin	CBS	42	Telemundo=42.2;CBS=42.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/CBS_Austin_logo_2016.svg/960px-CBS_Austin_logo_2016.svg.png 512x272	Texas	
 KEYT	San Luis Obispo	ABC	3	CBS=3.2;MyNetworkTV=3.3;Telemundo=3.5;ABC=3.1;Independent=3.3	https://upload.wikimedia.org/wikipedia/en/f/fa/3_ABC_KEYT.png 256x256	California	Santa Barbara|Santa Maria
@@ -462,7 +458,7 @@ KHFW	Dallas		35			Texas	Fort Worth
 KHGI	Grand Island	ABC	13	FOX=13.2		Nebraska	Hastings|Kearney|North Platte
 KHHI	Honolulu		48			Hawaii	
 KHII	Honolulu	MyNetworkTV	2	Independent=9.1;Rewind TV=9.2	https://upload.wikimedia.org/wikipedia/en/e/e3/KHII-TV_logo.png 450x200	Hawaii	
-KHIN		PBS	36			Iowa	Omaha
+KHIN	Red Oak	PBS	36			Iowa	Omaha
 KHIZ	Los Angeles		39			California	
 KHKR	Billings	MeTV	14			Montana	
 KHLM	Houston	CTN	12	CTN=12.1;CTN International=12.2	https://upload.wikimedia.org/wikipedia/commons/4/47/CTN_Houston_logo.png 926x644	Texas	
@@ -622,7 +618,7 @@ KLSR	Eugene	FOX	34	MyNetworkTV=34.2;FOX=34.1;Independent=34.2	https://thumb.wiki
 KLST	San Angelo	CBS	8	CBS=8.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/2021_KLST_logo.png/960px-2021_KLST_logo.png 2000x715	Texas	
 KLSV	Las Vegas		50			Nevada	
 KLTJ	Houston	Daystar	22	Daystar=22.1;Daystar Español=22.2;Daystar Reflections=22.3		Texas	Galveston
-KLTL	Lafayette	PBS	18			Louisiana	
+KLTL	Lake Charles	PBS	18			Louisiana	
 KLTM	Monroe	PBS	13			Louisiana	
 KLTS	Shreveport	PBS	24			Louisiana	
 KLTV	Tyler	ABC	7	Telemundo=7.3;ABC=7.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Kltv-logo.svg/960px-Kltv-logo.svg.png 512x221	Texas	Kilgore-Longview|Longview
@@ -659,7 +655,6 @@ KMEE	Kingman	MeTV	6	MeTV=40.1;MeTV+=40.2	https://thumb.wikimedia.org/wikipedia/c
 KMEG	Sioux City	Dabl	14	Roar=14.1		Iowa	
 KMEX	Los Angeles	Univision	34	Univision=34.1;UniMás=34.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/KMEX_Univision_34_2026.svg/960px-KMEX_Univision_34_2026.svg.png 512x76	California	
 KMGH	Denver	ABC	7	ABC=7.1;ION Mystery=7.2;Laff=7.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/KMGH_ABC_7_Denver.png/960px-KMGH_ABC_7_Denver.png 1000x643	Colorado	
-KMHB		FOX		FOX=67.1	https://upload.wikimedia.org/wikipedia/commons/f/f7/Fox_Rio_Grande_Valley_logo_2024.png 300x194		
 KMHC	Steamboat Springs	Independent	24	Outside TV=10.1		Colorado	
 KMID	Midland	ABC	2	ABC=2.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/KMID_%282022%2C_with_call_letters%29.svg/960px-KMID_%282022%2C_with_call_letters%29.svg.png 1025x793	Texas	Odessa
 KMIR	Palm Springs	NBC	36	NBC=36.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/KMIR-TV_NBC_Palm_Springs_2023.svg/960px-KMIR-TV_NBC_Palm_Springs_2023.svg.png 3024x1213	California	
@@ -741,7 +736,7 @@ KNPG	St. Joseph	NBC	21	CW=21.2;Telemundo=21.3;NBC=21.1	https://thumb.wikimedia.o
 KNPL	North Platte	CBS	10	CBS=10.1	https://upload.wikimedia.org/wikipedia/en/0/0e/KNPL-LD_10-11_North_Platte_logo.png 315x131	Nebraska	
 KNPN	St. Joseph	FOX	26	CBS=26.2;FOX=26.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/KNPN-CD.svg/960px-KNPN-CD.svg.png 568x926	Missouri	
 KNRC	Reno	3ABN	14			Nevada	
-KNRR		FOX	12			North Dakota	Winnipeg
+KNRR	Pembina	FOX	12			North Dakota	Winnipeg
 KNSD	San Diego	NBC	7	NBC=39.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/KNSD_%282023%29.svg/960px-KNSD_%282023%29.svg.png 1000x1183	California	
 KNSN	Reno	MyNetworkTV	21	Independent=21.1;The Nest=21.2;[Blank]=21.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/KNSN_NSN.svg/960px-KNSN_NSN.svg.png 1200x496	Nevada	
 KNSO	Fresno	Telemundo	51	TeleXitos=51.2;Telemundo=51.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/KNSO_2020.svg/960px-KNSO_2020.svg.png 512x506	California	Clovis
@@ -773,7 +768,7 @@ KOCY	Oklahoma City	Estrella TV	48			Oklahoma
 KODE	Joplin	ABC	12	ABC=12.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/KODE_12_2026.svg/960px-KODE_12_2026.svg.png 512x87	Missouri	Pittsburg
 KODF	Dallas		26			Texas	Fort Worth
 KOED	Tulsa	PBS	11			Oklahoma	
-KOET		PBS	3			Oklahoma	Fort Smith
+KOET	Eufaula	PBS	3			Oklahoma	Fort Smith
 KOFY	San Francisco	Merit TV	20	Estrella TV=20.1		California	Oakland|San Jose
 KOGG	Wailuku	NBC	13	Independent=13.2;CBS=13.3		Hawaii	
 KOHA	Omaha	Telemundo	2	News Channel Nebraska=27.2;Telemundo=27.1;NCN=27.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Telemundo_Nebraska_logo.png/960px-Telemundo_Nebraska_logo.png 1243x1214	Nebraska	
@@ -839,7 +834,7 @@ KPJC	San Francisco	News of the World	12			California
 KPJK	San Francisco	Independent	60	Non-commercial independent=60.1	https://thumb.wikimedia.org/wikipedia/en/thumb/e/e7/KPJK_logo_2020.svg/960px-KPJK_logo_2020.svg.png 525x191	California	Oakland|San Jose|San Mateo
 KPJR	Denver	TBN	38			Colorado	Greeley
 KPKN	Tyler		33			Texas	Kilgore-Longview
-KPLC	Lafayette	NBC	7	CW=7.2;NBC=7.1;CW+=7.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/KPLC_logo_2023.svg/960px-KPLC_logo_2023.svg.png 557x158	Louisiana	Lake Charles
+KPLC	Lake Charles	NBC	7	CW=7.2;NBC=7.1;CW+=7.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/KPLC_logo_2023.svg/960px-KPLC_logo_2023.svg.png 557x158	Louisiana	Lake Charles
 KPLE	Waco	TCT	31			Texas	Killeen|Temple
 KPLO	Pierre	CBS	6			South Dakota	
 KPLR	St. Louis	CW	11	CW=11.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/KPLR_STL_11_CW_2024.svg/960px-KPLR_STL_11_CW_2024.svg.png 512x234	Missouri	
@@ -848,7 +843,7 @@ KPMR	San Luis Obispo	Univision	38	Univision=38.1;UniMás=38.3;AltaVision=38.88	h
 KPNE	North Platte	PBS	9			Nebraska	
 KPNX	Phoenix	NBC	12	NBC=12.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/KPNX_12_logo.svg/960px-KPNX_12_logo.svg.png 308x178	Arizona	Mesa
 KPNZ	Salt Lake City	TCT	24	TCT=24.1		Utah	Ogden
-KPOB		ABC	15			Missouri	Paducah
+KPOB	Poplar Bluff	ABC	15			Missouri	Paducah
 KPOM	Los Angeles	Catchy Comedy	14	Catchy Comedy=14.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/KPOM_Catchy_Comedy_Los_Angeles.svg/960px-KPOM_Catchy_Comedy_Los_Angeles.svg.png 772x476	California	Ontario
 KPPX	Phoenix	ION	51	ION=51.1		Arizona	Tolleson
 KPRC	Houston	NBC	2	NBC=2.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/KPRC_2_%282025%29.svg/960px-KPRC_2_%282025%29.svg.png 784x1000	Texas	
@@ -1018,7 +1013,7 @@ KSL	Salt Lake City	NBC	5	NBC=5.1	https://thumb.wikimedia.org/wikipedia/commons/t
 KSLA	Shreveport	CBS	12	CBS=12.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Ksla-2023.svg/960px-Ksla-2023.svg.png 1271x423	Louisiana	Arkansas|Texarkana
 KSLM	Portland	QVCYTA TVtheDoveEstrella TV	27	QVC=3.1;YTA TV=17.1;theDove=27.1;Estrella TV=37.1		Oregon	Dallas|Salem
 KSLN	Salina						
-KSMN		PBS	20			Minnesota	Sioux Falls
+KSMN	Worthington	PBS	20			Minnesota	Sioux Falls
 KSMO	Kansas City	MyNetworkTV	62	Independent=62.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/KSMO-TV_%282011%29.svg/960px-KSMO-TV_%282011%29.svg.png 500x124	Missouri	
 KSMQ	Rochester	PBS	15	PBS=15.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Minnesota_PBS_2026.svg/960px-Minnesota_PBS_2026.svg.png 1000x158	Minnesota	Albert Lea|Austin|Mason City
 KSMS	Monterey	Univision	67	Univision=67.1;LATV=67.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/KSMS-TV_%282019%29.svg/960px-KSMS-TV_%282019%29.svg.png 1280x734	California	Salinas|Santa Cruz
@@ -1052,7 +1047,7 @@ KSVN	Salt Lake City	Binge TV	25	Binge TV=25.1	https://thumb.wikimedia.org/wikipe
 KSVT	Twin Falls	FOX	14	Fox/MyNetworkTV=14.1;ION=14.2	https://upload.wikimedia.org/wikipedia/commons/4/4e/KSVT14.png 200x78	Idaho	Sun Valley
 KSWB	San Diego	FOX	5	FOX=69.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/KSWB_Fox_5_%282018%29.svg/960px-KSWB_Fox_5_%282018%29.svg.png 1234x384	California	
 KSWK	Garden City	PBS	3			Kansas	
-KSWL	Lafayette	CBS	17	CBS=17.1	https://upload.wikimedia.org/wikipedia/commons/1/11/KSWL-LD_Logo_%28cropped%29.png 333x99	Louisiana	Lake Charles
+KSWL	Lake Charles	CBS	17	CBS=17.1	https://upload.wikimedia.org/wikipedia/commons/1/11/KSWL-LD_Logo_%28cropped%29.png 333x99	Louisiana	Lake Charles
 KSWO	Lawton	ABC	7	Telemundo=7.2;ABC=7.1	https://thumb.wikimedia.org/wikipedia/en/thumb/b/bd/KSWO-TV_7_News_logo.svg/960px-KSWO-TV_7_News_logo.svg.png 512x152	Oklahoma	Wichita Falls
 KSXE	Sioux City	Grit	16			Iowa	
 KSXF	Sioux Falls		56			South Dakota	
@@ -1082,7 +1077,7 @@ KTEJ	Jonesboro	PBS	19			Arkansas
 KTEL	Roswell	Cozi TV	33	Telemundo=25.4		New Mexico	Albuquerque|Carlsbad|Santa Fe
 KTEN	Ada	NBC	10	CW=10.2;ABC=10.3;NBC=10.1;CW+=10.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/KTEN2013.svg/960px-KTEN2013.svg.png 1812x1431	Oklahoma	Ardmore|Denison|Durant|Sherman
 KTES	Abilene	Roar	40			Texas	
-KTEV		CBS	19			Arkansas	Shreveport
+KTEV	Texarkana	CBS	19			Arkansas	Shreveport
 KTFD	Denver	UniMás	50	UniMás=50.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/KTFD_2021.svg/960px-KTFD_2021.svg.png 2469x974	Colorado	
 KTFF	Fresno	UniMás	61	Univision=61.2;UniMás=61.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/KTFF-DT_%282021%29.svg/960px-KTFF-DT_%282021%29.svg.png 1000x307	California	Porterville
 KTFK	Sacramento	UniMás	64	Univision=19.2;UniMás=64.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/KTFK-DT_%282021%29.svg/960px-KTFK-DT_%282021%29.svg.png 1000x297	California	Modesto|Stockton
@@ -1198,7 +1193,7 @@ KUGB	Houston		28			Texas
 KUGF	Great Falls	PBS	21			Montana	
 KUHM	Helena	PBS	10	PBS=10.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Montana_PBS_%282019%29.svg/960px-Montana_PBS_%282019%29.svg.png 512x85	Montana	
 KUHT	Houston	PBS	8	PBS=8.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Houston_Public_Media_%282020%29.svg/960px-Houston_Public_Media_%282020%29.svg.png 2177x416	Texas	
-KUID		PBS	12			Idaho	Pullman
+KUID	Moscow	PBS	12			Idaho	Pullman
 KUIL	Beaumont	MyNetworkTV	12	MyNetworkTV=12.5;Independent=12.5	https://upload.wikimedia.org/wikipedia/en/a/ae/Kuil_ld_2010.png 180x115	Texas	Port Arthur
 KUKC	Kansas City	Univision	14	Univision=14.1	https://upload.wikimedia.org/wikipedia/commons/6/63/Univision_Kansas_City_2019.webp 640x632	Missouri	
 KUKL	Kalispell	PBS	46			Montana	
@@ -1380,7 +1375,7 @@ KXMA	Dickinson	CW	2	CW=2.1	https://upload.wikimedia.org/wikipedia/commons/7/79/K
 KXMB	Bismarck	CW	12	CW=12.1	https://upload.wikimedia.org/wikipedia/commons/7/79/KX_News_2026.png 750x194	North Dakota	Mandan
 KXMC	Minot	CW	13	CW=13.1	https://upload.wikimedia.org/wikipedia/commons/7/79/KX_News_2026.png 750x194	North Dakota	
 KXMD	Williston	CW	11	CW=11.1	https://upload.wikimedia.org/wikipedia/commons/7/79/KX_News_2026.png 750x194	North Dakota	
-KXNE		PBS	19			Nebraska	Sioux City
+KXNE	Norfolk	PBS	19			Nebraska	Sioux City
 KXNU	Laredo	Telemundo	10	CBS=10.2;Telemundo=10.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/KXNU-LD-CD_%282018%29.svg/960px-KXNU-LD-CD_%282018%29.svg.png 2013x1940	Texas	
 KXNV	Reno	Telemundo	26	Telemundo=26.1;Silver State Sports=26.2;ABC=26.3	https://upload.wikimedia.org/wikipedia/commons/9/94/Telemundo_Reno.png 776x287	Nevada	Incline Village
 KXNW	Fayetteville	MyNetworkTV	34	Independent=34.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/KXNW-2020.svg/960px-KXNW-2020.svg.png 512x202	Arkansas	Eureka Springs|Fort Smith
@@ -1405,7 +1400,7 @@ KYCW	Springfield	CW	24	CW=24.1	https://thumb.wikimedia.org/wikipedia/commons/thu
 KYDF	Corpus Christi		34			Texas	
 KYES	Anchorage	CBS	5	NBC=2.11;MyNetworkTV=5.14		Alaska	
 KYEX	Juneau	CBS	5			Alaska	
-KYIN		PBS	24			Iowa	Rochester
+KYIN	Mason City	PBS	24			Iowa	Rochester
 KYLE	Bryan	MyNetworkTV	28	FOX=28.2;Independent=28.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/KYLE_2020.svg/960px-KYLE_2020.svg.png 512x406	Texas	College Station|Temple|Waco
 KYLX	Laredo	CBS	13	CW=13.2;CBS=13.1;CW+=13.2	https://upload.wikimedia.org/wikipedia/en/a/ad/KYLX13.png 350x252	Texas	
 KYMA	Yuma	NBCCBS	11	Estrella TV=13.3;NBC=11.1;CBS=13.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/KYMA-DT_NBC_11_CBS_13_Yuma%2C_Arizona_Logo.svg/960px-KYMA-DT_NBC_11_CBS_13_Yuma%2C_Arizona_Logo.svg.png 512x249	Arizona	El Centro
@@ -1472,7 +1467,7 @@ WAGA	Atlanta	FOX	5	FOX=5.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/3
 WAGM	Presque Isle	CBS	8	FOX=8.2;CW=8.3;CBS=8.1;CW+=8.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6e/WAGM-TV_logo.svg/960px-WAGM-TV_logo.svg.png 164x173	Maine	
 WAGT	Augusta	NBC	26	CW=26.2;NBC=26.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/WAGT_2023_logo.svg/960px-WAGT_2023_logo.svg.png 1118x753	Georgia (U.S. state)	
 WAGV	Eastern Kentucky Coalfield	Independent	44			Kentucky	
-WAHU	Charlottesville	FOX					
+WAHU	Charlottesville	FOX	27				
 WAIQ	Montgomery	PBS	26			Alabama	
 WAKA	Montgomery	CBS	8	ION=8.3;CBS=8.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/WAKA_2023.svg/960px-WAKA_2023.svg.png 2010x2010	Alabama	Selma
 WALA	Mobile	FOX	10	FOX=10.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/WALA_Fox_10_logo_2017.svg/960px-WALA_Fox_10_logo_2017.svg.png 508x204	Alabama	Pensacola
@@ -1495,7 +1490,6 @@ WAQP	Flint	TCT	49	TCT=49.1		Michigan	Bay City|Saginaw
 WARP	Tampa		20			Florida	St. Petersburg
 WARZ	Raleigh	Independent	21			North Carolina	Durham
 WASA	New York	Hot 97 TV	97	Hot 97 TV=24.1	https://upload.wikimedia.org/wikipedia/commons/b/b3/Hot_97_TV_%282025%29.jpg 283x173	New York	Port Jervis
-WASH		NBC					
 WATC	Atlanta	Independent	57	Independent=57.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/WATC_logo_2023.png/960px-WATC_logo_2023.png 1507x364	Georgia (U.S. state)	
 WATE	Knoxville	ABC	6	ABC=6.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Wate2024_%28transparent%29.png/960px-Wate2024_%28transparent%29.png 1000x327	Tennessee	
 WATL	Atlanta	MyNetworkTV	36	Independent=36.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/WATL_TV_2013_logo.svg/960px-WATL_TV_2013_logo.svg.png 472x286	Georgia (U.S. state)	
@@ -1615,7 +1609,6 @@ WCEE	Charlotte	Quiero TV	16			North Carolina
 WCES	Augusta	PBS	20			Georgia (U.S. state)	
 WCET	Cincinnati	PBS	48	PBS=48.1;Create=48.2;CET Arts=48.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/WCET_Logo.svg/960px-WCET_Logo.svg.png 300x149	Ohio	
 WCFE	Plattsburgh	PBS	57	PBS=57.1;NHK World=57.2	https://upload.wikimedia.org/wikipedia/en/3/3d/Mountain_Lake_PBS_logo_2021.png 673x153	New York	Burlington|Montpelier
-WCGV	Milwaukee		24		https://upload.wikimedia.org/wikipedia/en/d/d6/WCGV_logo_2006-2018.webp 361x276		
 WCGZ		Telemundo	20	ABC=9.2		Alabama	Columbus
 WCHS	Charleston	ABC	8	FOX=8.2;ABC=8.1;Antenna TV=8.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/WCHS26.svg/960px-WCHS26.svg.png 584x514	West Virginia	Huntington
 WCHU	Chicago		3			Illinois	
@@ -1661,7 +1654,7 @@ WCUH	Fort Wayne		16			Indiana
 WCVB	Boston	ABC	5	ABC=5.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/WCVB-TV_alternate_2021.svg/960px-WCVB-TV_alternate_2021.svg.png 512x600	Massachusetts	
 WCVE	Richmond	PBS	23			Virginia	
 WCVI	Christiansted	ABC	23	ABC=23.1;CBS=23.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/ABC-USVI-Logo-2021.svg/960px-ABC-USVI-Logo-2021.svg.png 1131x296		
-WCVN		PBS	54			Kentucky	Cincinnati
+WCVN	Covington	PBS	54			Kentucky	Cincinnati
 WCVW	Richmond	PBS	57	PBS=41.1	https://upload.wikimedia.org/wikipedia/en/4/41/WCVE-TV_WVPT_VPM_PBS_logo.png 525x174	Virginia	
 WCWF	Green Bay	CW	14	The CW / Fox / ABC=14.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/WCWF_2024.svg/960px-WCWF_2024.svg.png 1706x545	Wisconsin	Fox Cities|Suring
 WCWG	Greensboro	CW	20	CW=20.1;Dabl=20.4	https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Triad_CW_2024.svg/960px-Triad_CW_2024.svg.png 1001x629	North Carolina	High Point|Lexington|Winston-Salem
@@ -1718,7 +1711,7 @@ WDNP	Tampa		36			Florida	St. Petersburg
 WDNV	Atlanta		12			Georgia (U.S. state)	
 WDNZ	Bowling Green	The Country Network	11			Kentucky	
 WDOX	West Palm Beach		32			Florida	
-WDPB		PBS	64			Delaware	Salisbury
+WDPB	Seaford	PBS	64			Delaware	Salisbury
 WDPM	Mobile	Daystar	18	Daystar=18.1;Daystar Español=18.2;Daystar Reflections=18.3		Alabama	Pensacola
 WDPN	Wilmington	MeTV	2	MeTV=2.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/WDPN-TV_MeTV_logo.svg/960px-WDPN-TV_MeTV_logo.svg.png 1000x303	Delaware	Philadelphia
 WDPX	Boston	Grit	58	Grit=58.1		Massachusetts	Woburn
@@ -1757,7 +1750,7 @@ WEAE	Champaign		21			Illinois	Springfield
 WEAO	Cleveland	PBS	49				
 WEAR	Pensacola	ABC	3	NBC=3.2;ABC=3.1	https://thumb.wikimedia.org/wikipedia/en/thumb/a/a2/WEAR_ABC_3_Pensacola.svg/960px-WEAR_ABC_3_Pensacola.svg.png 342x292	Florida	Fort Walton Beach|Mobile
 WEAU	Eau Claire	NBC	13	CW=14.10;NBC=13.1;CW+=14.10	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/WEAU_13_2023.svg/960px-WEAU_13_2023.svg.png 948x1018	Wisconsin	La Crosse
-WEBA		PBS	14			South Carolina	Augusta
+WEBA	Allendale	PBS	14			South Carolina	Augusta
 WEBU	Greenwood	Cozi TV	22			Mississippi	
 WECN	San Juan	Independent	64			Puerto Rico	Naranjito
 WECP	Panama City	CBS	21	MyNetworkTV=21.2;Telemundo=21.5;CBS=21.1;Independent=21.2	https://thumb.wikimedia.org/wikipedia/en/thumb/c/c9/WECP_logo_2023.svg/960px-WECP_logo_2023.svg.png 339x295	Florida	
@@ -1770,7 +1763,7 @@ WEDN	Hartford	PBS	53			Connecticut	New Haven
 WEDQ	Tampa	PBS	3.4	PBS=3.4;Create=3.6	https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/WEDQ_PBS_2021.svg/960px-WEDQ_PBS_2021.svg.png 2142x416	Florida	St. Petersburg
 WEDS	Mobile		29			Alabama	
 WEDU	Tampa	PBS	3	PBS=3.1;World Channel=3.2;NHK World-Japan=3.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/WEDU_PBS_2021.svg/960px-WEDU_PBS_2021.svg.png 2134x416	Florida	St. Petersburg
-WEDW		PBS	49			Connecticut	New York
+WEDW	Bridgeport	PBS	49			Connecticut	New York
 WEDY	Hartford	CPTV Spirit	65	PBS=65.3		Connecticut	New Haven
 WEEE	Knoxville		32				
 WEEK	Peoria	NBC	25	ABC=25.2;CW=25.3;NBC=25.1;CW+=25.3;ION=25.4	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/WEEK-TV_NBC_25_ABC_25.2_Peoria%2C_Illinois_Logo.svg/960px-WEEK-TV_NBC_25_ABC_25.2_Peoria%2C_Illinois_Logo.svg.png 512x442	Illinois	Bloomington|Normal
@@ -1785,13 +1778,13 @@ WEIN	Evansville		40			Indiana
 WEIQ	Mobile	PBS	42			Alabama	
 WEIU	Champaign	Independent	51		https://upload.wikimedia.org/wikipedia/en/6/64/WEIU-TV_Eastern_Illinois_University.jpg 611x163	Illinois	Charleston|Springfield|Terre Haute
 WEKA	Cleveland		41			Ohio	
-WEKW		PBS	11			New Hampshire	Rural Vermont
+WEKW	Keene	PBS	11			New Hampshire	Rural Vermont
 WELF	Dalton	TBN	23			Georgia (U.S. state)	Chattanooga
 WELL	Philadelphia	Daystar	45			Pennsylvania	
 WELU	San Juan	CTN International	34	CTN International=34.1		Puerto Rico	Toa Baja
 WELW	Evansville		30			Indiana	
 WEMT	Johnson City	FOX	39	Roar=39.1		Tennessee	Bristol|Greeneville|Kingsport
-WENH		PBS	11			New Hampshire	Boston
+WENH	Durham	PBS	11			New Hampshire	Boston
 WENS	Pittsburgh						
 WENY	Elmira	ABC	36	CBS=36.2;Independent=36.3;ABC=36.1;ION=36.4	https://upload.wikimedia.org/wikipedia/en/1/1b/WENY_This_is_Home_logo.png 453x220	New York	Corning|Ithaca
 WEPH	Tupelo	CTN	49	CTN=49.1	https://upload.wikimedia.org/wikipedia/commons/d/d2/CTN_Tupelo_logo.png 926x644	Mississippi	Columbus|Starkville
@@ -1833,7 +1826,6 @@ WFGZ	Gainesville		22			Florida
 WFIB	Key West		6			Florida	
 WFIE	Evansville	NBC	14	NBC=14.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/WFIE_logo.svg/960px-WFIE_logo.svg.png 614x143	Indiana	Henderson|Owensboro
 WFIQ	Huntsville	PBS	36			Alabama	
-WFIU		PBS					
 WFLA	Tampa	NBC	8	NBC=8.1;Charge!=8.2;Antenna TV=8.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/WFLA-TV_NBC_8_Tampa%2C_Florida_logo.svg/960px-WFLA-TV_NBC_8_Tampa%2C_Florida_logo.svg.png 318x118	Florida	St. Petersburg
 WFLD	Chicago	FOX	32	FOX=32.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Fts-chicago-c.svg/960px-Fts-chicago-c.svg.png 1300x495	Illinois	
 WFLI	Chattanooga	CW	53	MyNetworkTV=53.2;CW=53.1;Independent=53.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/WFLI_CW_logo_2024.svg/960px-WFLI_CW_logo_2024.svg.png 1001x569	Tennessee	Cleveland
@@ -1848,10 +1840,9 @@ WFOR	Miami	CBS	4	CBS=4.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9
 WFOX	Jacksonville	FOX	30	MeTV=30.2;Telemundo=30.4;FOX=30.1;MyNetworkTV/MeTV=30.2;Heroes & Icons=30.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/WFOX_Fox_30_1.svg/960px-WFOX_Fox_30_1.svg.png 1900x493	Florida	
 WFPA	Philadelphia	UniMás	28	UniMás=28.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/WFPA-CD_%282021%29.svg/960px-WFPA-CD_%282021%29.svg.png 1000x393	Pennsylvania	
 WFPG	Atlantic City						
-WFPT		PBS	62			Maryland	Washington DC
+WFPT	Frederick	PBS	62			Maryland	Washington DC
 WFPX	Raleigh	Bounce TV	62	Bounce TV=62.1	https://upload.wikimedia.org/wikipedia/commons/6/67/Bounce_Raleigh_WFPX.webp 502x182	North Carolina	Archer Lodge|Durham
 WFQX	Traverse City	FOX	32	CW=33.2;FOX=45.1;The CW Plus=32.2;CBS=45.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/WFQX_Local_32_logo.svg/960px-WFQX_Local_32_logo.svg.png 857x1182	Michigan	Cadillac
-WFRN		CBS					
 WFRV	Green Bay	CBS	5	CBS=5.1	https://upload.wikimedia.org/wikipedia/en/1/19/CBS_5_WFRV-TV_Logo.png 400x246	Wisconsin	
 WFRZ	Montgomery	Independent	33			Alabama	
 WFSB	Hartford	CBS	3	CBS=3.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/WFSB_3D_logo.svg/960px-WFSB_3D_logo.svg.png 415x415	Connecticut	New Haven
@@ -1921,7 +1912,7 @@ WGNT	Norfolk	Independent	27	Independent=27.1	https://thumb.wikimedia.org/wikiped
 WGOM	Panama City		10			Florida	
 WGOX	Mobile		43			Alabama	
 WGPS	Fort Myers		22			Florida	
-WGPT		PBS	36			Maryland	Clarksburg
+WGPT	Oakland	PBS	36			Maryland	Clarksburg
 WGPX	Greensboro	ION	16	ION=16.1		North Carolina	Burlington|High Point|Winston-Salem
 WGRZ	Buffalo	NBC	2	NBC=2.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/WGRZ_%282011%29.svg/960px-WGRZ_%282011%29.svg.png 512x372	New York	
 WGSC	Florence-Myrtle Beach		8			South Carolina	
@@ -2003,7 +1994,7 @@ WHVL	Johnstown	MyNetworkTV	29	Independent=29.1;Buzzr=29.2	https://upload.wikimed
 WHWC	Eau Claire	PBS	28			Wisconsin	La Crosse
 WHWD	Greensboro	Daystar	21			North Carolina	
 WHWV	Charleston		45			West Virginia	Huntington
-WHYY		PBS	12	PBS=64.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/PBS_WHYY_logo.svg/960px-PBS_WHYY_logo.svg.png 1000x193	Delaware	Philadelphia
+WHYY	Philadelphia	PBS	12	PBS=64.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/PBS_WHYY_logo.svg/960px-PBS_WHYY_logo.svg.png 1000x193	Delaware	Philadelphia
 WIAT	Birmingham	CW	42	CW=42.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/WIAT_Alabama%27s_42_%282026%29.svg/960px-WIAT_Alabama%27s_42_%282026%29.svg.png 1000x144	Alabama	Anniston|Tuscaloosa
 WIAV	Washington DC	Roar	58			Washington, D.C.	
 WIBW	Topeka	CBS	13	MeTV and MyNetworkTV=13.2;CBS=13.1;MyNetworkTV/MeTV=13.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/WIBW-TV_logo.svg/960px-WIBW-TV_logo.svg.png 512x167	Kansas	
@@ -2022,7 +2013,7 @@ WIFS	Madison	ION	57	ION=57.1		Wisconsin	Janesville
 WIGL	Atlanta	TCT	38			Georgia (U.S. state)	
 WIIC	Pittsburgh		31			Pennsylvania	
 WIIH	Indianapolis	Confess	17	Confess=17.1		Indiana	
-WIIQ		PBS	41			Alabama	Meridian
+WIIQ	Demopolis	PBS	41			Alabama	Meridian
 WIIW	Nashville		14			Tennessee	
 WILC	Chicago	Daystar	6	Daystar=8.1;Daystar Español=8.2;Daystar Reflections=8.3		Illinois	Sugar Grove
 WILL	Champaign	PBS	12	PBS=12.1;Create/World=12.3	https://upload.wikimedia.org/wikipedia/en/7/7b/PBS_Illinois_Public_Media_logo_2023.webp 725x137	Illinois	Springfield|Urbana
@@ -2052,7 +2043,6 @@ WITF	Harrisburg	PBS	33	PBS=33.1	https://thumb.wikimedia.org/wikipedia/commons/th
 WITI	Milwaukee	FOX	6	FOX=6.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/FOX6_News_Milwaukee-1.svg/960px-FOX6_News_Milwaukee-1.svg.png 512x224	Wisconsin	
 WITN	Greenville	NBC	7	MyNetworkTV=7.2;NBC=7.1;Independent=7.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/WITN-TV_logo_%282025%29.svg/960px-WITN-TV_logo_%282025%29.svg.png 512x194	North Carolina	Jacksonville|New Bern|Washington
 WITV	Charleston	PBS	7			South Carolina	
-WIV		NBC					
 WIVB	Buffalo	CBS	4	CBS=4.1;Cozi TV=4.2	https://upload.wikimedia.org/wikipedia/commons/0/05/WIVB_Logo.png 267x267	New York	Niagara Falls
 WIVM	Cleveland	Independent	39			Ohio	
 WIVT	Binghamton	ABC	34	NBC=34.2;ABC=34.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/WIVT_34_2024.svg/960px-WIVT_34_2024.svg.png 512x401	New York	
@@ -2118,7 +2108,7 @@ WJZY	Charlotte	FOX	46	FOX=46.1	https://thumb.wikimedia.org/wikipedia/en/thumb/4/
 WKAB	Mobile						
 WKAQ	San Juan	Telemundo	2	NBC=2.3;Telemundo=2.1;Punto 2=2.2	https://thumb.wikimedia.org/wikipedia/en/thumb/8/8d/Telemundo_Puerto_Rico.svg/960px-Telemundo_Puerto_Rico.svg.png 287x348	Puerto Rico	
 WKAR	Lansing	PBS	23	PBS=23.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/WKAR_PBS_logo_%282019%29.png/960px-WKAR_PBS_logo_%282019%29.png 2592x500	Michigan	East Lansing|Jackson
-WKAS		PBS	25			Kentucky	Huntington
+WKAS	Ashland	PBS	25			Kentucky	Huntington
 WKBD	Detroit	CW	50	CW=50.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/WKBD-TV_2024.svg/960px-WKBD-TV_2024.svg.png 1000x100	Michigan	
 WKBF	Cleveland				https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/WKBF-TV_logo.png/960px-WKBF-TV_logo.png 983x757		
 WKBJ	Jacksonville		20			Florida	
@@ -2137,7 +2127,7 @@ WKHU	Pittsburgh		60			Pennsylvania
 WKIZ	Key West		49			Florida	
 WKLE	Lexington	PBS	46			Kentucky	
 WKLO	Louisville						
-WKMA		PBS	35			Kentucky	Evansville
+WKMA	Madisonville	PBS	35			Kentucky	Evansville
 WKMG	Orlando	CBS	6	CBS=6.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Wkmg_6.svg/960px-Wkmg_6.svg.png 512x512	Florida	
 WKMJ	Louisville	PBS	2	KET2/PBS=68.1;KET=68.2		Kentucky	
 WKMR	Lexington	PBS	38			Kentucky	
@@ -2148,7 +2138,7 @@ WKNX	Flint	Independent	22	Independent=7.1;Great=7.2;Ion Plus=7.3	https://upload.
 WKNY	Kingston						
 WKOB	New York		42			New York	
 WKOF	Syracuse	CBS	5	CBS=15.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/WTVH_5_logo.svg/960px-WTVH_5_logo.svg.png 949x771	New York	
-WKOH		PBS	31			Kentucky	Evansville
+WKOH	Owensboro	PBS	31			Kentucky	Evansville
 WKOI	Richmond	ION	43	ION=43.1		Indiana	Dayton
 WKON	Lexington	PBS	52			Kentucky	
 WKOP	Knoxville	PBS	15			Tennessee	
@@ -2165,7 +2155,6 @@ WKSO	Eastern Kentucky Coalfield	PBS	29			Kentucky
 WKTB	Atlanta	Telemundo	47.2	TeleXitos=47.3;Telemundo=47.2	https://upload.wikimedia.org/wikipedia/commons/8/89/Telemundo_Atlanta_2018.png 640x635	Georgia (U.S. state)	Norcross
 WKTC	Columbia	MyNetworkTV	63	Telemundo=63.2;Independent=63.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/WKTC_2019_Logo.svg/960px-WKTC_2019_Logo.svg.png 351x133	South Carolina	Sumter
 WKTV	Utica	NBC	2	CBS=2.2;Independent=2.3;NBC=2.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/WKTV_logo_2015.svg/960px-WKTV_logo_2015.svg.png 1200x1288	New York	Rome
-WKU		PBS					
 WKUT	Bowling Green		25			Kentucky	
 WKUW	Nashville		40			Tennessee	
 WKWT	Key West		42			Florida	
@@ -2182,7 +2171,7 @@ WLBZ	Bangor	NBC	2	NBC=2.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/
 WLCF	Champaign	CTN	45	CTN=45.1		Illinois	Decatur|Springfield
 WLCN	Charleston	CTN	18	CTN=18.1	https://upload.wikimedia.org/wikipedia/commons/6/62/CTN_Charleston_logo.png 926x644	South Carolina	
 WLCU	Louisville	Independent	4		https://upload.wikimedia.org/wikipedia/en/8/83/WLCU-CD_logo.jpg 300x195	Kentucky	Campbellsville
-WLED		PBS	11			New Hampshire	Rural Vermont
+WLED	Littleton	PBS	11			New Hampshire	Rural Vermont
 WLEF	Wausau	PBS	36			Wisconsin	
 WLEH	St. Louis		48			Illinois	
 WLEK			22			New Hampshire	Boston
@@ -2244,7 +2233,7 @@ WMAO	Greenwood	PBS	23			Mississippi
 WMAQ	Chicago	NBC	5	NBC=5.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/WMAQ_2023.svg/960px-WMAQ_2023.svg.png 1000x645	Illinois	
 WMAR	Baltimore	ABC	2	ABC=2.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/2_ABC_WMAR_Baltimore.png/960px-2_ABC_WMAR_Baltimore.png 1000x463	Maryland	
 WMAU	Jackson	PBS	17			Mississippi	
-WMAV		PBS	18			Mississippi	Memphis
+WMAV	Oxford	PBS	18			Mississippi	Memphis
 WMAW	Meridian	PBS	14			Mississippi	
 WMAZ	Macon	CBS	13	CW=13.2;CBS=13.1;CW+=13.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/WMAZ_current_%28horizontal%2C_with_slogan%29.svg/960px-WMAZ_current_%28horizontal%2C_with_slogan%29.svg.png 321x79	Georgia (U.S. state)	
 WMBB	Panama City	ABC	13	ABC=13.1;The CW Plus=13.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/WMBB_13_2023.svg/960px-WMBB_13_2023.svg.png 1499x1047	Florida	
@@ -2265,7 +2254,7 @@ WMDV	Roanoke	Independent	23	Independent=23.1		Virginia	Danville|Lynchburg|Martin
 WMEA	Portland	PBS	26			Maine	
 WMEB	Bangor	PBS	12			Maine	
 WMEC	Quincy	PBS	22			Illinois	
-WMED		PBS	13			Maine	Saint John
+WMED	Calais	PBS	13			Maine	Saint John
 WMEI	Green Bay	MeTV	31	MeTV=31.1;Telemundo=31.6	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/MeTV_WMEI.svg/960px-MeTV_WMEI.svg.png 155x67	Wisconsin	Fox Cities|Shawano
 WMEL	Greenwood	MeTV	13			Mississippi	
 WMEM	Presque Isle	PBS	10			Maine	
@@ -2289,7 +2278,7 @@ WMOW	Wausau	Catchy Comedy	4	ABC=4.2;Catchy Comedy=4.1	https://upload.wikimedia.o
 WMPB	Baltimore	PBS	67			Maryland	
 WMPJ	Tupelo		34			Mississippi	Columbus|Starkville
 WMPN	Jackson	PBS	29			Mississippi	
-WMPT		PBS	22			Maryland	Washington DC
+WMPT	Annapolis	PBS	22			Maryland	Washington DC
 WMPV	Mobile	TBN	21			Alabama	Pensacola
 WMPX	Boston	Daystar	33			Massachusetts	
 WMSN	Madison	FOX	47	FOX=47.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/WMSN_1.svg/960px-WMSN_1.svg.png 1291x477	Wisconsin	
@@ -2340,7 +2329,7 @@ WNET	Newark	PBS	13	PBS=13.1;World Channel=13.3	https://thumb.wikimedia.org/wikip
 WNEU	Merrimack	Telemundo	60	TeleXitos=60.2;Telemundo=60.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/WNEU_2018.svg/960px-WNEU_2018.svg.png 512x488	New Hampshire	Boston|Manchester
 WNEX	Macon						country=US
 WNFT	Gainesville		8			Florida	
-WNGH		PBS	18			Georgia (U.S. state)	Chattanooga
+WNGH	Chatsworth	PBS	18			Georgia (U.S. state)	Chattanooga
 WNGJ	Watertown		20			New York	
 WNGN	Albany		38			New York	Schenectady
 WNGS	Greenville		50			North Carolina	Spartanburg
@@ -2351,10 +2340,10 @@ WNHT	Birmingham	TheGrio	9			Alabama	Concord|Manchester
 WNIB	Rochester	TCT	42			New York	
 WNIN	Evansville	PBS	9	PBS=9.1	https://upload.wikimedia.org/wikipedia/commons/9/9e/WNIN_PBS_logo_%282020%29.png 480x102	Indiana	Henderson|Owensboro
 WNIT	South Bend	PBS	34	PBS=34.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/New_WNIT_Michiana_PBS_logo_2021.png/960px-New_WNIT_Michiana_PBS_logo_2021.png 1504x321	Indiana	
-WNJB		PBS	58			New Jersey	New York
-WNJN		PBS	50			New Jersey	New York
-WNJS		PBS	23			New Jersey	Philadelphia
-WNJT		PBS	52			New Jersey	Philadelphia
+WNJB	New Brunswick	PBS	58			New Jersey	New York
+WNJN	Montclair	PBS	50			New Jersey	New York
+WNJS	Camden	PBS	23			New Jersey	Philadelphia
+WNJT	Trenton	PBS	52			New Jersey	Philadelphia
 WNJU	Linden	Telemundo	47	TeleXitos=47.2;Telemundo=47.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Telemundo_47_%282018%29.svg/960px-Telemundo_47_%282018%29.svg.png 850x714	New Jersey	New York
 WNJX	Mayagüez	Independent	4	Telemundo=2.12;Punto 2=2.22;WAPA-TV=4.1;WAPA Deportes=4.2;Wapa 3=4.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/WAPA-TV_logo.svg/960px-WAPA-TV_logo.svg.png 615x168	Puerto Rico	
 WNKY	Bowling Green	NBC	40	CBS=40.2;NBC=40.1;MeTV=40.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/WNKY_NBC_40_CBS_40.2_MeTV_40.3_Bowling_Green%2C_Kentucky_Logo.svg/960px-WNKY_NBC_40_CBS_40.2_MeTV_40.3_Bowling_Green%2C_Kentucky_Logo.svg.png 1213x413	Kentucky	
@@ -2380,7 +2369,6 @@ WNWO	Toledo	NBC	24	NBC=24.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/
 WNWT	New York	MeTV	37	Story Television=37.1	https://upload.wikimedia.org/wikipedia/commons/9/99/WZME%27s_logo.png 200x127	New York	
 WNYA	Pittsfield	MyNetworkTV	4	Independent=51.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/WNYA_alt.svg/960px-WNYA_alt.svg.png 512x487	Massachusetts	Albany|Schenectady|Troy
 WNYB	Buffalo	TCT	26	TCT=26.1		New York	Jamestown
-WNYC							
 WNYE	New York	Independent	25	Non-commercial independent=25.1;NYC GOV=25.2;CUNY TV=25.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/NYC_Life.svg/960px-NYC_Life.svg.png 793x298	New York	
 WNYF	Watertown	FOX	28	FOX=28.1;MeTV=28.2	https://upload.wikimedia.org/wikipedia/commons/6/6f/Wnyf_ca_2008.png 253x119	New York	
 WNYI	Syracuse	Daystar	52	Daystar=52.1;Daystar Español=38.2		New York	
@@ -2433,7 +2421,7 @@ WOSU	Columbus	PBS	34	PBS=34.1	https://upload.wikimedia.org/wikipedia/en/a/aa/WOS
 WOTF	Orlando	Grit	26	WAPA Orlando=26.1	https://upload.wikimedia.org/wikipedia/commons/a/a8/Logo_wapa_orlando_oficial-black.jpg 269x77	Florida	Daytona Beach
 WOTM	Birmingham	Independent	19	Independent=19.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/WOTM_logo_2023.png/960px-WOTM_logo_2023.png 1790x511	Alabama	
 WOTV	Grand Rapids	ABC	4	ABC=41.1;CW=41.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/WOTV_%282022%2C_full_variant%29.svg/960px-WOTV_%282022%2C_full_variant%29.svg.png 986x299	Michigan	Battle Creek|Kalamazoo
-WOUB		PBS	20	PBS=44.1		Ohio	Parkersburg
+WOUB	Athens	PBS	20	PBS=44.1		Ohio	Parkersburg
 WOUC	Zanesville	PBS	44			Ohio	
 WOVA	Parkersburg	FOX	22	CW=22.2;FOX=22.1;CW+=22.2	https://upload.wikimedia.org/wikipedia/commons/0/00/Wtap_fox_tv.PNG 187x119	West Virginia	Marietta
 WOWK	Charleston	CBS	13	CBS=13.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/WOWK-TV_logo_1999.svg/960px-WOWK-TV_logo_1999.svg.png 502x395	West Virginia	Huntington
@@ -2451,7 +2439,6 @@ WPBY	Lafayette	ABC	35	MyNetworkTV=35.2;ABC=35.1;MeTV/MyNetworkTV=35.2	https://th
 WPCB	Pittsburgh	Cornerstone Television	40	Cornerstone TV=40.1		Pennsylvania	Greensburg
 WPCH	Atlanta	CW	17	CW=17.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/WPCH_2024.svg/960px-WPCH_2024.svg.png 512x192	Georgia (U.S. state)	
 WPCT	Panama City		46		https://upload.wikimedia.org/wikipedia/commons/9/97/BeachTV.png 150x110	Florida	Panama City Beach
-WPCW	Pittsburgh	CW	19				
 WPDE	Florence-Myrtle Beach	ABC	15	CW=15.2;ABC=15.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/WPDE-TV_logo_2021.svg/960px-WPDE-TV_logo_2021.svg.png 398x253	South Carolina	Florence|Lumberton|Myrtle Beach
 WPDN	Pittsburgh	Daystar	65			Pennsylvania	
 WPDS	Tampa	Independent	14			Florida	St. Petersburg
@@ -2608,7 +2595,6 @@ WSAV	Savannah	NBC	3	CW=3.2;MyNetworkTV=3.3;NBC=3.1;CW+/MyNetworkTV=3.2	https://t
 WSAW	Wausau	CBS	7	MeTV=7.2;FOX=7.3;CBS=7.1;MyNetworkTV/MeTV=7.2;CW+=7.4	https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/WSAW_2012.svg/960px-WSAW_2012.svg.png 512x554	Wisconsin	
 WSAZ	Charleston	NBC	3	MyNetworkTV=3.2;NBC=3.1;MeTV/MyNetworkTV=3.2	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/WSAZ_3_%282024%29.svg/960px-WSAZ_3_%282024%29.svg.png 512x97	West Virginia	Huntington
 WSB	Atlanta	ABC	2	ABC=2.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/WSB-TV_logo_2010_%28cropped%29.svg/960px-WSB-TV_logo_2010_%28cropped%29.svg.png 747x287	Georgia (U.S. state)	
-WSBE		PBS					
 WSBK	Boston	Independent	38	Independent=38.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/WSBK-TV_logo.svg/960px-WSBK-TV_logo.svg.png 297x297	Massachusetts	
 WSBS	Key West	Mega TV	22	Mega TV=22.1;Visión Latina=22.2	https://upload.wikimedia.org/wikipedia/commons/1/18/MegaTV.png 200x41	Florida	
 WSBT	South Bend	CBS	22	FOX=22.2;CBS=22.1;Charge!=22.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/WSBT-TV_logo.svg/960px-WSBT-TV_logo.svg.png 512x311	Indiana	
@@ -2628,8 +2614,8 @@ WSFL	Miami	Independent	39	Independent=39.1	https://thumb.wikimedia.org/wikipedia
 WSFX	Wilmington	FOX	26	FOX=26.1	https://upload.wikimedia.org/wikipedia/en/8/82/Wsfx_2009.png 320x211	North Carolina	
 WSHM	Springfield	CBS	3	CBS=33.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/CBS_3_logo_2015.svg/960px-CBS_3_logo_2015.svg.png 1040x507	Massachusetts	(applied to move to Boston|Holyoke|Northampton
 WSHX	Gainesville	Univision	29			Florida	
-WSIL		ABC	3	ABC=15.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/WSIL-TV_logo_2026.svg/960px-WSIL-TV_logo_2026.svg.png 512x576	Illinois	Paducah
-WSIU		PBS	8	PBS=16.1	https://upload.wikimedia.org/wikipedia/commons/f/f2/WSIU_PBS_NPR_logo.png 534x92	Illinois	Paducah
+WSIL	Harrisburg	ABC	3	ABC=15.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/WSIL-TV_logo_2026.svg/960px-WSIL-TV_logo_2026.svg.png 512x576	Illinois	Paducah
+WSIU	Carbondale	PBS	8	PBS=16.1	https://upload.wikimedia.org/wikipedia/commons/f/f2/WSIU_PBS_NPR_logo.png 534x92	Illinois	Paducah
 WSJN	San Juan	CTNi	20	CTN International=20.1		Puerto Rico	
 WSJP	Mayagüez	Cozi TV	18	FOX=18.2		Puerto Rico	
 WSJT			15			New Jersey	Philadelphia
@@ -2667,7 +2653,7 @@ WSUN	St. Petersburg				https://upload.wikimedia.org/wikipedia/commons/4/4a/WSUNT
 WSUR	Ponce	TeleOnce	9			Puerto Rico	
 WSVF	Harrisonburg	FOX	43	CBS=43.2;FOX=43.1	https://upload.wikimedia.org/wikipedia/commons/8/8d/The_Valleys_FOX.png 216x135	Virginia	Staunton
 WSVG	Savannah		23			Georgia (U.S. state)	
-WSVI		Independent	8	Independent=8.1	https://upload.wikimedia.org/wikipedia/en/6/6b/WSVI_Logo.png 335x297		
+WSVI	Christiansted	Independent	8	Independent=8.1	https://upload.wikimedia.org/wikipedia/en/6/6b/WSVI_Logo.png 335x297		
 WSVN	Miami	FOX	7	ABC=7.2;FOX=7.1	https://upload.wikimedia.org/wikipedia/commons/3/3e/WSVN_7_Miami_logo.png 212x232	Florida	Fort Lauderdale
 WSVT	Tampa	Daystar	18			Florida	St. Petersburg
 WSVW	Harrisonburg	NBC	3	CW=30.3;NBC=30.1;CW+=30.3	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/WSVW2019.svg/960px-WSVW2019.svg.png 3247x2016	Virginia	Staunton
@@ -2810,9 +2796,9 @@ WUJF	Jacksonville	Daystar	33			Florida
 WUJX	Jacksonville	Quiero TV	18			Florida	
 WUMN	Minneapolis	Univision	21	Univision=21.1	https://upload.wikimedia.org/wikipedia/commons/f/fc/Univision_Minnesota_2019.webp 640x529	Minnesota	Saint Paul
 WUNC	Raleigh	PBS	4			North Carolina	Durham
-WUND		PBS	2			North Carolina	Norfolk
+WUND	Edenton	PBS	2			North Carolina	Norfolk
 WUNE	Charlotte	The Explorer Channel	17	PBS=17.2		North Carolina	
-WUNF		PBS	33			North Carolina	Greenville
+WUNF	Asheville	PBS	33			North Carolina	Greenville
 WUNG	Charlotte	PBS	58			North Carolina	
 WUNI	Boston	Univision	66	Univision=66.1	https://upload.wikimedia.org/wikipedia/commons/b/b6/WUNI_2019.webp 250x240	Massachusetts	Marlborough
 WUNJ	Wilmington	PBS	39			North Carolina	
@@ -2820,7 +2806,7 @@ WUNK	Greenville	PBS	25			North Carolina
 WUNL	Greensboro	PBS	26			North Carolina	
 WUNM	Greenville	The Explorer Channel	19	PBS=19.2		North Carolina	
 WUNP	Raleigh	The Explorer Channel	36	PBS=36.2		North Carolina	Durham
-WUNU		PBS	31			North Carolina	Myrtle Beach
+WUNU	Lumberton	PBS	31			North Carolina	Myrtle Beach
 WUNW		The Explorer Channel	27	PBS=27.2		North Carolina	Greenville
 WUOA	Birmingham		46			Alabama	
 WUPA	Atlanta	CBS	69	CBS=69.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/CBS_Atlanta_logo.svg/960px-CBS_Atlanta_logo.svg.png 287x32	Georgia (U.S. state)	
@@ -2830,7 +2816,7 @@ WUPW	Toledo	FOX	36	FOX=36.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/
 WUPX	Lexington	ION	67	ION=67.1		Kentucky	Richmond
 WURH	Miami	WPBT Health Channel	13	The Health Channel=13.1		Florida	Fort Lauderdale
 WUSA	Washington DC	CBS	9	CBS=9.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/WUSA_9_2018_%28Stacked%29.svg/960px-WUSA_9_2018_%28Stacked%29.svg.png 709x730	Washington, D.C.	
-WUSI		PBS	16			Illinois	Terre Haute
+WUSI	Olney	PBS	16			Illinois	Terre Haute
 WUSP	Ponce	Daystar	25			Puerto Rico	
 WUSV	Clarksburg	Cozi TV	16			West Virginia	
 WUTB	Baltimore	Roar	24	Roar=24.1		Maryland	
@@ -2881,7 +2867,7 @@ WVOZ	Ponce	Daystar Español	18	Daystar=18.2		Puerto Rico
 WVPB	Charleston	PBS	33			West Virginia	Huntington
 WVPT	Harrisonburg	PBS	51	PBS=51.2	https://upload.wikimedia.org/wikipedia/en/4/41/WCVE-TV_WVPT_VPM_PBS_logo.png 525x174	Virginia	
 WVPX	Cleveland	ION	23	ION=23.1		Ohio	Akron|Canton
-WVPY		PBS	51			Virginia	Washington DC
+WVPY	Front Royal	PBS	51			Virginia	Washington DC
 WVQS	Vieques	Tiva TV	8	Tiva TV=8.1;CTN International=20.1;CTN=20.2;3ABN Latino=44.1;Lighthouse TV=60.1			
 WVRN	Richmond						
 WVSN	San Juan	Independent	68			Puerto Rico	
@@ -2889,7 +2875,7 @@ WVTB	Rural Vermont	PBS	20			Vermont
 WVTM	Birmingham	NBC	13	CBS=13.4;NBC=13.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/WVTM_without_peacock_2026.svg/960px-WVTM_without_peacock_2026.svg.png 76x78	Alabama	Anniston|Tuscaloosa
 WVTN	Eastern Kentucky	Independent	48			Kentucky	
 WVTT	Buffalo		34			New York	Olean
-WVTV	Milwaukee	CW	18	CW=18.1;Independent=24.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/WVTV_2024.svg/960px-WVTV_2024.svg.png 1704x565	Wisconsin	
+WVTV	Milwaukee	CW	18	CW=18.1;MyNetworkTV=24.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/WVTV_2024.svg/960px-WVTV_2024.svg.png 1704x565	Wisconsin	
 WVUA	Birmingham	Cozi TV	23	Cozi TV=23.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/WVUA_23_logo.svg/960px-WVUA_23_logo.svg.png 512x532	Alabama	
 WVUE	New Orleans	FOX	8	FOX=8.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Wvue-logo.svg/960px-Wvue-logo.svg.png 512x119	Louisiana	
 WVUP	Tallahassee	CTN	45	CTN=45.1	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/CTN_Pensacola-Tallahassee_logo_2026.webp/960px-CTN_Pensacola-Tallahassee_logo_2026.webp 1536x994	Florida	Thomasville
@@ -2931,7 +2917,7 @@ WWMT	Grand Rapids	CBS	3	CW=3.2;CBS=3.1;Independent=3.2	https://thumb.wikimedia.o
 WWMW	Milwaukee	Purple TV	16			Wisconsin	
 WWNY	Watertown	CBS	7	FOX=7.2;CBS=28.2	https://thumb.wikimedia.org/wikipedia/en/thumb/3/34/WWNY-TV_7_News_logo.svg/960px-WWNY-TV_7_News_logo.svg.png 475x210	New York	
 WWOO			17			New Hampshire	Boston
-WWOR	Secaucus	MyNetworkTV	5	FOX=9.2;Independent=9.1;Buzzr=9.3;Heroes & Icons=9.4	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/WWOR_9_Fox_5_Plus.svg/960px-WWOR_9_Fox_5_Plus.svg.png 1521x450	New Jersey	New York
+WWOR	Secaucus	MyNetworkTV	9	FOX=9.2;Independent=9.1;Buzzr=9.3;Heroes & Icons=9.4	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/WWOR_9_Fox_5_Plus.svg/960px-WWOR_9_Fox_5_Plus.svg.png 1521x450	New Jersey	New York
 WWPB	Hagerstown	PBS	31			Maryland	
 WWPI	Presque Isle	NBC	16	NBC=16.1	https://thumb.wikimedia.org/wikipedia/en/thumb/8/84/WWPI_logo_2023.svg/960px-WWPI_logo_2023.svg.png 299x275	Maine	Fort Kent
 WWPX	Martinsburg	ION	60	ION=60.1		West Virginia	Hagerstown|Winchester

@@ -404,6 +404,8 @@ class Picker:
                 return provider_logo
             return ''                             # an empty slot: no event yet, so nothing to show
         # channels, locals, everything else
+        if r.get('station_logo'):                 # a station's own news stream: the station's logo
+            return r['station_logo']
         if kind == 'local':
             hit = self.local_logo(r, name)
             if hit:
@@ -462,6 +464,11 @@ class Picker:
             for rx, k in EVENT_ORGS:
                 if rx.search(lookup_name) and OFFICIAL.get(k):
                     return OFFICIAL[k]
+        if r.get('logo_brand'):                   # 'WeatherNation Atlanta': WeatherNation's own logo
+            b = r['logo_brand']
+            hit = self.tvlogos(cc, b) or self.iptv_logo(cc, b) or next((u for rx, u, _l in self.aliases if rx.search(b)), None)
+            if hit:
+                return hit
         self.missing.append((cc, lookup_name, provider_logo or '', icon or ''))
         return provider_logo or icon or PLATFORM_LOGOS.get(r.get('platform') or '') or \
             self.family_logo(cc, lookup_name) or self.network_word(lookup_name) or ''

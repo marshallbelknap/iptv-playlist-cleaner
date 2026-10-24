@@ -45,7 +45,21 @@ FORCE = {'foxnews': 'US', 'foxnewschannel': 'US', 'foxbusiness': 'US', 'headline
          'cbcnews': 'CA', 'cbcnewsnetwork': 'CA', 'ctvnews': 'CA', 'ctvnewschannel': 'CA', 'cp24': 'CA',
          'acc': 'US', 'accnetwork': 'US', 'golfchannel': 'US', 'nbcgolf': 'US', 'foxsportsracing': 'US',
          'monsterjam': 'US', 'turnerclassic': 'US', 'turnerclassicmovies': 'US', 'tcm': 'US', 'ae': 'US',
-         'ane': 'US', 'aande': 'US', 'americanmovieclassics': 'US', 'gsn': 'US', 'gameshownetwork': 'US'}
+         'ane': 'US', 'aande': 'US', 'americanmovieclassics': 'US', 'gsn': 'US', 'gameshownetwork': 'US',
+         'skynewsweather': 'AU', 'actionmax': 'US', 'moremax': 'US', 'thrillermax': 'US', 'outermax': 'US',
+         'moviemax': 'US', '5starmax': 'US', 'cgtn': 'INT', 'cgtnenglish': 'INT', 'cnni': 'INT', 'nhkworld': 'INT',
+         'nhkworldjapan': 'INT', 'nhkworldnews': 'INT', 'ndtvworld': 'INT', 'indiatoday': 'INT', 'euronewsworld': 'INT',
+         'rtnewsamerica': 'INT', 'tickernews': 'AU', 'yessport5': 'INT', 'nowsportshk': 'INT', 'nowsports': 'INT',
+         'bbc2northernireland': 'UK', 'bbctwonorthernireland': 'UK', 'bbconenorthernireland': 'UK',
+         'bbc1northernireland': 'UK', 'rtenewsnow': 'IE', 'mtvclassicuk': 'UK', 'mtvclassicus': 'US', '4music': 'UK',
+         'kerrang': 'UK', 'kiss': 'UK', 'magic': 'UK', 'boxhits': 'UK', 'clublandtv': 'UK', 'now70s': 'UK',
+         'now80s': 'UK', 'now90s': 'UK', 'horseandcountry': 'UK', 'williamhilllive': 'UK', 'actionmaxwest': 'US',
+         'moremaxwest': 'US', 'thrillermaxwest': 'US', 'redbulltv': 'INT', 'laligatv': 'UK', 'racingtv': 'UK',
+         'skysportsracing': 'UK', 'premiersport1': 'UK', 'premiersport2': 'UK', 'premiersports1': 'UK',
+         'premiersports2': 'UK', 'shadesofblack': 'US', 'thefirst': 'US', 'mtvwest': 'US', 'vh1': 'US',
+         'mtvlive': 'US', 'vevo2k': 'US', 'vevo70s': 'US', 'vevo80s': 'US', 'vevo90s': 'US', 'vevocountry': 'US',
+         'vevohiphop': 'US', 'vevopop': 'US', 'crimeandinvestigation': 'UK', 'skyaction': 'UK', 'skydrama': 'UK',
+         'first': 'US', 'thefirstnews': 'US', 'tntultimate': 'UK', 'tntultimateplus': 'UK', 'tntsportsultimate': 'UK'}
 _INDEX = None
 _CATS = None
 
@@ -69,9 +83,9 @@ def _load():
     if not os.path.exists(path):
         return
     for r in csv.DictReader(open(path, encoding='utf-8')):
-        if r.get('closed'):
-            continue
         cc = IPTV_CC.get(r['country'], r['country'])
+        if r.get('closed') and cc not in ENGLISH:    # closed English channels still say where a brand comes from
+            continue
         for nm in [r['name']] + [x for x in r.get('alt_names', '').split(';') if x]:
             k = norm(nm)
             if len(k) < 2:
@@ -88,9 +102,9 @@ def countries(name):
 
 def home_country(name, cc):
     """cc the provider gave -> the country the channel belongs in (may be the same)."""
-    if cc not in ENGLISH or re.search(r'\b(Canada|Canadian)\b', name, re.I) and cc == 'CA':
-        return cc
-    tok = re.search(r'(?<!^)(?<!\b5 )\b(USA|US|Australia|NZ|New Zealand|Ireland|Canada|UK)\b(?! ?Version)', name)
+    if cc not in ENGLISH and cc != 'INT' or re.search(r'\b(Canada|Canadian)\b', name, re.I) and cc == 'CA':
+        return cc                                 # INT means 'country unknown': look it up like the others
+    tok = re.search(r'(?<!^)(?<!\b5 )(?<!Northern )\b(USA|US|Australia|NZ|New Zealand|Ireland|Canada|UK)\b(?! ?Version)', name)
     if tok:                                       # 'Nat Geo USA', 'Sky News Australia', 'Sky Sports NZ 3'
         t = tok.group(1)
         return {'USA': 'US', 'US': 'US', 'Australia': 'AU', 'NZ': 'NZ', 'New Zealand': 'NZ', 'Ireland': 'IE',
@@ -98,10 +112,16 @@ def home_country(name, cc):
     k = norm(name)
     if len(k) < 3 or k in GENERIC:
         return cc
+    if k.startswith('musicchoice'):              # Music Choice is a US service, wherever a provider files it
+        return 'US'
     if cc == 'CA' and (k in CA_OWN or re.sub(r'\d+$', '', k) in CA_OWN):
         return cc
     if k in FORCE:
         return FORCE[k] if not (cc == 'CA' and k in ('turnerclassicmovies', 'tcm')) else 'US'
+    if cc == 'INT':                               # only hand-checked brands leave the International group
+        if re.search(r'\bWest\b', name) and 'US' in countries(name):
+            return 'US'                           # 'MTV (West)': West feeds are American
+        return cc
     have = countries(name)
     if not have or cc in have:
         return cc

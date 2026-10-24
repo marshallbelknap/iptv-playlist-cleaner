@@ -43,6 +43,7 @@ KSWT WTMO WWDT WNEU KCSO KMAS KPDF KMUV KNIC KEUV KVTF WRDC KWHY KRCA KZJL KMPX 
 KUVI KNIC WLII WSJN WAPA WUNI KQCW
 '''.split())
 SPANISH_CALLS.discard('KQCW')
+SPANISH_CALLS -= {'KUNS', 'WRDC', 'KJTL', 'KAZA', 'KUVI', 'KPYX', 'WFTT', 'KSWT'}     # these switched to English networks
 FOREIGN_CC = {
     'AR', 'IN', 'IT', 'UA', 'PT', 'FR', 'ES', 'RU', 'CN', 'GR', 'PH', 'DE',
     'VN', 'JP', 'MX', 'BR', 'IL', 'PL', 'TR', 'KR', 'ZH', 'NL', 'SE', 'NO',
@@ -424,7 +425,7 @@ US_NETWORKS = ['ABC', 'CBS', 'NBC', 'FOX', 'CW', 'PBS', 'MNT', 'MyNetworkTV', 'M
                'IND', 'ION', 'ME', 'METV', 'UPN', 'TCT', 'CTN', 'TBN', 'Telemundo', 'Univision']
 CALL_RE = re.compile(r'(?<![A-Z])([KW][A-Z]{2,3})(?:[- ]?(?:TV|DT\d?|LD|CD|CA|D\d))?(?![A-Za-z])')
 CA_CALL_RE = re.compile(r'\b(C[A-Z]{3})(?:[- ]?(?:TV|DT))?\b')
-NOT_CALLSIGNS = {'WNBA', 'WETV', 'WWE', 'WPT', 'KIDS', 'WEST', 'WORLD', 'WILD', 'WOMEN', 'WAR', 'WAY',
+NOT_CALLSIGNS = {'WASH', 'KEY', 'WNYC', 'WNBA', 'WETV', 'WWE', 'WPT', 'KIDS', 'WEST', 'WORLD', 'WILD', 'WOMEN', 'WAR', 'WAY',
                  'WTA', 'WTT', 'WBC', 'WBO', 'WRC', 'WFN', 'WE', 'KAYO', 'WHL', 'WIRE', 'WFH',
                  'WOW', 'KIDZ', 'KOOL', 'WIND', 'WINE', 'WOLF', 'KICK', 'KILL', 'KEEP', 'WALK',
                  'WARM', 'KNOW', 'WHAT', 'WHEN', 'WHY', 'WELL', 'WITH', 'WORK', 'WEB', 'WPN', 'WSL',

@@ -106,7 +106,7 @@ bare knuckle|\bbkfc\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/B
 ^a ?(n|&|and) ?e$	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/A%26E_Network_logo.svg/960px-A%26E_Network_logo.svg.png
 ^angels broadcast|^abtv\b	https://thumb.wikimedia.org/wikipedia/en/thumb/e/e9/Angels_Broadcast_Television_logo.svg/960px-Angels_Broadcast_Television_logo.svg.png
 ^alter$|^horror by alter	https://upload.wikimedia.org/wikipedia/en/4/4a/Logo_for_Gunpowder_%26_Sky.png
-^la local 36	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/KCET_PBS_SoCal_Plus_logo_2024.svg/960px-KCET_PBS_SoCal_Plus_logo_2024.svg.png
+^la ?(local )?36$	https://i.imgur.com/JxTzUEq.png
 ^q2 news	https://upload.wikimedia.org/wikipedia/commons/e/e0/KTVQ_Q2_logo.png
 ^twn\b	https://thumb.wikimedia.org/wikipedia/en/thumb/b/bf/TWN_Logo_2011.svg/960px-TWN_Logo_2011.svg.png
 ^(t)?erra mater wild	https://i.imgur.com/EbMK3Ph.png

@@ -326,6 +326,7 @@ class EpgIndex:
         """A guide's channel name reduced to what identifies the channel: 'A&E US - Pacific Feed (132)' ->
         'A&E West', 'Fox News Channel HD' -> 'Fox News Channel', 'SBS Food Sydney' -> 'SBS Food'."""
         n = re.sub(r'\s*\(\d+(?:-\d+)?\)\s*$', '', n)
+        n = re.sub(r'\s+by\s+(?:A&E|Lifetime|History|Lionsgate|Mech\+|AMC|VideoElephant|FilmRise)$', '', n)   # 'Storage Wars by A&E'
         n = re.sub(r'\(?\b(Pacific|West)\b\)?', ' West ', n)
         n = re.sub(r'\b(Eastern|East|Feed|National Feed|HDTV|HD|FHD|SD|UHD|4K|DT|STVA|Network|Channel|TV|The)\b|[-()]', ' ', n,
                    flags=re.I)
@@ -358,7 +359,8 @@ class EpgIndex:
         if how == 'alias' or self.id_matches(base, clean_name, cc):
             return True
         if base in self.source_of and self.source_of[base] in ('US_LOCALS1', 'PBS'):
-            return True
+            call = re.match(r'([KW][A-Z]{2,3})', base)        # a station id only for a name that has its call sign
+            return bool(call and re.search(r'\b' + call.group(1) + r'\b', clean_name))
         return self.similarity(base, clean_name, cc) >= 90
 
     def id_matches(self, gid, clean_name, cc='US'):
