@@ -551,7 +551,9 @@ def parse_local(name, loose=False):
         m = re.match(r'^(ABC|CBS|NBC|FOX|CW|PBS)\s*:\s*(.+)$', nm)
         if m:
             rest = re.sub(r'\b(' + m.group(1) + r')\s*(\d{1,2})\b', ' ', m.group(2), flags=re.I)
-            num = re.search(r'\b' + m.group(1) + r'\s*(\d{1,2})\b', m.group(2), re.I)
+            num = re.search(r'\b' + m.group(1) + r'\s*(\d{1,2})\b', m.group(2), re.I) or \
+                re.search(r'\b(\d{1,2})\s+' + m.group(1) + r'\b', m.group(2), re.I)
+            rest = re.sub(r'\b\d{1,2}\b', ' ', rest)
             words = [w for w in rest.split() if not (w.isupper() and w in US_STATES)]
             return {'net': m.group(1), 'num': num.group(1) if num else None, 'call': None, 'sub': None,
                     'city': smart_case(' '.join(words).upper())}

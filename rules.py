@@ -152,7 +152,8 @@ ENGLISH_INTL = re.compile(
 
 JUNK_RE = re.compile(
     r'(signal test|atomizertest|slatepo\d*|backhaul test|internal use|^test\b|'
-    r'\btest channel\b|dummy|placeholder|do not use|\bzzz\b(?! ?offline))', re.I)
+    r'\btest channel\b|dummy|placeholder|do not use|\bzzz\b(?! ?offline)|marketing banner|tv banner|'
+    r'\(wisedv test\)|\btest\)|\binfomercial\b|llott only|\(fmscfo\))', re.I)
 
 # ---------------------------------------------------------------------------
 # Casing
@@ -388,7 +389,7 @@ SPORTS_RE = re.compile(r"\b(espn\w*|sports?|supersports?|loi \d|fox sports|fs[12
                        r"olympic|paralympic|ivy league|longhorn|sportsman|outdoor channel|pursuit|"
                        r"fishing|hunting|wfn|world fishing|sky sport|eir sport|premier league|red ?bull|hpi ?tv|tab|"
                        r"laliga|la liga|serie a|bundesliga|ligue 1|uefa|fifa|copa|champions|vsin|"
-                       r"cbs sports|nbc sports|stadium|athletics|swim|ski|surf|skate|wrestl|aew|tna|"
+                       r"cbs sports|nbc sports|stadium|athletics|(?<!adult )swim|ski|surf|skate|wrestl|aew|tna|"
                        r"impact wrestling|pbr|rodeo|bull riding|darts|snooker|poker|chess|esports?|"
                        r"gol tv|goltv|fox soccer|soccer|football|hockey|baseball|basketball|softball|"
                        r"volleyball|lacrosse|cycling|nhra|indycar|imsa|supercross|monster jam|"

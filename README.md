@@ -26,16 +26,25 @@ fill in the provider links and token, Build. To update later: Project > iptv-cle
 
 ## Naming and groups
 - Local stations: `US: Boston - NBC - WBTS - 10` (City - Network - Call sign - Channel). Missing parts are filled
-  from `data/us_stations.tsv` / `data/ca_stations.tsv` (pooled from all providers), otherwise left out.
+  from `data/us_stations.tsv` (every US station on Wikipedia: market, network, subchannels, branded channel number,
+  logo) and `data/ca_stations.tsv`. Branded names ('ABC7 Chicago', 'KIRO 7 Seattle', 'Boston 25') are recognised
+  as locals too. A subchannel shows its own number, e.g. `US: Asheville - MyNetworkTV - WLOS - 13.2`.
+- Channels go to their home country (`origin.py`, using iptv-org's channel database): CNN or WGN in a Canada
+  group become US channels, BBC News in an Australia group a UK one, RTE in a UK group an Irish one. A channel
+  stays where it is when that country has its own version (HGTV Canada, Adult Swim Canada). US stations carried in
+  Canada (Buffalo, Seattle, Detroit) go to `US | Locals`.
 - Copies of the same channel keep the same name (quality suffix 4K/FHD/HD/SD and +1 are kept).
 - 24/7 loops are split into `24/7 | TV Shows`, `24/7 | Movies`, `24/7 | Actors & Directors`, `24/7 | Kids & Animation`.
   Show/movie/actor channels found in country groups move there too (`data/loop_channels.tsv`, hand-checked; rules in `loops.py`).
 
 ## Logos
-`logo_pick.py`: league/service logo for every sports and event channel (`logos/`), 24/7 tiles, then tv-logos,
-the official logo from the matched guide (upsized), iptv-org (>= 256 px), the provider's logo if big enough,
-and finally a clean name tile drawn by the server (`/logo/<name>.png`). The server measures new logos in the
-background so only high-quality ones are used.
+`logo_pick.py` only uses real logos, never generated ones: league/service logo for every sports and event channel
+(`logos/`), 24/7 tiles, the station's own logo (Wikipedia) for locals, hand-checked brand logos
+(`data/logo_aliases.tsv`), tv-logos, the official logo from the matched guide (upsized), iptv-org, the logos
+free streaming services publish (Pluto, Samsung, Roku, Plex, Xumo - `data/fast_logos.tsv`), the provider's logo,
+then the same channel's logo from the other playlist. Big, landscape logos are preferred; the server measures
+new logos in the background. A handful of obscure feeds with no logo anywhere are left blank rather than given
+an invented one (they are listed in the cache as `logos_missing_<playlist>.tsv`).
 
 ## Guide (EPG)
 The server builds one guide for all playlists at `http://<machine-ip>:8765/<ACCESS_TOKEN>/guide.xml.gz`

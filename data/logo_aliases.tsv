@@ -1,0 +1,119 @@
+# regex (matched against the channel name without its country prefix)	logo	[late = only when nothing more specific is found]   (hand-checked; Wikipedia/Wikimedia or tv-logos)
+^music choice\b	https://upload.wikimedia.org/wikipedia/en/c/c6/Music_Choice_logo.png
+^iheart	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/IHeartRadio_Logo.svg/960px-IHeartRadio_Logo.svg.png	late
+\biheartradio\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/IHeartRadio_Logo.svg/960px-IHeartRadio_Logo.svg.png
+^(stingray|sr |dj stingray|z stingray)|by stingray\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/canada/stingray-music-ca.png	late
+\bqello\b	https://upload.wikimedia.org/wikipedia/en/2/20/Qello_Concerts_Logo.png
+\bvevo\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Vevo_2016_Logo.svg/960px-Vevo_2016_Logo.svg.png
+^karaoke\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/indonesia/karaoke-channel-id.png
+^q-?dance\b	https://upload.wikimedia.org/wikipedia/commons/3/31/Q-dance_logo_2018.png
+^super ?sports?\b(?! ch\b)	https://upload.wikimedia.org/wikipedia/en/6/66/Supersport2012.jpg
+^astro (super ?sport|grandstand)	https://upload.wikimedia.org/wikipedia/commons/2/2f/Astro_ASSP1.png
+^spark sports?\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/new-zealand/spark-sport-nz.png
+^7(afl|now|news|plus|two|mate|flix|bravo)\b	https://thumb.wikimedia.org/wikipedia/en/thumb/4/47/Logo_7plus_2020.svg/960px-Logo_7plus_2020.svg.png
+^9(mystery|now|crime|rush|life|gem|go)\b	https://upload.wikimedia.org/wikipedia/en/0/06/9Now_logo.png
+^liv golf\b	https://thumb.wikimedia.org/wikipedia/en/thumb/2/27/LIV_golf_logo.svg/960px-LIV_golf_logo.svg.png
+^vfl\b	https://thumb.wikimedia.org/wikipedia/en/thumb/3/34/VFL_Football_Logo.svg/960px-VFL_Football_Logo.svg.png
+^sanfl\b	https://thumb.wikimedia.org/wikipedia/en/thumb/7/7d/SANFL_logo.svg/960px-SANFL_logo.svg.png
+^wsl\b|world surf league	https://upload.wikimedia.org/wikipedia/commons/6/6d/World_Surf_League_Logo.png
+^arizona public media	https://upload.wikimedia.org/wikipedia/commons/9/9b/Arizona_Public_Media_logo.png
+^ball state pbs	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Ball_State_PBS.svg/960px-Ball_State_PBS.svg.png
+^blue ridge pbs	https://upload.wikimedia.org/wikipedia/en/0/0d/Blue_Ridge_PBS_logo_%282019%29.png
+^valley pbs	https://upload.wikimedia.org/wikipedia/commons/b/b2/ValleyPBS_logo_2020.png
+^southern oregon pbs	https://upload.wikimedia.org/wikipedia/commons/b/b2/Southern_Oregon_PBS_logo_2019.png
+^lakeshore pbs	https://upload.wikimedia.org/wikipedia/en/d/d3/Lakeshore_PBS_logo_%282020%29.png
+^pbs ?12\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/KBDI-TV_%282020%29.svg/960px-KBDI-TV_%282020%29.svg.png
+^think ?tv\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/ThinkTV_Logo.svg/960px-ThinkTV_Logo.svg.png
+^ocean state media	https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/OceanStateMedia.svg/960px-OceanStateMedia.svg.png
+\bpbs\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/pbs-us.png	late
+^jewelry ?tv	https://upload.wikimedia.org/wikipedia/en/5/50/Jewelry_television_logo.png
+^tv ?one\b	https://upload.wikimedia.org/wikipedia/commons/e/e3/TV-One-logo-2016.png
+^bleacher report|^b/r\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Bleacher_Report_logo.svg/960px-Bleacher_Report_logo.svg.png
+professional fight(ing|ers) league|^pfl\b	https://upload.wikimedia.org/wikipedia/en/3/32/ProfessionalFightersLeagueShieldLogo.png
+^tna\b	https://upload.wikimedia.org/wikipedia/commons/3/35/TNA-logo-June-2024-v2.png
+^big 12\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Big_12_Conference_%28cropped%29_logo.svg/960px-Big_12_Conference_%28cropped%29_logo.svg.png
+^chicago sports network|\bchsn\b	https://upload.wikimedia.org/wikipedia/commons/6/68/Chicago_Sports_Network_Logo.png
+^k ?baseball	https://thumb.wikimedia.org/wikipedia/en/thumb/5/59/KBO_League.svg/960px-KBO_League.svg.png
+^premier league\b	https://thumb.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/960px-Premier_League_Logo.svg.png
+^the masters\b	https://upload.wikimedia.org/wikipedia/en/2/23/Masters_Logo.png
+^bnp paribas open	https://upload.wikimedia.org/wikipedia/en/9/92/Bnpparibasopen.jpg
+bare knuckle|\bbkfc\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Bkfc-logo.png/960px-Bkfc-logo.png
+^livenow\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/LiveNOW_from_FOX.png/960px-LiveNOW_from_FOX.png
+^ndtv\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/NDTV_logo.svg/960px-NDTV_logo.svg.png
+^xumo\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/XUMO-logo-2022.svg/960px-XUMO-logo-2022.svg.png
+^roku\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/The_Roku_Channel_Logo.svg/960px-The_Roku_Channel_Logo.svg.png
+^directv\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/DIRECTV_2021_logo.svg/960px-DIRECTV_2021_logo.svg.png
+^sling\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Sling_TV_logo.svg/960px-Sling_TV_logo.svg.png
+^tubi\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Tubi_logo_2024_purple.svg/960px-Tubi_logo_2024_purple.svg.png
+^curzon\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Curzon_logo.svg/960px-Curzon_logo.svg.png
+^citynews\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/CityNews_logo.svg/960px-CityNews_logo.svg.png
+^(onmi|omni) ?1\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/canada/omni-1-ca.png
+^tv ?ontario|^tvo\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/TVO-MediaEducationGroup_logo_primary_RGB.svg/960px-TVO-MediaEducationGroup_logo_primary_RGB.svg.png
+^ireland parliament|^oireachtas	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/ireland/oireachtas-tv-ie.png
+^formosa tv	https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Formosa_TV_logo.svg/960px-Formosa_TV_logo.svg.png
+^movistar laliga	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Movistar_Plus%2B_2022_logo.svg/960px-Movistar_Plus%2B_2022_logo.svg.png
+^v sport\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/nordic/denmark/v-sport-live-dk.png
+^jewish broadcasting	https://upload.wikimedia.org/wikipedia/commons/3/3d/JBS_LOGO_Navy_FullName.png
+^nick ?teen\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/TeenNick_logo_2023_%28outline%29.svg/960px-TeenNick_logo_2023_%28outline%29.svg.png
+^dr\.? phil|merit tv	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Merit_TV_2024.png/960px-Merit_TV_2024.png
+^fubo\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/misc/media/fubo-tv.png
+^salt\+? ?(\+ )?light	https://upload.wikimedia.org/wikipedia/en/e/eb/Salt_%2B_Light_Television_2020.png
+^afrotainment	https://upload.wikimedia.org/wikipedia/en/e/e2/Afrotainment.png
+^revel(ation)? ?tv	https://upload.wikimedia.org/wikipedia/commons/8/86/Revelation_tv.png
+^remezcla	https://upload.wikimedia.org/wikipedia/commons/4/45/Remezcla_Logo.jpg
+^(the ?grio|redbox \(us\) grio)	https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/The_Grio.svg/960px-The_Grio.svg.png
+^tastemade	https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/TastemadeLogo.svg/960px-TastemadeLogo.svg.png
+^get ?tv\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/get-tv-us.png
+^sky golf\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-golf-uk.png
+^sky disney\+? cinema	https://upload.wikimedia.org/wikipedia/en/d/d7/Sky_Cinema_2026_Stacked_Logo.png
+^e!$	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/e-entertainment-uk.png
+^spectrum news\b|^spectrum new 1\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Spectrum_News_%282023%29.svg/960px-Spectrum_News_%282023%29.svg.png
+^bay news 9	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Spectrum_Bay_News_9_%282023%29.svg/960px-Spectrum_Bay_News_9_%282023%29.svg.png
+^boston 25	https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Wfxt2019.svg/960px-Wfxt2019.svg.png
+^kris ?6	https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/KRIS_6_%282024%29.svg/960px-KRIS_6_%282024%29.svg.png
+^tmj ?4	https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/TMJ_4_2020_gradient.svg/960px-TMJ_4_2020_gradient.svg.png
+^fox\+ chicago	https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/WPWR_Fox_Chicago_Plus_%282026%29.svg/960px-WPWR_Fox_Chicago_Plus_%282026%29.svg.png
+^my fox 10	https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/KFPH-DT_%282021%29.svg/960px-KFPH-DT_%282021%29.svg.png
+^cwtv\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/cw-us.png	late
+^abc ?\d+\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/abc-us.png	late
+^nbc ?\d+\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/nbc-us.png	late
+^cbs ?\d+\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/cbs-logo-white-us.png	late
+^fox ?\d+\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/fox-us.png	late
+^my ?\d+\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/my-network-tv-us.png	late
+^tv ?land	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/tv-land-us.png
+^sho ?2\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/showtime-2-us.png
+^(more|outer|thriller)max	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/cinemax-us.png
+^flo ?racing	https://raw.githubusercontent.com/marshallbelknap/iptv-playlist-cleaner/main/logos/flosports.png
+^t2 tennis	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/tennis-channel-us.png
+^cinebox\b|^docubox\b	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Cineverse_logo.svg/960px-Cineverse_logo.svg.png
+^(religious )?3abn	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/3abn-us.png
+^yahoo!? sports	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Yahoo_Sports_New_Logo.png/960px-Yahoo_Sports_New_Logo.png
+^racing\.?com	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/australia/racing-com-au.png
+^sky (1 )?racing|^sky thoroughbred	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/australia/sky-racing-au.png
+^eir sport	https://upload.wikimedia.org/wikipedia/en/d/df/Eirsportlogo.png
+^real madrid	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/spain/real-madrid-tv-es.png
+^gpb\b|georgia public	https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Georgia_Public_Broadcasting_2025_vector_logo.svg/960px-Georgia_Public_Broadcasting_2025_vector_logo.svg.png
+^wafl\b	https://upload.wikimedia.org/wikipedia/en/c/cb/West_Australian_Football_League_logo_2024.png
+^athletics australia	https://thumb.wikimedia.org/wikipedia/en/thumb/6/65/Australian_Athletics_logo.svg/960px-Australian_Athletics_logo.svg.png
+^a ?(n|&|and) ?e$	https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/A%26E_Network_logo.svg/960px-A%26E_Network_logo.svg.png
+^angels broadcast|^abtv\b	https://thumb.wikimedia.org/wikipedia/en/thumb/e/e9/Angels_Broadcast_Television_logo.svg/960px-Angels_Broadcast_Television_logo.svg.png
+^alter$|^horror by alter	https://upload.wikimedia.org/wikipedia/en/4/4a/Logo_for_Gunpowder_%26_Sky.png
+^la local 36	https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/KCET_PBS_SoCal_Plus_logo_2024.svg/960px-KCET_PBS_SoCal_Plus_logo_2024.svg.png
+^q2 news	https://upload.wikimedia.org/wikipedia/commons/e/e0/KTVQ_Q2_logo.png
+^twn\b	https://thumb.wikimedia.org/wikipedia/en/thumb/b/bf/TWN_Logo_2011.svg/960px-TWN_Logo_2011.svg.png
+^(t)?erra mater wild	https://i.imgur.com/EbMK3Ph.png
+^red apple 21	https://i.imgur.com/ICcQUCH.png
+^stash tv	https://image.xumo.com/v1/channels/channel/99991300/512x512.png?type=color_onBlack
+^(nbc )?lx home	https://image.xumo.com/v1/channels/channel/99991651/512x512.png?type=color_onBlack
+^fairground ai	https://image.xumo.com/v1/channels/channel/99951590/512x512.png?type=color_onBlack
+^nost\b	https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/NOST-1080x1080.jpg/250px-NOST-1080x1080.jpg
+^reelz	https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Reelz.svg/960px-Reelz.svg.png
+^(the )?shockwave$	https://images.pluto.tv/channels/68b784d03e17b7676a0378f7/colorLogoPNG_1760108955019.png
+^\[?wbcb\b|youngstown - wbcb	https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/WFMJ-DT2_%28WBCB%29_2024.svg/960px-WFMJ-DT2_%28WBCB%29_2024.svg.png
+^super sports ch \d	https://raw.githubusercontent.com/marshallbelknap/iptv-playlist-cleaner/main/logos/live-event.png
+^logo\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/logo-us.png
+^country music television|^cmt\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/cmt-us.png
+^yes (tv|hamilton|burlington)	https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/YesTV_Canada.svg/960px-YesTV_Canada.svg.png
+^we ?tv\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states/we-tv-us.png
+^w!? ?(- ?watch|$)	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/u-and-w-uk.png
+^w ?\+1	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/u-and-w-plus-uk.png

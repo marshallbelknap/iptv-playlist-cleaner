@@ -21,7 +21,7 @@ import urllib.parse
 import urllib.request
 
 from epgmap import norm
-from logos import LogoIndex, TVLOGOS_RAW, NETWORK_LOGOS
+from logos import LogoIndex, TVLOGOS_RAW, NETWORK_LOGOS  # noqa: F401
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, 'data')
@@ -100,7 +100,7 @@ LOOP_TILES = {'24/7 | TV Shows': repo('247-tv-shows'), '24/7 | Movies': repo('24
 SPORT_WORDS = [(r'soccer|football|futbol|fútbol|\bfc\b|\bvs?\.? ', 'soccer'), (r'hockey', 'hockey'),
                (r'tennis', 'tennis'), (r'rugby', 'rugby'), (r'boxing|fight|ufc|mma', 'boxing'), (r'golf', 'golf')]
 TRUSTED = re.compile(r'^https?://(raw\.githubusercontent\.com/(tv-logo|marshallbelknap)/|dtil\.tmsimg\.com/|'
-                     r'd2n0069hmnqmmx\.cloudfront\.net/epgdata/1\.0/newchanlogos/600/|images\.pluto\.tv/)')
+                     r'd2n0069hmnqmmx\.cloudfront\.net/epgdata/1\.0/newchanlogos/600/|images\.pluto\.tv/|image\.xumo\.com/|thumb\.wikimedia\.org/|upload\.wikimedia\.org/)')
 
 
 def bkey(s):
@@ -179,6 +179,30 @@ class Picker:
                 if f.endswith('.icons.tsv'):
                     self._load_icons(os.path.join(lists, f))
         self.iptv = self._iptv_sizes()
+        self.by_name = self._names_with_icons([os.path.join(DATA, 'epg')] + ([lists] if lists and os.path.isdir(lists) else []))
+        self.stations = {}                    # US call sign -> (Wikipedia logo url, 'WxH', primary network)
+        p = os.path.join(DATA, 'us_stations.tsv')
+        if os.path.exists(p):
+            for line in open(p, encoding='utf-8'):
+                f = line.rstrip('\n').split('\t')
+                if len(f) >= 6 and f[5] and not line.startswith('#'):
+                    u, _, wh = f[5].partition(' ')
+                    self.stations[f[0]] = (u, wh, f[2])
+        self.overrides = {}                   # hand-checked / Wikipedia logos for names nothing else knows
+        p = os.path.join(DATA, 'logo_overrides.tsv')
+        if os.path.exists(p):
+            for line in open(p, encoding='utf-8'):
+                f = line.rstrip('\n').split('\t')
+                if len(f) >= 3 and not line.startswith('#'):
+                    self.overrides[(f[0], f[1])] = f[2]
+        self.missing = []
+        self.aliases = []                     # (regex, logo): hand-checked brand / family logos
+        p = os.path.join(DATA, 'logo_aliases.tsv')
+        if os.path.exists(p):
+            for line in open(p, encoding='utf-8'):
+                f = line.rstrip('\n').split('\t')
+                if len(f) >= 2 and not line.startswith('#'):
+                    self.aliases.append((re.compile(f[0], re.I), f[1], len(f) > 2 and f[2] == 'late'))
 
     def _load_icons(self, path):
         if not os.path.exists(path):
@@ -187,6 +211,31 @@ class Picker:
             p = line.rstrip('\n').split('\t')
             if len(p) == 3 and p[2] and not line.startswith('#'):
                 self.guide_icons[p[1]] = p[2]
+
+    def _names_with_icons(self, dirs):
+        """FAST services (Pluto, Samsung, Roku, Plex ...) publish a logo with every channel: name -> logo."""
+        import logos as L
+        out = {}
+        for d in dirs:
+            for f in sorted(os.listdir(d)):
+                if not f.endswith('.tsv') or f.endswith('.icons.tsv'):
+                    continue
+                for line in open(os.path.join(d, f), encoding='utf-8'):
+                    p = line.rstrip('\n').split('\t')
+                    if len(p) >= 2 and p[0] in self.guide_icons:
+                        k = L.lkey(re.sub(r'^(Pluto TV|Samsung|Plex|Roku)\s+', '', p[1]))
+                        if len(k) >= 3:
+                            out.setdefault(k, upgrade(self.guide_icons[p[0]]))
+                            out.setdefault(L.lkey(p[1]), upgrade(self.guide_icons[p[0]]))
+        p = os.path.join(DATA, 'fast_logos.tsv')
+        if os.path.exists(p):
+            for line in open(p, encoding='utf-8'):
+                f = line.rstrip('\n').split('\t')
+                if len(f) >= 2 and not line.startswith('#'):
+                    for k in {L.lkey(f[0]), L.lkey(re.sub(r'\s+(by|from)\s+\S.*$', '', f[0]))}:
+                        if len(k) >= 3:
+                            out.setdefault(k, f[1])
+        return out
 
     @staticmethod
     def _iptv_sizes():
@@ -206,7 +255,11 @@ class Picker:
 
     def tvlogos(self, cc, name):
         k = __import__('logos').lkey(name)
-        for f in [__import__('logos').FOLDERS.get(cc), 'international']:
+        if not k:
+            return None
+        own = __import__('logos').FOLDERS.get(cc)
+        others = [x for x in SEARCH_ALSO if x != own] if len(k) >= 5 else []     # short names only at home
+        for f in [own, 'international'] + others:
             hit = self.idx.repo.get(f, {}).get(k) if f else None
             if hit:
                 return TVLOGOS_RAW + hit[0]
@@ -219,10 +272,15 @@ class Picker:
         return u if u and self.ok(u) else None
 
     def brand_prefix(self, cc, name):
-        words = re.sub(r'[:|(\[].*$', '', name).split()
-        for n in range(len(words) - 1, 0, -1):
+        head0 = re.sub(r'[:|(\[].*$', '', name).strip()
+        words = head0.split()
+        top = len(words) if head0 != name.strip() else len(words) - 1    # 'Music Choice: Yacht Rock' -> 'Music Choice'
+        for n in range(top, 0, -1):
             head = ' '.join(words[:n])
-            if len(head) < 3 or head.lower() in ('the', 'us', 'uk', 'my', 'new', 'best', 'true', 'real', 'great'):
+            if len(head) < 3 or head.lower() in ('the', 'us', 'uk', 'my', 'new', 'best', 'true', 'real', 'great', 'super',
+                                                 'sports', 'sport', 'news', 'live', 'top', 'world', 'all', 'one',
+                                                 'star', 'first', 'prime', 'max', 'plus', 'classic', 'kids', 'movie',
+                                                 'movies', 'music', 'local', 'free', 'channel', 'tv', 'big', 'home'):
                 continue
             hit = self.tvlogos(cc, head) or self.iptv_logo(cc, head)
             if hit:
@@ -259,10 +317,21 @@ class Picker:
                     return BRANDS[k]
             return BRANDS['ppv'] if g == 'PPV & Events' else repo('sports')
         # channels, locals, everything else
+        if kind == 'local':
+            hit = self.local_logo(r, name)
+            if hit:
+                return hit
+        bare = re.sub(r'^[A-Z]{2,3}: ', '', lookup_name)
         if kind != 'local':
+            for rx, u, is_late in self.aliases:      # hand-checked brand logos first
+                if not is_late and rx.search(bare):
+                    return u
             hit = self.tvlogos(cc, lookup_name)
             if hit:
                 return hit
+        key = (cc or '', __import__('logos').lkey(lookup_name))
+        if key in self.overrides:
+            return self.overrides[key]
         icon = upgrade(self.guide_icons.get((tvg_id or '').split('~')[0], ''))
         if icon and self.ok(icon):
             return icon
@@ -271,11 +340,6 @@ class Picker:
             return hit
         if provider_logo and self.ok(provider_logo):
             return provider_logo
-        hit = self.brand_prefix(cc, lookup_name)         # 'Music Choice 44' -> Music Choice, 'FOX 5 New York' -> FOX
-        if hit:
-            return hit
-        if kind == 'local' and r.get('local') and r['local'].get('net') in NETWORK_LOGOS:
-            return TVLOGOS_RAW + NETWORK_LOGOS[r['local']['net']]
         if kind == 'ca-local':                                    # 'CA: Kitchener - CTV - CKCO - 13'
             parts = name.split(' - ')
             net = parts[1].split()[0] if len(parts) > 1 else ''
@@ -283,7 +347,141 @@ class Picker:
                 return TV + CA_NETWORK_LOGOS[net]
             if net in NETWORK_LOGOS:
                 return TVLOGOS_RAW + NETWORK_LOGOS[net]
-        return self.name_tile(name)
+        import logos as L
+        for v in [lookup_name, re.sub(r'^(Pluto TV|Samsung|Plex|Roku|Xumo)\s+', '', lookup_name)] + variants(lookup_name):
+            hit = self.by_name.get(L.lkey(v))   # the FAST service's own logo for this channel
+            if hit:
+                return hit
+        for rx, u, is_late in self.aliases:
+            if rx.search(bare):
+                return u
+        for v in variants(lookup_name):           # '9Gem (Gold Coast)' -> '9Gem', 'Karaoke 3' -> 'Karaoke'
+            hit = self.tvlogos(cc, v) or self.iptv_logo(cc, v) or self.overrides.get((cc or '', __import__('logos').lkey(v)))
+            if hit:
+                return hit
+        for v in [lookup_name] + variants(lookup_name):
+            hit = self.tvlogos_fuzzy(cc, v)
+            if hit:
+                return hit
+        hit = self.brand_prefix(cc, lookup_name)
+        if hit:
+            return hit
+        # real logos that are smaller than we would like are still better than none
+        for u in (icon, self.iptv_any(cc, lookup_name), provider_logo):
+            if u and self.usable(u):
+                return u
+        if re.search(r'\bevent \d+\b|\(event only\)|fight night|\bfight\b', lookup_name, re.I) and \
+                (g.endswith('| Sports') or g == 'PPV & Events'):
+            return BRANDS['boxing'] if re.search(r'fight', lookup_name, re.I) else BRANDS['event']
+        self.missing.append((cc, lookup_name, provider_logo or '', icon or ''))
+        return provider_logo or icon or PLATFORM_LOGOS.get(r.get('platform') or '') or \
+            self.family_logo(cc, lookup_name) or self.network_word(lookup_name) or ''
+
+    def local_logo(self, r, name):
+        """Station's own logo (Wikipedia) for its main channel; the network's logo for a subchannel."""
+        loc = r.get('local') or {}
+        parts = re.sub(r'\s+(4K|FHD|HD|SD|\+1)$', '', name[4:]).split(' - ')
+        net = parts[1] if len(parts) >= 3 else loc.get('net')
+        call = loc.get('call')
+        sub = len(parts) >= 4 and re.search(r'\.(\d+)$', parts[-1]) and not parts[-1].endswith('.1')
+        st = self.stations.get(call or '')
+        if st and not sub and (not net or net == st[2] or net == 'Independent'):
+            return st[0]
+        if net in NETWORK_LOGOS:
+            return TVLOGOS_RAW + NETWORK_LOGOS[net]
+        if st:
+            return st[0]
+        return None
+
+    def tvlogos_fuzzy(self, cc, name):
+        """Typos and odd spellings: 'Nationl Geographic', 'Nickleodeon', 'A n E'."""
+        from rapidfuzz import process as rf, fuzz
+        import logos as L
+        k = L.lkey(name.replace(' n ', ' and '))
+        if len(k) < 6:
+            return None
+        for f in [L.FOLDERS.get(cc), 'international']:
+            keys = self._fkeys.get(f) if hasattr(self, '_fkeys') else None
+            if keys is None:
+                self._fkeys = getattr(self, '_fkeys', {})
+                keys = self._fkeys[f] = list(self.idx.repo.get(f, {}).keys()) if f else []
+            if not keys:
+                continue
+            m = rf.extractOne(k, keys, scorer=fuzz.ratio, score_cutoff=90)
+            if m:
+                return TVLOGOS_RAW + self.idx.repo[f][m[0]][0]
+        return None
+
+    def iptv_any(self, cc, name):
+        k = __import__('logos').lkey(name)
+        country = __import__('logos').IPTV_CC.get(cc)
+        return self.idx.iptv.get((country, k)) or self.idx.iptv.get((None, k))
+
+    def usable(self, url):
+        """Known to be a real, landscape-ish logo of at least 120 px (smaller than ideal, but genuine)."""
+        if url in self.iptv:
+            self.dims.d.setdefault(url, self.iptv[url])
+        v = self.dims.d.get(url)
+        if v is None:
+            self.dims.unknown.add(url)
+            return False
+        m = re.match(r'(\d+)x(\d+)', v)
+        return bool(m) and max(int(m.group(1)), int(m.group(2))) >= 120 and int(m.group(2)) <= int(m.group(1)) * 1.25
+
+    @staticmethod
+    def network_word(name):
+        m = re.search(r'\b(ABC|CBS|NBC|FOX|PBS|CW|MyNetworkTV|ION|MeTV)\b', name)
+        return TVLOGOS_RAW + NETWORK_LOGOS[m.group(1)] if m and m.group(1) in NETWORK_LOGOS else None
+
+    def family_logo(self, cc, name):
+        """Platform the channel belongs to ('Pluto TV ...', 'Stingray ...'), else the country's broadcaster logo."""
+        bare = re.sub(r'^[A-Z]{2,3}: ', '', name)
+        for rx, path, url in FAMILIES:
+            if re.search(rx, bare, re.I):
+                return url or TVLOGOS_RAW + path
+        return None
+
+
+REGION = (r'Sydney|Melbourne|Brisbane|Perth|Adelaide|Canberra|Hobart|Darwin|Gold[- ]Coast|Newcastle|Lismore|'
+          r'Townsville|Toowoomba|Mackay|Rockhampton|Wide Bay|Sunshine Coast|Cairns|NSW|QLD|VIC|SA|WA|TAS|NT|ACT|'
+          r'National|Regional|East|West|Pacific|Central|North|South|London|Scotland|Wales|Northern Ireland|NI|'
+          r'Toronto|Vancouver|Montreal|Calgary|Edmonton|Ottawa|Alberta|Ontario|Quebec|BC|Atlantic|Prairies|'
+          r'Main|Feed|Backup|Live|Channel|TV|Network|Plus|Extra|\d+')
+
+
+def variants(name):
+    """Shorter forms of a name to look a logo up by, most specific first."""
+    out = []
+    n = re.sub(r'\s*\([^)]*\)\s*', ' ', name).strip()
+    n = re.sub(r'\s*[:|-]\s*$', '', n)
+    if n != name:
+        out.append(n)
+    m = n
+    for _ in range(3):
+        m2 = re.sub(r'(?:\s+|(?<=[a-z!])(?=\d))(' + REGION + r')$', '', m, flags=re.I).strip(' -:')
+        if m2 == m or len(m2) < 2:
+            break
+        m = m2
+        out.append(m)
+    m3 = re.sub(r'^(Channel|The|Religious|Real)\s+', '', m, flags=re.I)
+    if m3 != m:
+        out.append(m3)
+    return [x for i, x in enumerate(out) if x and x not in out[:i]]
+
+
+SEARCH_ALSO = ['united-states', 'united-kingdom', 'canada', 'australia', 'new-zealand', 'ireland', 'south-africa']
+PLATFORM_LOGOS = {      # the free service a channel streams from, when the channel itself has no logo anywhere
+    'RK': 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/The_Roku_Channel_Logo.svg/960px-The_Roku_Channel_Logo.svg.png',
+    'TUBI': 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Tubi_logo_2024_purple.svg/960px-Tubi_logo_2024_purple.svg.png',
+    '7PLUS': 'https://thumb.wikimedia.org/wikipedia/en/thumb/4/47/Logo_7plus_2020.svg/960px-Logo_7plus_2020.svg.png',
+    '9NOW': 'https://upload.wikimedia.org/wikipedia/en/0/06/9Now_logo.png',
+    '10PLAY': 'https://thumb.wikimedia.org/wikipedia/en/thumb/9/91/Network_10_logo_2025.svg/960px-Network_10_logo_2025.svg.png',
+    'SBS': TV + 'australia/sbs-au.png',
+    'ABC': TV + 'australia/abc-au.png',
+}
+FAMILIES = [(r'^pluto tv\b', None, 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Pluto_TV_logo_2024_black.svg/960px-Pluto_TV_logo_2024_black.svg.png'),
+            (r'^samsung\b', None, 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Samsung_TV_Plus_logo.svg/960px-Samsung_TV_Plus_logo.svg.png'),
+            (r'^plex\b', None, 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Plex_logo_2022.svg/960px-Plex_logo_2022.svg.png')]      # (regex, tv-logos path) for platform families; filled when a family logo exists
 
 
 # ---- checking new logos (used by the server, in the background) ---------------------------------------

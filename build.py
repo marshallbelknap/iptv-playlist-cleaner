@@ -187,6 +187,19 @@ def main(src, out, report=None, gen_prefix='gen', name_tiles=False, cache_dir=No
         if not r['drop'] and e['attrs'].get('tvg-logo'):
             logo_use[e['attrs']['tvg-logo']].add(clean_for_lookup(r['name']).split(':')[0])
 
+    # logos chosen for the same channel name in the other playlists (kept in the cache between builds)
+    pool_path = os.path.join(cache_dir, 'logo_pool.json') if cache_dir else None
+    try:
+        pool = json.load(open(pool_path)) if pool_path and os.path.exists(pool_path) else {}
+    except ValueError:
+        pool = {}
+    # a channel's logo from another copy of the same channel (one source has it, another does not)
+    same_name_logo = {}
+    for e, r in zip(entries, recs):
+        u = e['attrs'].get('tvg-logo', '')
+        if not r['drop'] and u and len(logo_use[u]) <= 3 and u.rsplit('/', 1)[-1] not in WEAK_LOGOS:
+            same_name_logo.setdefault(clean_for_lookup(r.get('lookup') or r['name']).lower(), u)
+
     # most common provider logo per event label, reused for slots that have none
     lab_logos = defaultdict(Counter)
     for e, r in zip(entries, recs):
@@ -223,6 +236,7 @@ def main(src, out, report=None, gen_prefix='gen', name_tiles=False, cache_dir=No
         provider = old_logo
         if provider and (provider.rsplit('/', 1)[-1] in WEAK_LOGOS or len(logo_use[provider]) > 3):
             provider = ''                    # one generic picture shared by many different channels
+        provider = provider or same_name_logo.get(nm.lower(), '') or pool.get(nm.lower(), '')
         logo = picker.pick(r, cc, nm, tvg_id, provider)
         stats['logo: ' + logo_kind(logo, old_logo)] += 1
         kept.append({**r, 'tvg_id': tvg_id, 'logo': logo, 'url': e['url'], 'dur': e.get('dur', '-1'),
@@ -231,6 +245,17 @@ def main(src, out, report=None, gen_prefix='gen', name_tiles=False, cache_dir=No
     # copies of the same channel (several sources) keep the same name - no (2)/(3) numbering
     kept.sort(key=lambda r: (group_rank(r['group']), sort_key(r)))
 
+    if pool_path:
+        for r in kept:
+            if r['logo'] and r['group'] not in ('PPV & Events',) and not r['group'].startswith('Sports | '):
+                pool.setdefault(clean_for_lookup(r.get('lookup') or r['name']).lower(), r['logo'])
+        tmp = pool_path + '.tmp'
+        json.dump(pool, open(tmp, 'w'))
+        os.replace(tmp, pool_path)
+    if cache_dir:
+        with open(os.path.join(cache_dir, f'logos_missing_{gen_prefix}.tsv'), 'w', encoding='utf-8') as f:
+            for row in sorted(set(picker.missing)):
+                f.write('\t'.join(row) + '\n')
     used = set()
     for r in kept:
         if not r['tvg_id']:

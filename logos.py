@@ -33,6 +33,38 @@ NETWORK_LOGOS = {
     'ABC': 'countries/united-states/abc-us.png', 'CBS': 'countries/united-states/cbs-logo-white-us.png',
     'NBC': 'countries/united-states/nbc-us.png', 'FOX': 'countries/united-states/fox-us.png',
     'PBS': 'countries/united-states/pbs-us.png', 'CW': 'countries/united-states/cw-us.png',
+    'MyNetworkTV': 'countries/united-states/my-network-tv-us.png',
+    'ION': 'countries/united-states/ion-television-us.png',
+    'ION Mystery': 'countries/united-states/ion-mystery-us.png',
+    'MeTV': 'countries/united-states/me-tv-us.png',
+    'Telemundo': 'countries/united-states/telemundo-us.png',
+    'Univision': 'countries/united-states/univision-us.png',
+    'Cozi TV': 'countries/united-states/cozi-tv-us.png',
+    'Antenna TV': 'countries/united-states/antenna-us.png',
+    'Heroes & Icons': 'countries/united-states/heroes-and-icons-us.png',
+    'Start TV': 'countries/united-states/start-tv-us.png',
+    'Grit': 'countries/united-states/grit-us.png',
+    'Bounce TV': 'countries/united-states/bounce-us.png',
+    'Court TV': 'countries/united-states/court-tv-us.png',
+    'Dabl': 'countries/united-states/dabl-us.png',
+    'Charge!': 'countries/united-states/charge-us.png',
+    'Comet': 'countries/united-states/comet-us.png',
+    'Story Television': 'countries/united-states/story-television-us.png',
+    'Catchy Comedy': 'countries/united-states/catchy-comedy-us.png',
+    'Laff': 'countries/united-states/laff-us.png',
+    'Roar': 'countries/united-states/roar-us.png',
+    'Defy': 'countries/united-states/defy-us.png',
+    'TBN': 'countries/united-states/tbn-us.png',
+    'Daystar': 'countries/united-states/daystar-us.png',
+    '3ABN': 'countries/united-states/3abn-us.png',
+    'HSN': 'countries/united-states/hsn-us.png',
+    'QVC': 'countries/united-states/qvc-us.png',
+    'Retro TV': 'countries/united-states/retro-tv-us.png',
+    'Buzzr': 'countries/united-states/buzzr-us.png',
+    'getTV': 'countries/united-states/get-tv-us.png',
+    'Movies!': 'countries/united-states/movies-us.png',
+    'Shop LC': 'countries/united-states/shop-lc-us.png',
+    'MeTV Toons': 'countries/united-states/me-tv-toons-us.png',
 }
 
 STRIP = {'hd', 'fhd', 'uhd', 'sd', '4k', 'tv', 'channel', 'network', 'the', 'us', 'uk', 'ca', 'au', 'nz',
@@ -48,13 +80,14 @@ class LogoIndex:
         self.repo = {}
         for line in open(files_txt):
             p = line.strip().strip('"')
-            m = re.match(r'^countries/([^/]+)/(.+)\.png$', p)
+            m = re.match(r'^countries/([^/]+)/(?:(.*)/)?([^/]+)\.png$', p)
             if not m:
                 continue
-            folder, stem = m.groups()
-            stem = re.sub(r'-(us|uk|ca|au|nz|ie|za|int)$', '', stem)
-            # skip obvious variants when a plain version exists
-            variant = bool(re.search(r'-(hz|white|light|dark|icon|square|alt|old|\d{4})(-|$)', stem))
+            folder, sub, stem = m.groups()
+            stem = re.sub(r'[-_](us|uk|ca|au|nz|ie|za|int)$', '', stem)
+            # skip obvious variants when a plain version exists (sub-folders like 'beinsports/old/...' rank last)
+            variant = bool(re.search(r'-(hz|white|light|dark|icon|square|alt|old|\d{4})(-|$)', stem)) or \
+                bool(sub and re.search(r'\bold\b', sub))
             k = lkey(stem.replace('-', ' '))
             cur = self.repo.setdefault(folder, {}).get(k)
             if cur is None or (cur[1] and not variant):
