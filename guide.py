@@ -176,8 +176,9 @@ def refresh_channel_list(src, path, list_dir):
         log(f'{src}: channel list now has {len(rows)} channels (was {old_n})')
 
 
-def copy_programmes(path, wanted, out, lo, hi):
-    """Stream one XMLTV file, writing programmes for wanted ids (and their shifted copies). Returns ids seen."""
+def copy_programmes(path, wanted, out, lo, hi, last=None):
+    """Stream one XMLTV file, writing programmes for wanted ids (and their shifted copies). Returns ids seen;
+    `last` (a dict) gets the end time of each id's last programme."""
     seen = set()
     opener = gzip.open if path.endswith('.gz') else open
     try:
@@ -206,6 +207,8 @@ def copy_programmes(path, wanted, out, lo, hi):
                             el.tail = '\n'
                             out.write(ET.tostring(el, encoding='unicode'))
                             seen.add(tid)
+                            if last is not None and (tid not in last or e2 > last[tid]):
+                                last[tid] = e2
                     root.clear()
                 elif el.tag == 'channel':
                     root.clear()
@@ -214,11 +217,97 @@ def copy_programmes(path, wanted, out, lo, hi):
     return seen
 
 
+PROG_TAG = re.compile(r'<programme\b[^>]*>')
+ATTR = re.compile(r'(start|stop|channel)="([^"]*)"')
+
+
+def coverage(path, needed, lo, hi):
+    """Minutes of listings each (id, shift) has between lo and hi. needed = {id: {shifts}}.
+    A quick scan of the programme tags; the full copy happens later only for the ids that are picked."""
+    cov = {}
+    opener = gzip.open if path.endswith('.gz') else open
+    try:
+        with opener(path, 'rt', encoding='utf-8', errors='replace') as f:
+            for line in f:
+                if '<programme' not in line:
+                    continue
+                for tag in PROG_TAG.findall(line):
+                    a = dict(ATTR.findall(tag))
+                    cid = html.unescape(a.get('channel', ''))
+                    shifts = needed.get(cid)
+                    if not shifts or 'start' not in a:
+                        continue
+                    try:
+                        st, en = parse_xt(a['start']), parse_xt(a.get('stop') or a['start'])
+                    except ValueError:
+                        continue
+                    for sh in shifts:
+                        s2, e2 = st + timedelta(minutes=sh), en + timedelta(minutes=sh)
+                        m = (min(e2, hi) - max(s2, lo)).total_seconds() / 60
+                        if m > 0:
+                            cov[(cid, sh)] = cov.get((cid, sh), 0) + m
+    except (OSError, EOFError) as e:
+        log('could not scan', os.path.basename(path), e)
+    return cov
+
+
+def load_alts(folder):
+    """Other guide ids for the same channels, written by the playlist builder (guide_alts_<playlist>.json)."""
+    alts = {}
+    try:
+        names = [n for n in os.listdir(folder) if n.startswith('guide_alts_') and n.endswith('.json')]
+    except OSError:
+        return alts
+    import json
+    for n in names:
+        try:
+            for k, v in json.load(open(os.path.join(folder, n), encoding='utf-8')).items():
+                alts[k] = list(dict.fromkeys(alts.get(k, []) + list(v)))
+        except (OSError, ValueError):
+            continue
+    return alts
+
+
+def pick_sources(chans, alts, epg, paths, now):
+    """For each channel, the guide id to take listings from: its own id unless that guide has gone stale
+    (e.g. a source that stopped updating), in which case the alternative with the most listings for the
+    next day. Returns {channel id: (source id, shift minutes)}."""
+    cands = {}
+    needed = {}                                     # source -> {id: {shifts}}
+    for cid in chans:
+        lst = []
+        for c in [cid] + alts.get(cid, []):
+            base, _, sh = c.partition(SHIFT_SEP)
+            src = epg.source_of.get(base)
+            if src and paths.get(src):
+                lst.append((base, int(sh or 0)))
+                needed.setdefault(src, {}).setdefault(base, set()).add(int(sh or 0))
+        if lst:
+            cands[cid] = lst
+    lo, hi = now, now + timedelta(hours=24)
+    cov = {}
+    for src, ids in needed.items():
+        cov.update(coverage(paths[src], ids, lo, hi))
+    out = {}
+    switched = 0
+    for cid, lst in cands.items():
+        scores = [cov.get(c, 0) for c in lst]
+        best = max(scores)
+        if best <= 0:
+            continue
+        i = 0 if scores[0] >= 0.6 * best else scores.index(best)
+        out[cid] = lst[i]
+        switched += i > 0
+    log(f'{len(out)} channels have listings; {switched} use another guide because their own has gone stale')
+    return out
+
+
 # ---------------------------------------------------------------------------
 # generated listings
 # ---------------------------------------------------------------------------
 def event_parts(name):
     """'NFL 02: Jaguars vs Eagles (Oct 11 9:30 AM ET)' -> ('NFL 02', 'Jaguars vs Eagles', datetime|None)."""
+    name = re.sub(r'\s+(4K|FHD|HD|SD)$', '', name)        # 'NFL 08: Ravens at Falcons (Oct 24 8:00 PM ET) 4K'
     slot, _, text = name.partition(': ')
     if not text:
         return name, '', None
@@ -295,12 +384,18 @@ def build(out_path, playlists, cache_dir=None):
     now = datetime.now(timezone.utc)
     lo, hi = now - timedelta(hours=KEEP_PAST_HOURS), now + timedelta(days=DAYS_AHEAD)
 
+    alts = load_alts(os.path.dirname(os.path.abspath(out_path)))
+    list_dir = os.environ.get('EPG_LIST_DIR') or os.path.join(cache_dir, 'channel_lists')
+    paths = {}
+    for src in sorted(EPG_URLS):                  # every source, so channels new to a guide are picked up
+        path = fetch(src, cache_dir)
+        if path:
+            refresh_channel_list(src, path, list_dir)
+            paths[src] = path
+    chosen = pick_sources(chans, alts, epg, paths, now)
     wanted = {}                                   # source -> {base id: [(target id, shift minutes)]}
-    for cid in chans:
-        base, _, shift = cid.partition(SHIFT_SEP)
-        src = epg.source_of.get(base)
-        if src:
-            wanted.setdefault(src, {}).setdefault(base, []).append((cid, int(shift or 0)))
+    for cid, (base, shift) in chosen.items():
+        wanted.setdefault(epg.source_of[base], {}).setdefault(base, []).append((cid, shift))
 
     tmp = out_path + '.tmp'
     covered = set()
@@ -310,16 +405,17 @@ def build(out_path, playlists, cache_dir=None):
             icon = f'<icon src="{esc(ch["logo"])}"/>' if ch['logo'] and '__SERVER__' not in ch['logo'] else ''
             out.write(f'<channel id="{esc(cid)}"><display-name>{esc(display_title(ch["name"]))}</display-name>'
                       f'{icon}</channel>\n')
-        list_dir = os.environ.get('EPG_LIST_DIR') or os.path.join(cache_dir, 'channel_lists')
-        for src in sorted(EPG_URLS):              # every source, so channels new to a guide are picked up
-            path = fetch(src, cache_dir)
-            if path:
-                refresh_channel_list(src, path, list_dir)
-            ids = wanted.get(src)
-            if path and ids:
-                got = copy_programmes(path, ids, out, lo, hi)
-                covered |= got
-                log(f'{src}: listings for {len(got)} of {sum(len(v) for v in ids.values())} channels')
+        last = {}
+        for src in sorted(wanted):
+            got = copy_programmes(paths[src], wanted[src], out, lo, hi, last)
+            covered |= got
+            log(f'{src}: listings for {len(got)} of {sum(len(v) for v in wanted[src].values())} channels')
+        for cid, end in last.items():             # a guide that runs out early: the channel name after it
+            if end < hi - timedelta(hours=1) and cid in chans:
+                t = end
+                while t < hi:
+                    out.write(prog(cid, t, min(t + timedelta(hours=6), hi), display_title(chans[cid]['name'])))
+                    t += timedelta(hours=6)
         n_gen = 0
         for cid, ch in chans.items():
             if cid not in covered:                # no published guide, or the source had nothing for it

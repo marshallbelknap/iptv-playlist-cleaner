@@ -359,6 +359,8 @@ class Picker:
         top = len(words) if head0 != name.strip() else len(words) - 1    # 'Music Choice: Yacht Rock' -> 'Music Choice'
         for n in range(top, 0, -1):
             head = ' '.join(words[:n])
+            if n == 1 and (len(head) < 6 or head0 == name.strip()):   # one short word ('More') says too little
+                continue
             if len(head) < 3 or head.lower() in ('the', 'us', 'uk', 'my', 'new', 'best', 'true', 'real', 'great', 'super',
                                                  'sports', 'sport', 'news', 'live', 'top', 'world', 'all', 'one',
                                                  'star', 'first', 'prime', 'max', 'plus', 'classic', 'kids', 'movie',

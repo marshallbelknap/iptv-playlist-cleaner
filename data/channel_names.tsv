@@ -1,0 +1,391 @@
+# Official display names: country<TAB>canonical key (see channel_aliases.tsv)<TAB>name shown in the playlist
+# Channels not listed here use the spelling most copies of that channel use.
+US	ane	A&E
+US	abcnewslive	ABC News Live
+US	acc	ACC Network
+US	amcplus	AMC+
+US	cbsnews	CBS News 24/7
+US	cheddarnews	Cheddar News
+US	cspan	C-SPAN
+US	cspan2	C-SPAN 2
+US	cspan3	C-SPAN 3
+US	e	E!
+US	ewest	E! West
+US	espn	ESPN
+US	espn2	ESPN2
+US	espnews	ESPNews
+US	espnu	ESPNU
+US	fxm	FXM
+US	gameshow	Game Show Network
+US	golf	Golf Channel
+US	greatamericanfamily	Great American Family
+US	hdnetmovies	HDNet Movies
+US	hln	HLN
+US	hallmark	Hallmark Channel
+US	hallmarkmystery	Hallmark Mystery
+US	hallmarkmysterywest	Hallmark Mystery West
+US	investigationdiscovery	Investigation Discovery
+US	investigationdiscoverywest	Investigation Discovery West
+US	lmn	LMN
+US	mgmplus	MGM+
+US	mgmplushits	MGM+ Hits
+US	msnow	MS NOW
+US	1americanews	One America News
+US	own	OWN
+US	paramount	Paramount Network
+US	showtime	Paramount+ with Showtime
+US	showtimewest	Paramount+ with Showtime West
+US	reelz	Reelz
+US	sec	SEC Network
+US	science	Science Channel
+US	sonymovie	Sony Movies
+US	spectrumsportsnetla	Spectrum SportsNet LA
+US	spectrumsportsnet	Spectrum SportsNet
+US	sundance	SundanceTV
+US	tcm	TCM
+US	vice	Vice
+US	we	WE tv
+US	yahoofinance	Yahoo Finance
+US	todayallday	Today All Day
+US	metv	MeTV
+US	sportsnetnewyork	SNY
+US	fs1	FS1
+US	fs2	FS2
+US	big10	Big Ten Network
+US	cbssports	CBS Sports Network
+US	cbssportsgolazo	CBS Sports Golazo Network
+US	realamericasvoice	Real America's Voice
+US	lawcrime	Law & Crime
+US	heroesicons	Heroes & Icons
+US	newsmax	Newsmax
+US	newsmax2	Newsmax2
+US	weather	The Weather Channel
+US	ion	ION
+US	tv1	TV One
+US	bloomberg	Bloomberg TV
+US	bloombergplus	Bloomberg TV+
+US	foxnews	FOX News
+US	foxbusiness	FOX Business
+US	foxweather	FOX Weather
+US	newsnation	NewsNation
+US	fyi	FYI
+US	tlc	TLC
+US	tnt	TNT
+US	tbs	TBS
+US	trutv	truTV
+US	usanetwork	USA Network
+US	nicktoons	Nicktoons
+US	nickjr	Nick Jr.
+US	nickjrwest	Nick Jr. West
+US	teennick	TeenNick
+US	teennickwest	TeenNick West
+US	nickelodeon	Nickelodeon
+US	cartoon	Cartoon Network
+US	disney	Disney Channel
+US	disneyjunior	Disney Junior
+US	disneyxd	Disney XD
+US	discovery	Discovery Channel
+US	discoveryfamily	Discovery Family
+US	animalplanet	Animal Planet
+US	food	Food Network
+US	travel	Travel Channel
+US	history	History
+US	land	TV Land
+US	outdoor	Outdoor Channel
+US	tennis	Tennis Channel
+US	cowboy	The Cowboy Channel
+US	pursuit	Pursuit Channel
+US	bounce	Bounce TV
+US	grit	Grit
+US	laff	Laff
+US	comet	Comet
+US	charge	Charge!
+US	dabl	Dabl
+US	insp	INSP
+US	revolt	Revolt
+US	thegrio	TheGrio
+US	failarmy	FailArmy
+US	petcollective	The Pet Collective
+US	design	The Design Network
+US	smithsonian	Smithsonian Channel
+US	smithsonianwest	Smithsonian Channel West
+US	magnolia	Magnolia Network
+US	americanheroes	American Heroes Channel
+US	crimeinvestigation	Crime & Investigation
+US	womenssports	Women's Sports Network
+US	allwomenssports	All Women's Sports Network
+US	livenowfromfox	LiveNOW from FOX
+US	nbcsports	NBC Sports Network
+US	jewelrytv	Jewelry TV
+US	wwe	WWE Network
+US	ny1	Spectrum News NY1
+US	cw	The CW
+US	tvg	TVG
+US	tvg2	TVG2
+US	diy	DIY Network
+US	movie	The Movie Channel
+US	moviewest	The Movie Channel West
+US	beinsports	beIN Sports
+US	espn8ocho	ESPN8 The Ocho
+US	nesnplus	NESN+
+US	msgplus	MSG+
+US	mtvu	MTVU
+US	mtv2	MTV2
+US	vh1	VH1
+US	bet	BET
+US	bether	BET Her
+US	cmt	CMT
+US	pop	Pop
+US	up	UPtv
+US	uptv	UPtv
+US	syfy	Syfy
+US	bravo	Bravo
+US	oxygentruecrime	Oxygen True Crime
+US	accuweather	AccuWeather
+US	accuweathernow	AccuWeather Now
+US	weathernation	WeatherNation
+US	sportsgrid	SportsGrid
+US	pokergo	PokerGO
+US	nhra	NHRA TV
+US	f1	F1 TV
+US	hersphere	HerSphere
+US	outersphere	OuterSphere
+US	moviesphere	MovieSphere
+US	moviespheregold	MovieSphere Gold
+US	screenpix	ScreenPix
+US	screenpixaction	ScreenPix Action
+US	screenpixvoices	ScreenPix Voices
+US	screenpixwesterns	ScreenPix Westerns
+US	pixl	PixL
+US	retroplex	RetroPlex
+US	indieplex	IndiePlex
+US	movieplex	MoviePlex
+US	unxplainedzone	UnXplained Zone
+US	newsy	Newsy
+US	fanduel	FanDuel TV
+US	fanduelextra	FanDuel TV Extra
+US	draftkings	DraftKings Network
+US	msg2	MSG 2
+US	masn2	MASN2
+US	qvc2	QVC2
+US	qvc3	QVC3
+US	shoplc	Shop LC
+US	vsin	VSiN
+US	golfpass	GolfPass
+US	speedvision	SpeedVision
+US	powernation	PowerNation
+US	howto	How To
+US	waypoint	Waypoint TV
+US	babyfirst	BabyFirst
+US	ionmystery	ION Mystery
+US	ionplus	ION Plus
+UK	itv1	ITV1
+UK	itv1plus1	ITV1 +1
+UK	itv2	ITV2
+UK	itv3	ITV3
+UK	itv4	ITV4
+UK	itvbe	ITVBe
+UK	bbc1	BBC One
+UK	bbc2	BBC Two
+UK	bbc3	BBC Three
+UK	bbc4	BBC Four
+UK	bbc1scotland	BBC One Scotland
+UK	cbeebies	CBeebies
+UK	cbbc	CBBC
+UK	crimeinvestigation	Crime & Investigation
+UK	udave	U&Dave
+UK	ugold	U&Gold
+UK	uyesterday	U&Yesterday
+UK	ualibi	U&Alibi
+UK	udrama	U&Drama
+UK	ueden	U&Eden
+UK	uw	U&W
+UK	skycinemaaction	Sky Cinema Action
+UK	skycinemadrama	Sky Cinema Drama
+UK	skycinemagreats	Sky Cinema Greats
+UK	skycinemathriller	Sky Cinema Thriller
+UK	skycinemapremiere	Sky Cinema Premiere
+UK	skycinemaanimation	Sky Cinema Animation
+UK	skycinemacomedy	Sky Cinema Comedy
+UK	skycinemafamily	Sky Cinema Family
+UK	skycinemahits	Sky Cinema Hits
+UK	skycinemaselect	Sky Cinema Select
+UK	skycinemascifihorror	Sky Cinema Sci-Fi & Horror
+UK	skyscifi	Sky Sci-Fi
+UK	skynews	Sky News
+UK	skysportsnfl	Sky Sports NFL
+UK	skysportsplus	Sky Sports+
+UK	racing	Racing TV
+UK	premiersports1	Premier Sports 1
+UK	premiersports2	Premier Sports 2
+UK	tntsportsultimate	TNT Sports Ultimate
+UK	nationalgeographic	National Geographic
+UK	natgeowild	Nat Geo Wild
+UK	4seven	4seven
+UK	film4	Film4
+UK	more4	More4
+UK	e4	E4
+UK	5usa	5USA
+UK	5star	5STAR
+UK	5action	5ACTION
+UK	5select	5SELECT
+UK	channel4	Channel 4
+UK	channel5	Channel 5
+UK	great	Great! TV
+UK	greatplus1	Great! TV +1
+UK	greatmovies	Great! Movies
+UK	greatmoviesplus1	Great! Movies +1
+UK	greataction	Great! Action
+UK	greatactionplus1	Great! Action +1
+UK	greatromance	Great! Romance
+UK	lfc	LFC TV
+UK	talkingpictures	Talking Pictures TV
+UK	nickjr	Nick Jr.
+UK	nickjrtoo	Nick Jr. Too
+UK	nicktoons	Nicktoons
+UK	now70s	Now 70s
+UK	now80s	Now 80s
+UK	now90s	Now 90s
+UK	truecrime	True Crime
+UK	qvc	QVC
+UK	blaze	Blaze
+UK	thats	That's TV
+IE	virginmedia1	Virgin Media One
+IE	virginmedia2	Virgin Media Two
+IE	virginmedia3	Virgin Media Three
+IE	rte1	RTE One
+IE	rte2	RTE2
+IE	rtenewsnow	RTE News
+IE	premiersports1	Premier Sports 1
+IE	premiersports2	Premier Sports 2
+IE	tg4	TG4
+CA	cbcnews	CBC News Network
+CA	ctvnews	CTV News Channel
+CA	much	Much
+CA	tsc	TSC
+CA	gametv	GameTV
+CA	natgeo	National Geographic
+CA	natgeowild	Nat Geo Wild
+CA	lovenature	Love Nature
+CA	history	History
+CA	weather	The Weather Network
+CA	fight	Fight Network
+CA	treehouse	Treehouse
+CA	ctvdrama	CTV Drama Channel
+CA	ctvcomedy	CTV Comedy Channel
+CA	ctvlife	CTV Life Channel
+CA	ctvscifi	CTV Sci-Fi Channel
+CA	hbo1	HBO 1
+CA	hbo2	HBO 2
+CA	starz1	Starz 1
+CA	starz2	Starz 2
+CA	movietime	MovieTime
+CA	history2	History2
+CA	hpitv	HPItv
+CA	makeful	Makeful
+CA	vision	Vision TV
+CA	dejaview	DejaView
+CA	discovery	Discovery Channel
+CA	food	Food Network
+CA	hollywoodsuite2000s	Hollywood Suite 2000s
+AU	7	Seven
+AU	9	Nine
+AU	10	10
+AU	9gem	9Gem
+AU	9go	9Go!
+AU	9life	9Life
+AU	9rush	9Rush
+AU	abc	ABC TV
+AU	racingcom	Racing.com
+AU	history	The History Channel
+INT	aljazeera	Al Jazeera English
+INT	euronews	Euronews
+INT	france24	France 24
+INT	i24news	i24NEWS
+INT	redbull	Red Bull TV
+INT	crimeinvestigation	Crime & Investigation
+INT	motortrend	MotorTrend
+INT	cnninternational	CNN International
+INT	travelxp	Travelxp
+US	1starsstories	TV One Stars & Stories
+US	starzkids	Starz Kids
+US	starzkidswest	Starz Kids West
+US	teamusa	Team USA
+US	news12bronx	News 12 The Bronx
+US	shoxbet	SHOxBET
+CA	cartoon	Cartoon Network
+US	bigten2	Big Ten Network 2
+US	bigten3	Big Ten Network 3
+US	bigten4	Big Ten Network 4
+US	monumentalsports	Monumental Sports Network
+US	sportsnetpittsburgh	SportsNet Pittsburgh
+US	nbcsportsphiladelphiaplus	NBC Sports Philadelphia+
+US	spacecityhome	Space City Home Network
+US	willowxtra	Willow Xtra
+US	americanheroes	American Heroes Channel
+US	nationalgeographic	National Geographic
+US	natgeowild	Nat Geo Wild
+US	teennick	TeenNick
+US	newenglandcablenews	NBC Boston News (NECN)
+US	blacknews	Black News Channel
+US	freespeech	Free Speech TV
+US	land	TV Land
+US	1crimejustice	TV One Crime & Justice
+US	accdigital	ACC Digital Network
+US	espn8ocho	ESPN8 The Ocho
+NZ	skysport1	Sky Sport 1
+NZ	skysport2	Sky Sport 2
+NZ	skysport3	Sky Sport 3
+NZ	skysport4	Sky Sport 4
+NZ	skysport5	Sky Sport 5
+NZ	skysport6	Sky Sport 6
+NZ	skysport7	Sky Sport 7
+NZ	skysport8	Sky Sport 8
+NZ	skysport9	Sky Sport 9
+NZ	skysport10	Sky Sport 10
+NZ	skysportselect	Sky Sport Select
+NZ	skysportpremierleague	Sky Sport Premier League
+NZ	skysportpopup1	Sky Sport Pop-Up 1
+NZ	tabtrackside1	TAB Trackside 1
+NZ	tabtrackside2	TAB Trackside 2
+UK	bbc1northernireland	BBC One Northern Ireland
+UK	bbc2northernireland	BBC Two Northern Ireland
+UK	bbc1yorkshirelincolnshire	BBC One Yorkshire & Lincolnshire
+UK	bbc1northeastcumbria	BBC One North East & Cumbria
+UK	bbc1channelislands	BBC One Channel Islands
+UK	investigationdiscovery	Investigation Discovery
+UK	investigationdiscoveryplus1	Investigation Discovery +1
+UK	skycinemapremiereplus1	Sky Cinema Premiere +1
+UK	uw	U&W
+UK	uwplus1	U&W +1
+UK	discoveryhistory	Discovery History
+UK	discoveryscience	Discovery Science
+UK	discoveryturbo	Discovery Turbo
+UK	animalplanetplus1	Animal Planet +1
+CA	aptn	APTN
+CA	americanheroes	American Heroes Channel
+CA	investigationdiscovery	Investigation Discovery
+CA	e	E!
+CA	familyjr	Family Jr.
+CA	nickelodeon	Nickelodeon
+CA	omni1	OMNI 1
+CA	omni2	OMNI 2
+CA	saltpluslight	Salt + Light
+CA	tvo	TVO
+US	moremax	MoreMax
+US	moviemax	MovieMax
+US	outermax	OuterMax
+US	5starmax	5StarMax
+US	actionmax	ActionMax
+US	thrillermax	ThrillerMax
+US	westbound	West Bound
+US	starzinblack	Starz in Black
+US	showtime2	Showtime 2
+US	showtime2west	Showtime 2 West
+US	shoxbetwest	SHOxBET West
+US	crime360	A&E Crime 360
+US	fetv	FETV
+US	fanduelsportsnetworkcarolinas	FanDuel Sports Network Carolinas
+US	chicagosports	Chicago Sports Network
+US	chicagosportsplus	Chicago Sports Network Plus
+US	lifetimemoviefavorites	Lifetime Movie Favorites

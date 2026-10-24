@@ -42,6 +42,7 @@ FORCE = {'foxnews': 'US', 'foxnewschannel': 'US', 'foxbusiness': 'US', 'headline
          'rtetwo': 'IE', 'rteoneplus1': 'IE', 'rtetwoplus1': 'IE', 'rtenews': 'IE', 'virginmediaone': 'IE',
          'virgin1': 'IE', 'virgin2': 'IE', 'virginone': 'IE', 'virginmediaoneplus1': 'IE', 'oireachtas': 'IE',
          'utv': 'UK', 'eirsport1': 'IE', 'eirsport2': 'IE', 'tnasports': 'US', 'tnawrestling': 'US',
+         'cbcnews': 'CA', 'cbcnewsnetwork': 'CA', 'ctvnews': 'CA', 'ctvnewschannel': 'CA', 'cp24': 'CA',
          'acc': 'US', 'accnetwork': 'US', 'golfchannel': 'US', 'nbcgolf': 'US', 'foxsportsracing': 'US',
          'monsterjam': 'US', 'turnerclassic': 'US', 'turnerclassicmovies': 'US', 'tcm': 'US', 'ae': 'US',
          'ane': 'US', 'aande': 'US', 'americanmovieclassics': 'US', 'gsn': 'US', 'gameshownetwork': 'US'}

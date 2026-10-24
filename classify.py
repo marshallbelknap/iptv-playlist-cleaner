@@ -230,6 +230,7 @@ def clean_event(e, label=None):
     e = dedupe_parens(e)
     if label:
         e = re.sub(r'^(?:' + re.escape(label) + r'|English Football League|LaLiga|La Liga|Serie A|MLS on TSN)\s*:\s*', '', e, flags=re.I)
+    e = re.sub(r'^(?:B1G\+|BTN\+|BIG10\+)\s*[|:-]\s*', '', e)
     e = norm_dates(e)
     e = re.sub(r'\s*\|\s*', ' | ', e)
     parts = [p.strip(' :-') for p in e.split(' | ')]
@@ -253,7 +254,8 @@ def clean_event(e, label=None):
     e = smart_case(e, aggressive=False)
     if dates:
         e = (e + ' ' + dates[0]).strip()
-    return e
+    from eventtime import normalise, tidy_matchup     # one way of writing the start time: '(Oct 10 7:30 PM ET)'
+    return tidy_matchup(normalise(e, label))
 
 
 SLOT_PATTERNS = [
@@ -277,7 +279,8 @@ SLOT_PATTERNS = [
     # Event DAZN CA 1 HD
     re.compile(r'^Event\s+(?P<p>.+?)\s+(?P<n>\d{1,3})\b\s*(?P<e>.*)$', re.I),
 ]
-PREFIX_NORMALISE = [(re.compile(r'^Ligue ?1\b'), 'LIGUEONE'), (re.compile(r'^Formula ?1\b'), 'FORMULAONE'),
+PREFIX_NORMALISE = [(re.compile(r'^([A-Za-z][A-Za-z0-9+]*\+?\s*\d{1,3})\s+(?:(?:HD|FHD|SD|4K)\s*)?\((?:D|A|H|S|X\d?)\)\s*:'), r'\1:'),
+                    (re.compile(r'^Ligue ?1\b'), 'LIGUEONE'), (re.compile(r'^Formula ?1\b'), 'FORMULAONE'),
                     (re.compile(r'^Big ?10\+', re.I), 'BIG10+'), (re.compile(r'^(?:USA?|CA|UK)\s*\|\s*'), '')]
 
 

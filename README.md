@@ -33,7 +33,16 @@ fill in the provider links and token, Build. To update later: Project > iptv-cle
   group become US channels, BBC News in an Australia group a UK one, RTE in a UK group an Irish one. A channel
   stays where it is when that country has its own version (HGTV Canada, Adult Swim Canada). US stations carried in
   Canada (Buffalo, Seattle, Detroit) go to `US | Locals`.
-- Copies of the same channel keep the same name (quality suffix 4K/FHD/HD/SD and +1 are kept).
+- One channel, one name: every copy of a channel - in both playlists - gets the same name, guide, logo and group,
+  however the provider spelled it (`FOX News Channel HD`, `Fox News (FNC)` -> `US: FOX News HD`, `US: FOX News`).
+  `canon.py` reduces each name to an identity (East feed, 'Channel'/'Network'/'TV', punctuation and abbreviations
+  in brackets do not count); `data/channel_aliases.tsv` joins spellings that are the same channel (`ID` /
+  `Investigation Discovery`, `Showtime` / `Paramount+ with Showtime`, old regional sports network names) and
+  `data/channel_names.tsv` holds the official name where one is known; otherwise the spelling most copies use wins.
+  The quality suffix (4K/FHD/HD/SD), West feeds and +1 channels stay separate, since those are different streams.
+- Event start times are written one way, in Eastern time, at the end of the name: `(Oct 10 7:30 PM ET)`
+  (`eventtime.py` reads 'Saturday, 10 October 2026 15:00', 'Sun 11 Oct 18:30 EDT', '1pm', '11-10-2026 - 20:00
+  (GMT)' and other provider formats). Matchups read `A vs B`.
 - 24/7 loops are split into `24/7 | TV Shows`, `24/7 | Movies`, `24/7 | Actors & Directors`, `24/7 | Kids & Animation`.
   Show/movie/actor channels found in country groups move there too (`data/loop_channels.tsv`, hand-checked; rules in `loops.py`).
 
@@ -53,14 +62,21 @@ provider fills them in) the logo is left blank rather than invented; they are li
 The server builds one guide for all playlists at `http://<machine-ip>:8765/<ACCESS_TOKEN>/guide.xml.gz`
 (also `/guide.xml`), and every playlist it serves already points to it.
 - Channels matched to a published guide get real listings: epgshare01 (US, US locals, sports, CA, UK, IE, AU,
-  NZ, beIN, Plex, Distro, Peacock, TBN+, Whale TV+, FanDuel, Rakuten) and i.mjh.nz (Pluto TV, Samsung TV Plus,
-  Roku, Plex, PBS, MeTV, Foxtel, Kayo). Only the files and channels actually used are kept.
+  NZ, beIN, Plex, Distro, Peacock, TBN+, Whale TV+, FanDuel, Rakuten), Open-EPG (US, US locals, CA, UK, IE, AU,
+  NZ, ZA) and i.mjh.nz (Pluto TV, Samsung TV Plus, Roku, Plex, PBS, MeTV, Foxtel, Kayo).
+- Each channel's other guide ids are kept (`guide_alts_<playlist>.json` in the cache). When a source stops updating
+  (epgshare01 did in October 2026), the guide takes that channel's listings from the source with the most
+  listings for the next day, so a channel never falls back to its own name while another source has it.
+- A guide match is only used when it is clearly the same channel (same identity, a hand-checked alias or a very
+  close name, and the same country's broadcast); a provider's own guide id is checked the same way.
 - +1 channels and West feeds reuse the main channel's listings shifted by 1 or 3 hours.
 - Everything else gets generated listings: event slots show the current event at its scheduled time
   ("Up next" before it, "event ended" after), 24/7, music and other channels show their name.
 
 ## Files
 - rules.py / classify.py / process.py – naming, language and grouping rules (edit these to tweak)
+- canon.py – one identity and one name per channel (with data/channel_aliases.tsv, data/channel_names.tsv)
+- eventtime.py – event start times in one format
 - epgmap.py – guide-id matching (aliases at the top)
 - guide.py – builds the combined guide
 - logos.py – logo fallbacks (tv-logo/tv-logos repo, iptv-org database)

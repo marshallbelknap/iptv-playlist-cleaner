@@ -41,6 +41,13 @@ def _station(r):
 
 
 US_STATIONS = {r[0]: _station(r) for r in _load_tsv('us_stations.tsv') if len(r) >= 4}
+STATE_NAMES_TITLE = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+                     'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+                     'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+                     'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+                     'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+                     'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+                     'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming', 'Hi']
 RENAMED_CALLS = {'WSBE': 'WPVD', 'WFIU': 'WTIU', 'WKU': 'WKYU', 'WKAS': 'WKAS'}   # old call -> current one
 SPANISH_NETS = {'Telemundo', 'Univision', 'UniMás', 'Estrella TV', 'LATV', 'Azteca América', 'TeleXitos', 'Canal de la Fe'}
 NET_ALIASES = {'IND': 'Independent', 'MNT': 'MyNetworkTV', 'MY': 'MyNetworkTV', 'ION': 'ION', 'CW': 'CW'}
@@ -258,6 +265,24 @@ FOREIGN_4K = re.compile(r'\b(RU|ES|FR|PL|NL|IT)\b(?=.*(UHD|4K))|\b(Our Siberia|K
                         r'Decasa|Slow|Movistar|M\+ LaLiga|V Sport)\b', re.I)
 
 
+NET_WORDS = r'(?:ABC|CBS|NBC|FOX|CW|PBS|MY|MyNetworkTV)'
+
+
+def context_call(nm):
+    """A call sign that is also a word ('WOOD', 'WRC', 'WAPA') counts when the name shows it is a station:
+    in brackets, or next to a network name / channel number ('WOOD NBC 8', 'NBC 4 (WRC)')."""
+    for m in re.finditer(r'\b([KW][A-Z]{2,3})\b', nm):
+        c = m.group(1)
+        st = US_STATIONS.get(c)
+        if not st or not st['city'] or not st['num']:
+            continue
+        before, after = nm[:m.start()], nm[m.end():]
+        if re.search(r'\(\s*$', before) and re.match(r'\s*\)', after) or \
+                re.match(r'\s+' + NET_WORDS + r'\b', after) or re.search(r'\b' + NET_WORDS + r'\s*\d*\s*\(?\s*$', before):
+            return m
+    return None
+
+
 def branded_local(name):
     """'ABC7 Chicago', 'KIRO 7 Seattle', 'WCPO 9 Cincinnati', 'Boston 25', 'FOX 29 Philadelphia' -> a local record,
     but only when the station table confirms which station it is."""
@@ -265,9 +290,10 @@ def branded_local(name):
     if re.search(r'\bLocal\b|\bNews$|^(CBSN|Spectrum)\b|\bPlus\b|\bXtra\b', nm):
         return None
     cands = []
-    cm = find_callsign(nm)
+    cm = find_callsign(nm) or context_call(nm)
     if not (cm and cm.group(1) in US_STATIONS):           # 'WOOD' is also a word, so the finder skips it
-        cm = next((t for t in re.finditer(r'\b([KW][A-Z]{2,3})(?:-(?:TV|DT|CD|LD|LP))?\b', nm) if t.group(1) in US_STATIONS), None)
+        cm = next((t for t in re.finditer(r'\b([KW][A-Z]{2,3})(?:-(?:TV|DT|CD|LD|LP))?\b', nm)
+                   if t.group(1) in US_STATIONS and t.group(1) not in NOT_CALLSIGNS), None)
     if cm and cm.group(1) in US_STATIONS:
         rest = nm.replace(cm.group(0), ' ')
         num = re.search(r'\b(\d{1,2})\b', rest)
@@ -311,6 +337,19 @@ def us_station_in_ca(name):
     return bool(US_NET_START.match(name))
 
 
+def _in_guide(cc, name):
+    try:
+        from epgmap import shared_index
+        e = shared_index()
+        from origin import FORCE, norm as onorm
+        if onorm(name) in FORCE:                  # 'CNN International', 'Al Jazeera': international on purpose
+            return False
+        return any(e.trusted(i, h, name, cc) for i, h in e.lookup_all(cc, name, how=True)
+                   if e.source_of.get(i) == 'US2' or (e.source_of.get(i) or '').startswith('OE_US'))
+    except Exception:
+        return False
+
+
 def process_entry(c):
     src = c['attrs'].get('group-title', '')
     url = c.get('url', '')
@@ -333,7 +372,7 @@ def process_entry(c):
         n = re.sub(r'^(\|\+18\||\[XXX\]|\*xxx:|\(Adult\)|\(18\+\)|Adult\s*:?)\s*', '', t, flags=re.I)
         n, q = extract_quality(strip_tail_tags(n))
         return finish(rec, smart_case(n), q)
-    if JUNK_RE.search(t) or re.fullmatch(r'[\W\d_]*', t):
+    if JUNK_RE.search(t) or re.fullmatch(r'[\W\d_]*', t) or re.search(r'(?:^|[:|]\s*)#{2,}.*#{2,}\s*$', t):
         rec['drop'] = 'test / placeholder feed'
         return rec
     mc = re.match(r"^MC\s+(.+?)\s*\((?:M)\)\s*$", t)
@@ -382,6 +421,13 @@ def process_entry(c):
             return rec
         return event_record(rec, label, t2)
 
+    if re.search(r'\b(en\s+)?espa(?:n|ñ|)ol\b|\bSpanish\b|\bLatinos?\b|\bDeportes\b|\bEchorouk\b|\bEchourouk\b|'
+                 r'^(?:US|USA)\s*:?\s*Mega TV\b|\bCanela\.?TV\b|\bTelediario\b|\bTeleCentro\b|\bTarima\b|'
+                 r'\bNuestra Vision\b|\bCentroamerica\b|\bZona Futbol\b|\bTV Amor\b|\bAmor Real\b|\bPitufo\b|'
+                 r'\bLaM[uú]sica\b|\bRemezcla\b|\bVas O No Vas\b|\bSony One Competencias\b|\bNat Geo Mundo\b|'
+                 r'\bCin[eé]polis\b|\bTC Internacional\b|\bOro TV\b|\bPrimo TV\b|\bFOX en Tubi\b', t, re.I):
+        rec['drop'] = 'non-English (Spanish version)'
+        return rec
     if is_non_english(t) or (re.search(r'4K|UHD', src + ' ' + rec['src'] + ' ' + raw) and FOREIGN_4K.search(t)):
         rec['drop'] = 'non-English'
         return rec
@@ -412,6 +458,7 @@ def process_entry(c):
         return rec
     cc = info['cc']
     name = strip_tail_tags(info['name'])
+    name = re.sub(r'^(?:\+1s|s)\s*:\s*', '', name)                 # 'UK +1s : Channel 4+1'
     qtag = next((x[2:] for x in info['tags'] if x.startswith('Q:')), None)
     name, q = extract_quality(name)
     q = q or {'UHD': '4K'}.get(qtag, qtag)
@@ -465,6 +512,21 @@ def process_entry(c):
         cc = rec['cc'] = 'US'
         src = 'US Locals & Regional'
     if cc == 'US':
+        name = re.sub(r'\b([KW][A-Z]{3})(TV|DT|LD|CD)\b', r'\1-\2', name)     # 'KDKATV' -> 'KDKA-TV'
+        # 'CBS (KRQE Albuquerque NM)', 'CBS (WJZ– Baltimore MD)', 'FOX (MY WZDX Huntsville AL)' -> 'Albuquerque (KRQE)'
+        m_cc = re.match(r"^(?:ABC|CBS|NBC|FOX|CW|PBS|MY|MyNetworkTV)\s*\(\s*(?:MY\s+)?([KW][A-Z]{2,3})(?:-?(?:TV|DT|LD|CD))?"
+                        r"\s*[–—-]?\s*(?:TV\s*[–—-]\s*)?([A-Za-z][A-Za-z .'/-]+?)\s*\)$", name)
+        if m_cc and m_cc.group(1) in US_STATIONS:
+            city = re.sub(r'\s+(?:[A-Z]{2}|' + '|'.join(STATE_NAMES_TITLE) + r')$', '', m_cc.group(2).strip())
+            name = f'{city.title() if city.isupper() else city} ({m_cc.group(1)})'
+        m_pc = re.match(r"^(ABC|CBS|NBC|FOX|CW|PBS)\s*\(([A-Z][A-Za-z .'-]+)\)$", name)
+        if m_pc and m_pc.group(2) not in ('East', 'West', 'Pacific', 'National') and \
+                not re.fullmatch(r'[KW][A-Z]{2,3}(-[A-Z]{2})?', m_pc.group(2)):   # 'CBS (Buffalo)', not 'CBS (KBOI)'
+            rec['group'] = country_group('US', 'Locals')
+            rec['kind'] = 'local'
+            rec['local'] = {'net': m_pc.group(1), 'num': None, 'call': None, 'sub': None, 'city': m_pc.group(2)}
+            rec['q_pending'] = q
+            return finish(rec, format_local('US', m_pc.group(2), m_pc.group(1)), q)
         mc = re.match(r"^([A-Z][\w .'-]+), ([A-Z]{2}) (.+?)(?:\s*\((?:Virtual|A\d?[^)]*)\))?$", name)
         if mc and mc.group(2) in US_STATES:          # 'Grand Rapids, MI WOOD NBC 8' -> 'WOOD NBC 8 Grand Rapids'
             body = re.sub(r'\b([KW][A-Z]{2,3})(CD|LP|LD|DT|TV)\b', r'\1-\2', mc.group(3), flags=re.I)
@@ -493,7 +555,8 @@ def process_entry(c):
         if m_call and m_call.group(1) not in NOT_CALLSIGNS and not re.search(r'\bNews\b', name) \
                 and not re.match(r'^(World|Wild|West|Women|Kids|King|Kitchen)\b', name, re.I):
             name = f'{m_call.group(2)} ({m_call.group(1)})'
-        elif re.fullmatch(r'[KW][A-Z]{2,3}', name) and name not in NOT_CALLSIGNS and src in LOCAL_SRC | {'United States', 'US Entertainment'}:
+        elif re.fullmatch(r'[KW][A-Z]{2,3}', name) and src in LOCAL_SRC | {'United States', 'US Entertainment'} and \
+                (name not in NOT_CALLSIGNS or (US_STATIONS.get(name) or {}).get('num')):
             name = f'({name})'
         loc = parse_local(name, loose=src in LOCAL_SRC or bool(bracket) or bool(m_call) or name.startswith('(')) or \
             branded_local(name)
@@ -537,6 +600,8 @@ def process_entry(c):
         return finish(rec, '24/7 ' + title, q)
     cat = classify_category(name, src)
     home = home_country(title, cc)               # CNN in a Canada group -> US, RTE in a UK group -> IE
+    if home == 'INT' and cc == 'US' and _in_guide(cc, title):
+        home = cc                                 # 'Oxygen' in a US group is US Oxygen: that country's guide has it
     if home != cc:
         cc = rec['cc'] = home
         if cc == 'INT' and cat == 'Locals':
@@ -564,6 +629,15 @@ def process_all(entries):
             if c.lower() in STATE_NAMES or len(c.split()) > 3:      # 'Arizona', 'Arizona's Family Sports Phoenix'
                 score -= 1.5
             cities[loc['call']][c] += score
+    for r in recs:                               # a call sign that is not a station: 'NBC: WIV MILWAUKEE WTMJ', 'KDKAD'
+        loc = r.get('local')
+        real = lambda c: c in US_STATIONS and bool(US_STATIONS[c]['city']) and bool(US_STATIONS[c]['num'])
+        if loc and loc.get('call') and not real(loc['call']) and r.get('kind') == 'local':
+            other = [c for c in re.findall(r'\b([KW][A-Z]{2,3})', r['orig'].upper()) if real(c)]
+            if real(loc['call'][:4]):
+                loc['call'] = loc['call'][:4]
+            elif other:
+                loc['call'] = other[0]
     for r in recs:
         loc = r.get('local')
         if not loc or r.get('kind') != 'local':

@@ -10,8 +10,16 @@
 ^super ?sports?\b(?! ch\b)	https://upload.wikimedia.org/wikipedia/en/6/66/Supersport2012.jpg
 ^astro (super ?sport|grandstand)	https://upload.wikimedia.org/wikipedia/commons/2/2f/Astro_ASSP1.png
 ^spark sports?\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/new-zealand/spark-sport-nz.png
-^7(afl|now|news|plus|two|mate|flix|bravo)\b	https://thumb.wikimedia.org/wikipedia/en/thumb/4/47/Logo_7plus_2020.svg/960px-Logo_7plus_2020.svg.png
-^9(mystery|now|crime|rush|life|gem|go)\b	https://upload.wikimedia.org/wikipedia/en/0/06/9Now_logo.png
+^7 ?two\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/australia/7two-au.png
+^7 ?mate\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/australia/7mate-au.png
+^7 ?flix\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/australia/7flix-au.png
+^7(afl|now|news|plus|bravo)\b	https://thumb.wikimedia.org/wikipedia/en/thumb/4/47/Logo_7plus_2020.svg/960px-Logo_7plus_2020.svg.png	late
+^9 ?gem\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/australia/nine-gem-au.png
+^9 ?go!?\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/australia/nine-go-au.png
+^9 ?life\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/australia/nine-life-au.png
+^9 ?rush\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/australia/nine-rush-au.png
+^(channel 9|nine)\b	https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/australia/nine-au.png
+^9(mystery|now|crime)\b	https://upload.wikimedia.org/wikipedia/en/0/06/9Now_logo.png	late
 ^liv golf\b	https://thumb.wikimedia.org/wikipedia/en/thumb/2/27/LIV_golf_logo.svg/960px-LIV_golf_logo.svg.png
 ^vfl\b	https://thumb.wikimedia.org/wikipedia/en/thumb/3/34/VFL_Football_Logo.svg/960px-VFL_Football_Logo.svg.png
 ^sanfl\b	https://thumb.wikimedia.org/wikipedia/en/thumb/7/7d/SANFL_logo.svg/960px-SANFL_logo.svg.png

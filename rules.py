@@ -424,7 +424,7 @@ US_NETWORKS = ['ABC', 'CBS', 'NBC', 'FOX', 'CW', 'PBS', 'MNT', 'MyNetworkTV', 'M
                'IND', 'ION', 'ME', 'METV', 'UPN', 'TCT', 'CTN', 'TBN', 'Telemundo', 'Univision']
 CALL_RE = re.compile(r'(?<![A-Z])([KW][A-Z]{2,3})(?:[- ]?(?:TV|DT\d?|LD|CD|CA|D\d))?(?![A-Za-z])')
 CA_CALL_RE = re.compile(r'\b(C[A-Z]{3})(?:[- ]?(?:TV|DT))?\b')
-NOT_CALLSIGNS = {'WNBA', 'WWE', 'WPT', 'KIDS', 'WEST', 'WORLD', 'WILD', 'WOMEN', 'WAR', 'WAY',
+NOT_CALLSIGNS = {'WNBA', 'WETV', 'WWE', 'WPT', 'KIDS', 'WEST', 'WORLD', 'WILD', 'WOMEN', 'WAR', 'WAY',
                  'WTA', 'WTT', 'WBC', 'WBO', 'WRC', 'WFN', 'WE', 'KAYO', 'WHL', 'WIRE', 'WFH',
                  'WOW', 'KIDZ', 'KOOL', 'WIND', 'WINE', 'WOLF', 'KICK', 'KILL', 'KEEP', 'WALK',
                  'WARM', 'KNOW', 'WHAT', 'WHEN', 'WHY', 'WELL', 'WITH', 'WORK', 'WEB', 'WPN', 'WSL',
