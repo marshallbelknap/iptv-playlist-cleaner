@@ -204,12 +204,16 @@ class H(BaseHTTPRequestHandler):
         with open(path, 'rb') as f:
             data = f.read()
         # point the app at this server's guide (one small file instead of many large public ones)
-        host = self.headers.get('Host') or f'127.0.0.1:{self.server.server_port}'
-        url = f'http://{host}{base}/guide.xml.gz'
+        # behind a reverse proxy (Synology's, for access from outside the home) use the address the app used
+        host = (self.headers.get('X-Forwarded-Host') or self.headers.get('Host') or
+                f'127.0.0.1:{self.server.server_port}').split(',')[0].strip()
+        proto = (self.headers.get('X-Forwarded-Proto') or 'http').split(',')[0].strip().lower()
+        proto = proto if proto in ('http', 'https') else 'http'
+        url = f'{proto}://{host}{base}/guide.xml.gz'
         nl = data.find(b'\n')
         if data.startswith(b'#EXTM3U') and nl > 0:
             data = f'#EXTM3U x-tvg-url="{url}" url-tvg="{url}"'.encode() + data[nl:]
-        data = data.replace(b'__SERVER__', f'http://{host}{base}'.encode())     # name tiles drawn by this server
+        data = data.replace(b'__SERVER__', f'{proto}://{host}{base}'.encode())  # name tiles drawn by this server
         self.send_response(200)
         self.send_header('Content-Type', 'audio/x-mpegurl; charset=utf-8')
         self.send_header('Content-Length', str(len(data)))
